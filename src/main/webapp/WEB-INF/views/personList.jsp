@@ -6,17 +6,7 @@
         <title>Hibernate Spring Person Table View</title>
     </head>
     <body>
-    <h2>Person Table Management Screen</h2>
-    <form:form method="post" action="add" commandName="person">
-        <table>
-        <tr>
-            <td><form:label path="title"><spring:message code="label.title"/></form:label></td>
-            <td><form:input path="title" /></td>
-        </tr>
-    </table> 
-    </form:form>
-    
-    
+
     <h3>Persons</h3>
     
     <c:if  test="${!empty personsList}">
