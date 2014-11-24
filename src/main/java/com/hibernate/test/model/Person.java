@@ -17,6 +17,39 @@ public class Person {
 	
 	@Column(name="title")
 	private String title;
+	
+	@Column(name="first_name")
+	private String firstName;
+	
+	@Column(name="surname")
+	private String surname;
+	
+	@Column(name="age")
+	private Integer age;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
 	public Integer getId() {
 		return id;

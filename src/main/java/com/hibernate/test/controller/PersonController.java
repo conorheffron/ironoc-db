@@ -1,5 +1,6 @@
 package com.hibernate.test.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hibernate.test.model.Person;
 import com.hibernate.test.service.PersonService;
 
 @Controller
@@ -24,7 +26,8 @@ public class PersonController {
 	public String home(Locale locale, ModelMap map) {
 		logger.info("Entering personController method home");
 		
-        map.addAttribute("personsList", personService.getAllPersons());
+		List<Person> personslist = personService.getAllPersons();
+        map.addAttribute("personsList", personslist);
 
         return "personList";
 	}

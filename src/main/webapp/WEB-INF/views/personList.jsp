@@ -13,10 +13,16 @@
     <table class="data">
     <tr>
         <th>Title</th>
+        <th>First Name</th>
+        <th>Surname</th>
+        <th>Age</th>
     </tr>
     <c:forEach items="${personsList}" var="person">
         <tr>
             <td>${person.title}</td>
+            <td>${person.firstName}</td>
+            <td>${person.surname}</td>
+            <td>${person.age}</td>
         </tr>
     </c:forEach>
     </table>
