@@ -22,7 +22,7 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.oddschecker.prototype" />
+	<context:component-scan base-package="com.hibernate.test" />
 	<context:annotation-config />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
