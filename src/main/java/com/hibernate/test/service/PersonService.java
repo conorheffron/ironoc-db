@@ -8,4 +8,8 @@ public interface PersonService {
 
     List<Person> getAllPersons();
 
+	Boolean addPerson(Person person);
+
+	Boolean deletePersonBySurname(String surname);
+
 }

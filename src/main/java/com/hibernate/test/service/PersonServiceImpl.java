@@ -22,4 +22,15 @@ public class PersonServiceImpl implements
 		return personDao.getAllPersons();
 	}
 
+	@Override
+	@Transactional
+	public Boolean addPerson(Person person) {
+		return personDao.addPerson(person);
+	}
+
+	@Override
+	public Boolean deletePersonBySurname(String surname) {
+		return personDao.deleteBySurname(surname);
+	}
+
 }

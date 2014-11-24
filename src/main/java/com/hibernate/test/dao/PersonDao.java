@@ -7,5 +7,9 @@ import com.hibernate.test.model.Person;
 public interface PersonDao {
 
     List<Person> getAllPersons();
+
+	Boolean addPerson(Person person);
+
+	Boolean deleteBySurname(String surname);
  
 }

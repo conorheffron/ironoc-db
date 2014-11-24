@@ -7,7 +7,7 @@
     </head>
     <body>
 
-    <h3>Persons</h3>
+    <h3>Person Data Manager</h3>
     
     <c:if  test="${!empty personsList}">
     <table class="data">
@@ -28,6 +28,22 @@
     </table>
     </c:if>
     
+    <br />
+    
+    <form:form action="add" modelAttribute="person">
+	    Title: <form:input type="text" path="title"/><br />
+		First Name: <form:input type="text" path="firstName"/><br />
+		Last Name: <form:input type="text" path="surname" /><br />
+		Age: <form:input type="text" path="age" /><br />
+		<input type="submit" value="Add Person" />
+	</form:form>
+	
+	<br />
+	
+	<form:form action="delete" modelAttribute="person">
+		Last Name: <form:input type="text" path="surname" /><br />
+		<input type="submit" value="Delete Person" />
+	</form:form>
     
     </body>
 </html>

@@ -3,6 +3,10 @@ HibernateExample
 
 root / 
 
-Hibernate Example - Basic hibernate set up to view a person attributes
+Hibernate Example - Basic set up to view, add and delete a list of persons and their attributes.
+
+
+
+
 
 
