@@ -12,7 +12,6 @@ import com.hibernate.test.model.Person;
 @Service
 public class PersonServiceImpl implements
 		PersonService {
-	
 
 	@Autowired
     private PersonDao personDao;

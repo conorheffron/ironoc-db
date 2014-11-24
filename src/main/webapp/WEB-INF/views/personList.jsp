@@ -6,7 +6,7 @@
         <title>Hibernate Spring Person Table View</title>
     </head>
     <body>
-    <h2>Push Messages Lookup Table Management Screen</h2>
+    <h2>Person Table Management Screen</h2>
     <form:form method="post" action="add" commandName="person">
         <table>
         <tr>
@@ -26,7 +26,7 @@
     </tr>
     <c:forEach items="${personsList}" var="person">
         <tr>
-            <td>${push.title}</td>
+            <td>${person.title}</td>
         </tr>
     </c:forEach>
     </table>

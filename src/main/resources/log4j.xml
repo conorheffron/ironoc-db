@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.oddschecker.prototype">
+	<logger name="com.test.hibernate">
 		<level value="info" />
 	</logger>
 	
