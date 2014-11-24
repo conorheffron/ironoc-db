@@ -49,10 +49,5 @@ public class PersonController {
 
         return this.home(map);
 	}
-	
-	public void setMobilePushMessagesLookupService(
-			PersonService mobilePushMessagesLookupService) {
-		this.personService = mobilePushMessagesLookupService;
-	}
 
 }
