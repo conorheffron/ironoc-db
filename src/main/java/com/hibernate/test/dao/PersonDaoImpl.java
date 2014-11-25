@@ -35,6 +35,8 @@ public class PersonDaoImpl implements PersonDao {
 		} catch (HibernateException e) {
 			LOGGER.error("Exception occured in DAO layer: {}", e);
 		}
+		
+		session.close();
 		return personsList;
 	}
 
@@ -42,6 +44,7 @@ public class PersonDaoImpl implements PersonDao {
 	public Boolean addPerson(Person person) {
 		Session session = sessionFactory.openSession();
 		Boolean isAdded = false;
+		
 		try {
 			session.save(person);
 			isAdded = true;
@@ -49,6 +52,8 @@ public class PersonDaoImpl implements PersonDao {
 			LOGGER.error("Exception occured in DAO layer: {}", e);
 			return isAdded;
 		}
+		
+		session.close();
 		return isAdded;
 	}
 
@@ -67,7 +72,6 @@ public class PersonDaoImpl implements PersonDao {
 		}
 		
 		session.close();
-		
 		return noOfRecsDeleted > 0 ? true : false;
 	}
 
@@ -86,7 +90,6 @@ public class PersonDaoImpl implements PersonDao {
 		}
 		
 		session.close();
-		
 		return personList;
 	}
 

@@ -40,6 +40,8 @@ public class PersonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addperson(ModelMap map, @Valid @ModelAttribute("person") Person person,
 			BindingResult result) {
+		
+		// validation error handling
 		if (result.hasErrors()) {
 			List<Person> personslist = personService.getAllPersons();
 	        map.addAttribute("personsList", personslist);
@@ -51,13 +53,15 @@ public class PersonController {
         return this.home(map);
 	}
     
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String deletePersonBySurname(ModelMap map, @RequestParam String surname) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String deletePersonBySurname(ModelMap map, @RequestParam("surname") String surname) {
 
 		List<Person> persons = personService.findPersonBySurname(surname);
+		
 		if (!persons.isEmpty()) {
 			personService.deletePersonBySurname(surname);
 		} else {
+			// no matching entries to delete
 			map.addAttribute("deleteError", "There are no matching entries to delete");
 		}
 

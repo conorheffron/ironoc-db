@@ -48,11 +48,11 @@
 	
 	<br />
 	
-	<form:form action="delete" modelAttribute="person">
+	<form action="delete" method="GET">
 		<h4 class="error">${deleteError}</h4>
-		Last Name: <form:input type="text" path="surname" /><br />
+		Last Name: <input type="text" name="surname"/><br />
 		<input type="submit" value="Delete Person" />
-	</form:form>
+	</form>
 	
 	<br />
 	

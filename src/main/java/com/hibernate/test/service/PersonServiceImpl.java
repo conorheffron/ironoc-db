@@ -29,11 +29,13 @@ public class PersonServiceImpl implements
 	}
 
 	@Override
+	@Transactional
 	public Boolean deletePersonBySurname(String surname) {
 		return personDao.deleteBySurname(surname);
 	}
 
 	@Override
+	@Transactional
 	public List<Person> findPersonBySurname(String surname) {
 		return personDao.findPersonBySurname(surname);
 	}
