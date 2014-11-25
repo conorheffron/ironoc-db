@@ -1,5 +1,6 @@
 package com.hibernate.test.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -68,6 +69,25 @@ public class PersonDaoImpl implements PersonDao {
 		session.close();
 		
 		return noOfRecsDeleted > 0 ? true : false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Person> findPersonBySurname(String surname) {
+		Session session = sessionFactory.openSession();
+		List<Person> personList = new ArrayList<Person>();
+		
+		try {
+			Query query = session.createQuery("from Person where surname= :surname");
+			query.setString("surname", surname);
+			personList = query.list();
+		} catch (HibernateException e) {
+			LOGGER.error("Exception occured in DAO layer: {}", e);
+		}
+		
+		session.close();
+		
+		return personList;
 	}
 
 }

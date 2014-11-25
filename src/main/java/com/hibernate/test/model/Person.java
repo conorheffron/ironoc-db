@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name="PERSON")
@@ -16,15 +20,20 @@ public class Person {
 	private Integer id;
 	
 	@Column(name="title")
+	@NotEmpty(message = "Title is not defined")
 	private String title;
 	
 	@Column(name="first_name")
+	@NotEmpty(message = "First Name is not defined")
 	private String firstName;
 	
 	@Column(name="surname")
+	@NotEmpty(message = "Surname is not defined")
 	private String surname;
 	
 	@Column(name="age")
+	@Range(min = 1, max = 90, message="Age is not in range of 1-90")
+	@NotNull(message = "Age is not defined")
 	private Integer age;
 
 	public String getFirstName() {

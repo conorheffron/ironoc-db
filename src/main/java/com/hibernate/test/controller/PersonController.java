@@ -2,11 +2,14 @@ package com.hibernate.test.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +38,13 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addperson(ModelMap map, @ModelAttribute("person") Person person) {
+	public String addperson(ModelMap map, @Valid @ModelAttribute("person") Person person,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			List<Person> personslist = personService.getAllPersons();
+	        map.addAttribute("personsList", personslist);
+			return "personList";
+		}
 
 		personService.addPerson(person);
 
@@ -45,7 +54,12 @@ public class PersonController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deletePersonBySurname(ModelMap map, @RequestParam String surname) {
 
-		personService.deletePersonBySurname(surname);
+		List<Person> persons = personService.findPersonBySurname(surname);
+		if (!persons.isEmpty()) {
+			personService.deletePersonBySurname(surname);
+		} else {
+			map.addAttribute("deleteError", "There are no matching entries to delete");
+		}
 
         return this.home(map);
 	}

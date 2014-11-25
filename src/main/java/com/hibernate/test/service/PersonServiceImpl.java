@@ -33,4 +33,9 @@ public class PersonServiceImpl implements
 		return personDao.deleteBySurname(surname);
 	}
 
+	@Override
+	public List<Person> findPersonBySurname(String surname) {
+		return personDao.findPersonBySurname(surname);
+	}
+
 }

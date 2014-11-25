@@ -11,5 +11,7 @@ public interface PersonDao {
 	Boolean addPerson(Person person);
 
 	Boolean deleteBySurname(String surname);
+
+	List<Person> findPersonBySurname(String surname);
  
 }

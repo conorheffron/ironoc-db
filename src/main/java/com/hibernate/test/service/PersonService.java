@@ -12,4 +12,6 @@ public interface PersonService {
 
 	Boolean deletePersonBySurname(String surname);
 
+	List<Person> findPersonBySurname(String surname);
+
 }
