@@ -49,8 +49,7 @@
 	<br />
 	
 	<form action="delete" method="GET">
-		<h4 class="error">${deleteError}</h4>
-		Last Name: <input type="text" name="surname"/><br />
+		<h4 class="error">${deleteError}</h4>Last Name: <input type="text" name="surname">
 		<input type="submit" value="Delete Person" />
 	</form>
 	
