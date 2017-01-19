@@ -2,6 +2,7 @@ package com.hibernate.test.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.hibernate.test.model.Person;
 import com.hibernate.test.service.PersonService;
@@ -25,6 +27,12 @@ public class PersonController {
 	
 	@Autowired
     private PersonService personService;
+	
+	@RequestMapping(value = "/*")
+	public RedirectView catchAll(HttpServletRequest httpServletRequest) {
+		LOGGER.info("Invaid request URL " + httpServletRequest.getRequestURI());
+        return new RedirectView("/", false);
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap map) {
@@ -40,6 +48,7 @@ public class PersonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addperson(ModelMap map, @Valid @ModelAttribute("person") Person person,
 			BindingResult result) {
+		LOGGER.info("Entering personController method addPerson");
 		
 		// validation error handling
 		if (result.hasErrors()) {
@@ -55,7 +64,7 @@ public class PersonController {
     
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deletePersonBySurname(ModelMap map, @RequestParam("surname") String surname) {
-
+		LOGGER.info("Entering personController method deletePersonBySurname");
 		List<Person> persons = personService.findPersonBySurname(surname);
 		
 		if (!persons.isEmpty()) {
