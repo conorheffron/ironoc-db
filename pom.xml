@@ -6,7 +6,7 @@
 	<artifactId>test</artifactId>
 	<name>HibernateExample</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.1.0</version>
 
 
 	<properties>
