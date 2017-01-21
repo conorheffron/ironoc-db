@@ -43,3 +43,6 @@ Temporary Items
 .apdisk
 /target/
 /.env
+/bfc916b3442ce1-cert.pem
+/bfc916b3442ce1-key.pem
+/cleardb-ca.pem
