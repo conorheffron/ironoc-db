@@ -36,7 +36,7 @@ public class PersonController {
 	
 	@RequestMapping("/favicon.ico")
 	public String favicon() {
-        return "forward:/resources/config/favicon.ico";
+        return "forward:/resources/imgs/favicon.ico";
     }
 	
 	@RequestMapping("/robots.txt")
