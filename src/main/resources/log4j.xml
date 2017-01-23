@@ -11,8 +11,8 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.test.hibernate">
-		<level value="info" />
+	<logger name="com.hibernate.test">
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -29,10 +29,6 @@
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
-	
-	<logger name="com.hibernate.test">
 		<level value="info" />
 	</logger>
 
