@@ -33,9 +33,7 @@
 	<div class="container">
 		<h3>Sample Data Manager</h3>
 		<p>Add / delete entries below and view the first 10 results.</p>
-	</div>
 
-	<div class="container">
 		<form:form action="add" modelAttribute="person" class=".form-control">
 			<form:errors path="title" cssClass="error"></form:errors>
 			<form:input type="text" path="title" style="width:50%"
@@ -50,24 +48,19 @@
 				placeholder="Enter Surname....." />
 			<br />
 			<form:errors path="age" cssClass="error"></form:errors>
-			<form:input type="text" path="age" style="width:50%"
+			<form:input type="number" path="age" style="width:50%"
 				placeholder="Enter Age....." />
 			<br />
 			<input type="submit" value="Add Person" class="btn btn-default" />
 		</form:form>
-	</div>
 
-	<br />
-
-	<div class="container">
 		<form action="delete" method="GET" class=".form-control">
-			<h4 class="error">${deleteError}</h4>
-			<input type="text" name="surname" style="width:50%" placeholder="Enter Surname....."><br />
-			<input type="submit" value="Delete Person" class="btn btn-default" />
+			<h5 class="error">${deleteError}</h5>
+			<input type="text" name="surname" style="width: 50%"
+				placeholder="Enter Surname....."><br /> <input
+				type="submit" value="Delete Person" class="btn btn-default" />
 		</form>
 	</div>
-
-	<br />
 
 	<c:if test="${!empty personsList}">
 		<div class="container">
