@@ -31,6 +31,7 @@ public class PersonDaoImpl implements PersonDao {
 		
 		try {
 			Query query = session.createQuery("from Person");
+			query.setMaxResults(10);
 			personsList = query.list();
 		} catch (HibernateException e) {
 			LOGGER.error("Exception occured in DAO layer: {}", e);

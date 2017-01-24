@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet"
 	href='<c:url value="/resources/style/main.css" />'>
-<title>iRonoc - Person Data Manager</title>
+<title>iRonoc - Sample Data Manager</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -31,8 +31,35 @@
 	</nav>
 
 	<div class="container">
-		<h3>iRonoc - Person Data Manager</h3>
-		<p>Add / delete entries below</p>
+		<h3>Sample Data Manager</h3>
+		<p>Add / delete entries below and view the first 10 results.</p>
+
+		<form:form action="add" modelAttribute="person" class=".form-control">
+			<form:errors path="title" cssClass="error"></form:errors>
+			<form:input type="text" path="title" style="width:50%"
+				placeholder="Enter title....." />
+			<br />
+			<form:errors path="firstName" cssClass="error"></form:errors>
+			<form:input type="text" path="firstName" style="width:50%"
+				placeholder="Enter First Name....." />
+			<br />
+			<form:errors path="surname" cssClass="error"></form:errors>
+			<form:input type="text" path="surname" style="width:50%"
+				placeholder="Enter Surname....." />
+			<br />
+			<form:errors path="age" cssClass="error"></form:errors>
+			<form:input type="number" path="age" style="width:50%"
+				placeholder="Enter Age....." />
+			<br />
+			<input type="submit" value="Add Person" class="btn btn-default" />
+		</form:form>
+
+		<form action="delete" method="GET" class=".form-control">
+			<h5 class="error">${deleteError}</h5>
+			<input type="text" name="surname" style="width: 50%"
+				placeholder="Enter Surname....."><br /> <input
+				type="submit" value="Delete Person" class="btn btn-default" />
+		</form>
 	</div>
 
 	<c:if test="${!empty personsList}">
@@ -55,53 +82,6 @@
 			</table>
 		</div>
 	</c:if>
-
-	<br />
-
-	<div class="container">
-		<form:form action="add" modelAttribute="person" class="form-inline">
-
-			<div class="form-group">
-				<form:errors path="title" cssClass="error"></form:errors>
-				Title:
-				<form:input type="text" path="title" />
-			</div>
-
-			<div class="form-group">
-				<form:errors path="firstName" cssClass="error"></form:errors>
-				First Name:
-				<form:input type="text" path="firstName" />
-			</div>
-
-			<div class="form-group">
-				<form:errors path="surname" cssClass="error"></form:errors>
-				Last Name:
-				<form:input type="text" path="surname" />
-			</div>
-
-			<div class="form-group">
-				<form:errors path="age" cssClass="error"></form:errors>
-				Age:
-				<form:input type="text" path="age" />
-			</div>
-
-			<input type="submit" value="Add Person" class="btn btn-default" />
-
-		</form:form>
-
-	</div>
-
-	<br />
-
-	<div class="container">
-		<form action="delete" method="GET" class="form-inline">
-			<div class="form-group">
-				<h4 class="error">${deleteError}</h4>
-				Last Name: <input type="text" name="surname">
-			</div>
-			<input type="submit" value="Delete Person" class="btn btn-default" />
-		</form>
-	</div>
 
 </body>
 </html>

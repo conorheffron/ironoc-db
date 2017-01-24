@@ -66,7 +66,7 @@ public class PersonController {
 		LOGGER.info("Entering personController method addPerson");
 		
 		// validation error handling
-		if (result.hasErrors()) {
+		if (result.hasErrors()) {			
 			List<Person> personslist = personService.getAllPersons();
 	        map.addAttribute("personsList", personslist);
 			return "personList";
