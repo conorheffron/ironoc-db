@@ -39,7 +39,7 @@
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="/WEB-INF/jdbc.properties" />
+		<property name="location" value="/WEB-INF/db/jdbc.properties" />
 	</bean>
 
 	<bean id="messageSource"
