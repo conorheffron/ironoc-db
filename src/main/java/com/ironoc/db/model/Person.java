@@ -1,4 +1,4 @@
-package com.hibernate.test.model;
+package com.ironoc.db.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,8 +1,8 @@
-package com.hibernate.test.service;
+package com.ironoc.db.service;
 
 import java.util.List;
 
-import com.hibernate.test.model.Person;
+import com.ironoc.db.model.Person;
 
 public interface PersonService {
 

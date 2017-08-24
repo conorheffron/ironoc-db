@@ -1,8 +1,8 @@
-package com.hibernate.test.dao;
+package com.ironoc.db.dao;
 
 import java.util.List;
 
-import com.hibernate.test.model.Person;
+import com.ironoc.db.model.Person;
 
 public interface PersonDao {
 

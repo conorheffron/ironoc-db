@@ -1,4 +1,4 @@
-package com.hibernate.test.dao;
+package com.ironoc.db.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hibernate.test.model.Person;
+import com.ironoc.db.model.Person;
 
 @Repository
 public class PersonDaoImpl implements PersonDao {
