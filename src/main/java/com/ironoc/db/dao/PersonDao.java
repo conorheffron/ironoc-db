@@ -12,9 +12,9 @@ import com.ironoc.db.model.Person;
 public interface PersonDao extends CrudRepository<Person, Long> {
 	
 	@Transactional
-    Long deleteBySurname(String surname);
+    public Long deleteBySurname(String surname);
 
     @Transactional
-    List<Person> findBySurname(String surname);
+    public List<Person> findBySurname(String surname);
 
 }

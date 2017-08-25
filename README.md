@@ -5,7 +5,7 @@ Sample Data Manager
 This project is a sample data manager. It provides a basic template for Java/Spring developers. This project also includes form validation of controller model objects and request parameters.
 
 # Technologies
-Java 8, Spring Boot, Hibernate, MySQL
+Java 8, Spring Boot, Hibernate, MySQL, JSP
 
 # Run
 Build Image:
