@@ -33,21 +33,6 @@ public class PersonController {
 		LOGGER.info("Invaid request URL " + httpServletRequest.getRequestURI());
         return new RedirectView("/", false);
 	}
-	
-	@RequestMapping("/favicon.ico")
-	public String favicon() {
-        return "forward:/resources/imgs/favicon.ico";
-    }
-	
-	@RequestMapping("/robots.txt")
-	public String robots() {
-        return "forward:/resources/config/robots.txt";
-    }
-	
-	@RequestMapping("/sitemap.xml")
-	public String sitemap() {
-        return "forward:/resources/config/sitemap.xml";
-    }
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap map) {
