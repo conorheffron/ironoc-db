@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hibernate</groupId>
 	<artifactId>ironoc-db</artifactId>
-	<name>HibernateExample</name>
+	<name>Sample Data Manager</name>
 	<packaging>war</packaging>
 	<version>1.4.7</version>
 
