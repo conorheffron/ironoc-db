@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.hibernate.test">
+	<logger name="com.ironoc.db">
 		<level value="debug" />
 	</logger>
 	
