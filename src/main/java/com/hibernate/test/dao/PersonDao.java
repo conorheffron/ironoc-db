@@ -1,17 +1,17 @@
-package com.ironoc.db.service;
+package com.hibernate.test.dao;
 
 import java.util.List;
 
-import com.ironoc.db.model.Person;
+import com.hibernate.test.model.Person;
 
-public interface PersonService {
+public interface PersonDao {
 
     List<Person> getAllPersons();
 
 	Boolean addPerson(Person person);
 
-	Boolean deletePersonBySurname(String surname);
+	Boolean deleteBySurname(String surname);
 
 	List<Person> findPersonBySurname(String surname);
-
+ 
 }

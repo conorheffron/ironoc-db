@@ -1,11 +1,13 @@
-package com.ironoc.db.service;
+package com.hibernate.test.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ironoc.db.dao.PersonDao;
-import com.ironoc.db.model.Person;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.hibernate.test.dao.PersonDao;
+import com.hibernate.test.model.Person;
 
 @Service
 public class PersonServiceImpl implements
@@ -15,27 +17,27 @@ public class PersonServiceImpl implements
     private PersonDao personDao;
 
 	@Override
+	@Transactional
 	public List<Person> getAllPersons() {
-		return (List<Person>) personDao.findAll();
+		return personDao.getAllPersons();
 	}
 
 	@Override
+	@Transactional
 	public Boolean addPerson(Person person) {
-		if (personDao.save(person) != null) {
-			return true;
-		}
-		return false;
+		return personDao.addPerson(person);
 	}
 
 	@Override
+	@Transactional
 	public Boolean deletePersonBySurname(String surname) {
-		personDao.deleteBySurname(surname);
-		return true;
+		return personDao.deleteBySurname(surname);
 	}
 
 	@Override
+	@Transactional
 	public List<Person> findPersonBySurname(String surname) {
-		return (List<Person>) personDao.findBySurname(surname);
+		return personDao.findPersonBySurname(surname);
 	}
 
 }

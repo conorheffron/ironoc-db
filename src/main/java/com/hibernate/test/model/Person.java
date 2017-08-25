@@ -1,4 +1,4 @@
-package com.ironoc.db.model;
+package com.hibernate.test.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
-@Table(name="person")
+@Table(name="PERSON")
 public class Person {
 	
 	@Id
