@@ -1,0 +1,6 @@
+version: '2'
+services:
+  ironoc-db:
+    image: ironoc-db
+    ports:
+     - "8080:8080"
