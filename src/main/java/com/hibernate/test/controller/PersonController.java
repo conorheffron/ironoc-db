@@ -1,4 +1,4 @@
-package com.ironoc.db.controller;
+package com.hibernate.test.controller;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.ironoc.db.model.Person;
-import com.ironoc.db.service.PersonService;
+import com.hibernate.test.model.Person;
+import com.hibernate.test.service.PersonService;
 
 @Controller
 public class PersonController {
@@ -33,6 +33,21 @@ public class PersonController {
 		LOGGER.info("Invaid request URL " + httpServletRequest.getRequestURI());
         return new RedirectView("/", false);
 	}
+	
+	@RequestMapping("/favicon.ico")
+	public String favicon() {
+        return "forward:/resources/imgs/favicon.ico";
+    }
+	
+	@RequestMapping("/robots.txt")
+	public String robots() {
+        return "forward:/resources/config/robots.txt";
+    }
+	
+	@RequestMapping("/sitemap.xml")
+	public String sitemap() {
+        return "forward:/resources/config/sitemap.xml";
+    }
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap map) {
