@@ -15,8 +15,8 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'docker'
 apply plugin: 'war'
 
-group = 'com.ironoc'
-version = '1.5.1'
+group = 'conorheffron'
+version = '1.5.2'
 description = "Sample Data Manager"
 
 sourceCompatibility = 1.8
