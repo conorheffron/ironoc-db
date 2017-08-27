@@ -10,7 +10,7 @@ Java 8, Spring Boot, Hibernate, MySQL, JSP, Gradle
 # Run
 MySql
 ```
-docker run --detach --name=test-mysql --env="MYSQL_ROOT_PASSWORD=mypassword" mysql
+docker run -p 3306:3306 -d --name test-mysql -e "MYSQL_ROOT_PASSWORD=mypassword" mysql
 docker logs test-mysql
 docker inspect test-mysql
 ```
@@ -29,6 +29,7 @@ docker run -p 8080:8080 --name ironocdb conorheffron/ironoc-db:1.5.2
 Tear-down:
 ```
 docker stop ironocdb
+docker stop test-mysql
 ```
 
 # Screenshots
