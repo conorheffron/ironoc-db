@@ -5,7 +5,7 @@ Sample Data Manager
 This project is a sample data manager. It provides a basic template for Java/Spring developers. This project also includes form validation of controller model objects and request parameters.
 
 # Technologies
-Java 8, Spring Boot, Hibernate, MySQL, JSP
+Java 8, Spring Boot, Hibernate, MySQL, JSP, Gradle
 
 # Run
 MySql
@@ -18,17 +18,17 @@ Get IP address from inspect cmd and test connection from MySql workbench with ne
 
 Build Image:
 ```
-mvn clean package docker:build 
+gradle clean buildDocker
 ```
 
 Spin-up Container: 
 ```
-docker-compose up -d
+docker run -p 8080:8080 --name ironocdb conorheffron/ironoc-db:1.5.2
 ```
 
 Tear-down:
 ```
-docker-compose down
+docker stop ironocdb
 ```
 
 # Screenshots
