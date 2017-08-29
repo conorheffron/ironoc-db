@@ -29,6 +29,7 @@ docker-compose up -d
 Tear-down:
 ```
 docker-compose down
+docker stop test-mysql
 ```
 
 # Screenshots
