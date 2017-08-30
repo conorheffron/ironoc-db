@@ -16,7 +16,7 @@ apply plugin: 'docker'
 apply plugin: 'war'
 
 group = 'conorheffron'
-version = '1.5.2'
+version = '1.5.3'
 description = "Sample Data Manager"
 
 sourceCompatibility = 1.8
