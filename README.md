@@ -23,7 +23,7 @@ gradle clean buildDocker
 
 Spin-up Container: 
 ```
-docker run -p 8080:8080 --name ironocdb conorheffron/ironoc-db:1.5.2
+docker run -d -p 8080:8080 --name ironocdb conorheffron/ironoc-db:1.5.3
 ```
 
 Tear-down:

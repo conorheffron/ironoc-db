@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    image: "conorheffron/ironoc-db:1.5.3"
+    ports:
+     - "8080:8080"
+    volumes:
+     - .:/tmp
