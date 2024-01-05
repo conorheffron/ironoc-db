@@ -42,7 +42,7 @@ Link containers to same network for access:
 docker network connect test-mysql
 docker network connect ironocdb
 ```
-Inspect network configurations (IP etc.)
+Inspect network configurations (IPv4Address etc.)
 ```
 docker inspect network my-network 
 ```
