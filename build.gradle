@@ -32,7 +32,7 @@ repositories {
 
 dependencies {
     compile group: 'com.rabbitmq', name: 'amqp-client', version:'3.3.4'
-    compile group: 'io.searchbox', name: 'jest', version:'0.1.6'
+    compile group: 'io.searchbox', name: 'jest', version:'6.3.1'
     compile group: 'org.elasticsearch', name: 'elasticsearch', version:'0.90.3'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.6.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.6.RELEASE'
