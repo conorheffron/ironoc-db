@@ -39,6 +39,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
     compile group: 'com.sparkpost', name: 'sparkpost-lib', version:'0.16.1'
     compile group: 'com.h2database', name: 'h2', version:'1.4.196'
+    compile group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
     compile group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.11'
  
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'1.5.6.RELEASE'
