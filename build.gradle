@@ -46,7 +46,7 @@ dependencies {
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'8.5.16'
     compile group: 'javax.servlet', name: 'jstl', version:'1.2'
     
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.6.RELEASE') {
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'3.2.4') {
 		exclude(module: 'commons-logging')
     }
 }
