@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM eclipse-temurin:8-jdk
 
 VOLUME /tmp
 ADD target/*.war app.war

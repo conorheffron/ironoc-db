@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.22.RELEASE")
         classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
@@ -14,7 +14,7 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'docker'
 apply plugin: 'war'
-apply plugin: 'maven'
+// apply plugin: 'maven'
 
 group = 'conorheffron'
 version = '1.5.3'
@@ -31,21 +31,25 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.rabbitmq', name: 'amqp-client', version:'3.3.4'
-    compile group: 'io.searchbox', name: 'jest', version:'0.1.6'
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'0.90.3'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '1.5.22.RELEASE'
+    compile group: 'com.rabbitmq', name: 'amqp-client', version:'5.20.0'
+    compile group: 'io.searchbox', name: 'jest', version:'6.3.1'
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'8.13.0'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.6.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.6.RELEASE'
-    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.43'
+    compile group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
     compile group: 'com.sparkpost', name: 'sparkpost-lib', version:'0.16.1'
     compile group: 'com.h2database', name: 'h2', version:'1.4.196'
-    compile group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.7.5.201505241946'
+    compile group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
+    compile group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.11'
  
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'1.5.6.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.2.4'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'8.5.16'
-    compile group: 'javax.servlet', name: 'jstl', version:'1.2'
-    
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.6.RELEASE') {
+    // compile group: 'javax.servlet', name: 'jstl', version:'1.2'
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.5'
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'3.2.4') {
 		exclude(module: 'commons-logging')
     }
 }
