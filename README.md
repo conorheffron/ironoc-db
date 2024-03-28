@@ -59,6 +59,3 @@ docker remove test-mysql
 
 # Screenshots
 ![Home](./screenshots/DBManager.png?raw=true "Home Page")
-
-# TODO
-Create docker compose file to spin up both MySql and ironoc-db.
