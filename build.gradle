@@ -17,7 +17,7 @@ apply plugin: 'war'
 apply plugin: 'maven'
 
 group = 'conorheffron'
-version = '1.5.4'
+version = '2.3.0'
 description = "Sample Data Manager"
 
 sourceCompatibility = 1.8
