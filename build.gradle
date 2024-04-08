@@ -34,7 +34,7 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '1.5.22.RELEASE'
     compile group: 'com.rabbitmq', name: 'amqp-client', version:'5.20.0'
     compile group: 'io.searchbox', name: 'jest', version:'6.3.1'
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'8.13.0'
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version:'8.13.1'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.22.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.22.RELEASE'
     compile group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
