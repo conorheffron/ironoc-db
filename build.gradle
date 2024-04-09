@@ -18,8 +18,8 @@ group = 'conorheffron'
 version = '3.1.0'
 description = "Sample Data Manager"
 
-sourceCompatibility = 10
-targetCompatibility = 10
+sourceCompatibility = 9
+targetCompatibility = 9
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
