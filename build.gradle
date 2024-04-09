@@ -43,7 +43,7 @@ dependencies {
     compile group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
     compile group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.11'
  
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'1.5.22.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.2.4'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.20'
     // compile group: 'javax.servlet', name: 'jstl', version:'1.2'
     compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
