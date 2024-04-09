@@ -30,7 +30,7 @@ repositories {
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.2.4'
-    compile group: 'com.rabbitmq', name: 'amqp-client', version:'5.21.0'
+    compile group: 'com.rabbitmq', name: 'amqp-client', version: '5.18.0'
     compile group: 'io.searchbox', name: 'jest', version:'6.3.1'
     compile group: 'org.elasticsearch', name: 'elasticsearch', version:'8.13.2'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.22.RELEASE'
