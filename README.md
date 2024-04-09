@@ -9,7 +9,7 @@ This project is a sample data manager. It provides a basic template for Java/Spr
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 8, Spring Boot, Hibernate, MySQL, JSP, Gradle
+Java 17, Spring Boot, Hibernate, MySQL, JSP, Gradle
 
 ## Run
 MySql
