@@ -42,6 +42,9 @@ dependencies {
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.2.4'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.20'
+
+    // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.1'
     implementation group: 'javax.servlet', name: 'servlet-api', version: '2.5'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
