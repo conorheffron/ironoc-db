@@ -1,3 +1,5 @@
+![Auto Assign](https://github.com/conorheffron/ironoc-db/actions/workflows/auto-assign.yml/badge.svg)
+
 # Sample Data Manager
 ================
 
