@@ -1,3 +1,5 @@
+![Proof HTML](https://github.com/conorheffron/ironoc-db/actions/workflows/proof-html.yml/badge.svg)
+
 # Sample Data Manager
 ================
 
