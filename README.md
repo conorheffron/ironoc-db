@@ -1,4 +1,4 @@
-![Auto Assign](https://github.com/cph39/demo-repository/actions/workflows/auto-assign.yml/badge.svg)
+![Auto Assign](https://github.com/conorheffron/ironoc-db/actions/workflows/auto-assign.yml/badge.svg)
 
 # Sample Data Manager
 ================
