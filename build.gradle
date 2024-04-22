@@ -34,7 +34,7 @@ dependencies {
     implementation group: 'io.searchbox', name: 'jest', version:'6.3.1'
     implementation group: 'org.elasticsearch', name: 'elasticsearch', version:'8.13.2'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.22.RELEASE'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.22.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'3.2.5'
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
     implementation group: 'com.sparkpost', name: 'sparkpost-lib', version:'0.27'
     implementation group: 'com.h2database', name: 'h2', version:'2.2.224'
