@@ -1,4 +1,4 @@
-FROM eclipse-temurin:8-jdk
+FROM eclipse-temurin:21-jdk
 
 VOLUME /tmp
 ADD *.war app.war
