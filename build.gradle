@@ -51,7 +51,7 @@ dependencies {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  applicationName = war.baseName
+  // applicationName = war.baseName
   dockerfile = file('Dockerfile')
   doFirst {
     copy {
