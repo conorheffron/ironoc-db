@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.2.5")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.3.0")
         classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
@@ -15,11 +15,11 @@ apply plugin: 'docker'
 apply plugin: 'war'
 
 group = 'conorheffron'
-version = '3.1.4'
+version = '4.1.2'
 description = "Sample Data Manager"
 
-sourceCompatibility = 17
-targetCompatibility = 17
+sourceCompatibility = 21
+targetCompatibility = 21
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -29,20 +29,21 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.2.5'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.3.0'
     implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.21.0'
     implementation group: 'io.searchbox', name: 'jest', version:'6.3.1'
     implementation group: 'org.elasticsearch', name: 'elasticsearch', version:'8.13.4'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.22.RELEASE'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.22.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'3.3.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'3.3.0'
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
     implementation group: 'com.sparkpost', name: 'sparkpost-lib', version:'0.27'
     implementation group: 'com.h2database', name: 'h2', version:'2.2.224'
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.2.5'
-    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.23'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.3.0'
+    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.24'
     implementation group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'3.2.5') {
@@ -51,7 +52,7 @@ dependencies {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  applicationName = war.baseName
+  applicationName = war.archiveBaseName
   dockerfile = file('Dockerfile')
   doFirst {
     copy {

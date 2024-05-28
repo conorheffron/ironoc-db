@@ -1,14 +1,16 @@
 package com.ironoc.db.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
 
 @Entity
 @Table(name="person")
@@ -32,7 +34,8 @@ public class Person {
 	private String surname;
 	
 	@Column(name="age")
-	@Range(min = 1, max = 90, message="Age is not in range of 1-90")
+	@Min(value=1, message="Age is less than 1")
+	@Max(value=90, message="Age is greater than 90")
 	@NotNull(message = "Age is not defined")
 	private Integer age;
 
