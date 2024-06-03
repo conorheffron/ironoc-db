@@ -43,7 +43,7 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.3.0'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.24'
     implementation group: 'javax.servlet', name: 'servlet-api', version: '2.5'
-    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'3.2.5') {
