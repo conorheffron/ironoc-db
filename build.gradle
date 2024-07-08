@@ -15,7 +15,7 @@ apply plugin: 'docker'
 apply plugin: 'war'
 
 group = 'conorheffron'
-version = '4.2.9'
+version = '4.2.10'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
@@ -48,6 +48,20 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'3.3.1') {
 		exclude(module: 'commons-logging')
+    }
+}
+
+test {
+    // show standard out and standard error of the test JVM(s) on the console, without this
+    // the text output printed by the tests won't show.
+    // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
+    testLogging.showStandardStreams = true
+    def testCount = 0
+    afterTest { descriptor, result ->
+        // descriptor is of type TestDescriptor, result is of type TestResult
+        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestDescriptor.html
+        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
+        logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
 }
 
