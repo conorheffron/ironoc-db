@@ -15,6 +15,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = { "com.ironoc.db" })
 public class AppConfig implements WebMvcConfigurer {
 
+	protected static final String RESOURCES_HANDLER = "/resources/**";
+	protected static final String FAV_ICON = "/favicon.ico";
+	protected static final String SITE_MAP = "/sitemap.xml";
+	protected static final String ROBOTS_TEXT = "/robots.txt";
+	protected static final String STATIC_LOC = "/static/";
+	protected static final String IMAGES_LOC = STATIC_LOC + "imgs/";
+	protected static final String STATIC_CONF_LOC = STATIC_LOC + "config/";
+
 	@Bean
 	public ViewResolver getViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -25,10 +33,10 @@ public class AppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/static/");
-		registry.addResourceHandler("/favicon.ico").addResourceLocations("/static/imgs/");
-    	registry.addResourceHandler("/sitemap.xml").addResourceLocations("/static/config/");
-    	registry.addResourceHandler("/robots.txt").addResourceLocations("/static/config/");
+		registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(STATIC_LOC);
+		registry.addResourceHandler(FAV_ICON).addResourceLocations(IMAGES_LOC);
+    	registry.addResourceHandler(SITE_MAP).addResourceLocations(STATIC_CONF_LOC);
+    	registry.addResourceHandler(ROBOTS_TEXT).addResourceLocations(STATIC_CONF_LOC);
 	}
 
 	@Override
