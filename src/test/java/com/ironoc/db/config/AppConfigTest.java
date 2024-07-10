@@ -1,4 +1,4 @@
-package com.ironoc.db;
+package com.ironoc.db.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,10 +33,6 @@ public class AppConfigTest {
 
     @Test
     public void test_getViewResolver_success() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/templates/");
-        resolver.setSuffix(".jsp");
-
         // when
         ViewResolver result = appConfig.getViewResolver();
 

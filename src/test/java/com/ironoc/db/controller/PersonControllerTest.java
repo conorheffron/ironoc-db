@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -52,8 +51,6 @@ public class PersonControllerTest {
     @Before
     public void setUp() {
         // initialise test variables
-        MockitoAnnotations.initMocks(this);
-
         persons = new ArrayList<>();
         persons.add(personMock);
     }
