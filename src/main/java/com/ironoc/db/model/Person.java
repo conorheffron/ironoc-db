@@ -79,4 +79,47 @@ public class Person {
 		this.title = title;
 	}
 
+	public static class PersonBuilder {
+
+		private Integer id;
+		private String title;
+		private String firstName;
+		private String surname;
+		private Integer age;
+
+		public PersonBuilder withId(Integer id) {
+			this.id = id;
+			return this;
+		}
+
+		public PersonBuilder withTitle(String title) {
+			this.title = title;
+			return this;
+		}
+
+		public PersonBuilder withFirstName(String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+
+		public PersonBuilder withSurname(String surname) {
+			this.surname = surname;
+			return this;
+		}
+
+		public PersonBuilder withAge(int age) {
+			this.age = age;
+			return this;
+		}
+
+		public Person build() {
+			Person person = new Person();
+			person.setId(this.id);
+			person.setTitle(this.title);
+			person.setFirstName(this.firstName);
+			person.setSurname(this.surname);
+			person.setAge(this.age);
+			return person;
+		}
+	}
 }
