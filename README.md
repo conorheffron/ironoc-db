@@ -15,7 +15,7 @@ This project is a sample data manager. It provides a basic template for Java/Spr
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 21 (LTS Version), Spring Boot, Hibernate, MySQL, JSP, Gradle 8
+Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL, JSP, Gradle 8
 
 ## Run
 MySql
@@ -32,38 +32,12 @@ docker inspect test-mysql
 
 - Get IP address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
 
-## Build Image:
+Run 'com.ironoc.db.App.java' directly from IntelliJ or via CLI (build / spin up docker image):
 ```
-gradle clean buildDocker
-```
-
-## Spin-up Container: 
-```
-docker run -d -p 8080:8080 --name ironocdb conorheffron/ironoc-db:1.5.3
-```
-
-## Create Network
-```
-docker network create my-network
-docker inspect network my-network 
-```
-
-## Link containers to same network for access:
-```
-docker network connect test-mysql
-docker network connect ironocdb
-```
-
-## Inspect network configurations (IPv4Address etc.)
-```
-docker inspect network my-network 
+docker compose up
 ```
 
 ## Tear-down:
-```
-docker stop ironocdb
-docker remove ironocdb
-```
 ```
 docker stop test-mysql
 docker remove test-mysql
