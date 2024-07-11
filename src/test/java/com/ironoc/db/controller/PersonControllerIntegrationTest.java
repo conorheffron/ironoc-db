@@ -1,7 +1,6 @@
 package com.ironoc.db.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironoc.db.TestAppConfig;
 import com.ironoc.db.dao.PersonDao;
 import com.ironoc.db.model.Person;
 import com.ironoc.db.service.PersonService;
@@ -12,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -32,9 +30,9 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(PersonController.class)
-@Import(TestAppConfig.class)
+@AutoConfigureMockMvc
 public class PersonControllerIntegrationTest {
 
     @Autowired
