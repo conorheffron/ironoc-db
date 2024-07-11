@@ -45,3 +45,11 @@ docker remove test-mysql
 
 ## Screenshot Home
 ![Home](./screenshots/DBManager.png?raw=true "Home Page")
+
+## Screenshot Form Validation Error for Add Person Call
+![image](https://github.com/user-attachments/assets/3b5edddb-4b6e-40a4-bbb5-99f5367bccad)
+
+## Screenshot Form Validation Error for Delete Operation
+![image](https://github.com/user-attachments/assets/d4086af9-02a1-467e-9a75-93c507c7966d)
+
+
