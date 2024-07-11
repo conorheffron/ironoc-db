@@ -25,38 +25,27 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Collections;
 import java.util.List;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.MOCK)
 @WebMvcTest(controllers = PersonController.class)
 @TestPropertySource(properties = {"spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration"})
-
 @ContextConfiguration(classes = AppConfig.class)
-//@ExtendWith(SpringExtension.class)
-//@SpringBootTest(classes = {PersonController.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@AutoConfigureMockMvc
-//@RunWith(SpringRunner.class)
 public class PersonControllerIntegrationTest {
 
     @Autowired
     private WebApplicationContext webAppContext;
 
-//    @Autowired
-//    private ApplicationContext context;
-
     private MockMvc mockMvc;
 
-//    @Autowired
-    private ObjectMapper mapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper mapper;
 
     @Mock
     private PersonService personServiceMock;
@@ -143,5 +132,4 @@ public class PersonControllerIntegrationTest {
         assertThat(response.getForwardedUrl(), is(nullValue()));
         assertThat(response.getContentAsString(), is(emptyString()));
     }
-
 }
