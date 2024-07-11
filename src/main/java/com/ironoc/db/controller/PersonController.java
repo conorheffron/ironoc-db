@@ -2,7 +2,7 @@ package com.ironoc.db.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
@@ -46,8 +46,8 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addperson(ModelMap map, @Valid @ModelAttribute("person") Person person,
-			BindingResult result) {
+	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
+							BindingResult result) {
 		LOGGER.info("Entering personController method addPerson");
 		
 		// validation error handling
