@@ -58,9 +58,14 @@ dependencies {
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.3.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.3.1'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.25'
-    implementation group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
+    implementation group: 'taglibs', name: 'standard', version: '1.1.2'
+    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
+    implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
     implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
+    implementation group: 'jakarta.ws.rs', name: 'jakarta.ws.rs-api', version: '3.1.0'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'3.3.1') {
