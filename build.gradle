@@ -28,6 +28,23 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+    integrationTestImplementation.extendsFrom testImplementation
+}
+
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.3.1'
     implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.21.0'
@@ -52,6 +69,28 @@ dependencies {
 }
 
 test {
+    // show standard out and standard error of the test JVM(s) on the console, without this
+    // the text output printed by the tests won't show.
+    // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
+    testLogging.showStandardStreams = true
+    def testCount = 0
+    afterTest { descriptor, result ->
+        // descriptor is of type TestDescriptor, result is of type TestResult
+        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestDescriptor.html
+        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
+        logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
+    }
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+integrationTest {
     // show standard out and standard error of the test JVM(s) on the console, without this
     // the text output printed by the tests won't show.
     // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
