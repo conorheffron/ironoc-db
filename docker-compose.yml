@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: "conorheffron/ironoc-db:1.5.3"
+    image: "conorheffron/ironoc-db:1.5.4"
     ports:
      - "8080:8080"
     volumes:
