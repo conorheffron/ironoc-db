@@ -58,11 +58,17 @@ docker image build -t ironoc-db .
 docker compose up -d
 ```
 
+![image](https://github.com/user-attachments/assets/171bc3ad-f5d4-49aa-a768-8178a1560a5f)
+
+
 ## Tear-down:
 ```
 docker stop test-mysql
 docker remove test-mysql
 ```
+
+## Alternatively, Docker Desktop is good if you prefer to not use the terminal/command line (CLI)
+![image](https://github.com/user-attachments/assets/955235dd-8280-41cd-9fe4-1f0c94dfb191)
 
 ## Screenshot Home
 ![Home](./screenshots/DBManager.png?raw=true "Home Page")
