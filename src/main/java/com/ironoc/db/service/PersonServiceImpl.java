@@ -1,6 +1,7 @@
 package com.ironoc.db.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,12 @@ public class PersonServiceImpl implements
 
 	@Override
 	public List<Person> getAllPersons() {
-		return (List<Person>) personDao.findAll();
+		List<Person> persons = (List<Person>) personDao.findAll();
+		if (persons.size() > 10) {
+			return persons.stream().limit(10).collect(Collectors.toList());
+		} else {
+			return persons;
+		}
 	}
 
 	@Override
