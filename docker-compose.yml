@@ -1,8 +1,13 @@
-version: '3'
 services:
   web:
-    image: "conorheffron/ironoc-db:1.5.4"
+    image: "ironoc-db"
     ports:
      - "8080:8080"
+    networks:
+      - my-network
     volumes:
      - .:/tmp
+
+networks:
+  my-network:
+    external: true

@@ -15,7 +15,7 @@ This project is a sample data manager. It provides a basic template for Java/Spr
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL, JSP, Gradle 8
+Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL, JSP, Gradle 8.5
 
 ## Run
 MySql
@@ -30,12 +30,34 @@ docker inspect test-mysql
 ![load-db](./screenshots/run-starter-db-script.png?raw=true "Load DB")
 ![verify-db](./screenshots/verify-db-load.png?raw=true "Verify DB")
 
-- Get IP address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
+## Create Network
+```
+docker network create my-network
+docker inspect network my-network 
+```
 
-Run 'com.ironoc.db.App.java' directly from IntelliJ or via CLI (build / spin up docker image):
+## Link container to same network for access:
 ```
-docker compose up
+docker network connect test-mysql
 ```
+
+## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
+- Get IP address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
+```
+docker inspect network my-network 
+```
+
+## Build ironoc-db, run unit & integration tests, & generate war file.
+```
+gradle build
+```
+
+## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
+```
+docker image build -t ironoc-db .
+docker compose up -d
+```
+![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
 ## Tear-down:
 ```
@@ -43,13 +65,19 @@ docker stop test-mysql
 docker remove test-mysql
 ```
 
+## Alternatively, Docker Desktop is good if you prefer to not use the terminal/command line (CLI)
+![docker-desktop-containers](./screenshots/docker-desktop-containers.png?raw=true "Docker Desktop containers")
+
+## Can tail the logs by scrolling within the container logs:
+![docker-desktop-ironoc-db-logs](./screenshots/docker-desktop-ironoc-db-logs.png?raw=true "Docker Desktop ironoc-db logs")
+
 ## Screenshot Home
 ![Home](./screenshots/DBManager.png?raw=true "Home Page")
 
 ## Screenshot Form Validation Error for Add Person Call
-![image](https://github.com/user-attachments/assets/3b5edddb-4b6e-40a4-bbb5-99f5367bccad)
+![ui-form-validation](./screenshots/ui-form-validation.png?raw=true "UI form validation")
 
 ## Screenshot Form Validation Error for Delete Operation
-![image](https://github.com/user-attachments/assets/d4086af9-02a1-467e-9a75-93c507c7966d)
+![ui-delete-validation](./screenshots/ui-delete-validation.png?raw=true "UI delete validation")
 
 
