@@ -70,6 +70,9 @@ docker remove test-mysql
 ## Alternatively, Docker Desktop is good if you prefer to not use the terminal/command line (CLI)
 ![image](https://github.com/user-attachments/assets/955235dd-8280-41cd-9fe4-1f0c94dfb191)
 
+## Can tail the logs by scrolling within the container logs:
+- ![image](https://github.com/user-attachments/assets/20e67697-fb22-4f1d-84f3-d37852ac076e)
+
 ## Screenshot Home
 ![Home](./screenshots/DBManager.png?raw=true "Home Page")
 
