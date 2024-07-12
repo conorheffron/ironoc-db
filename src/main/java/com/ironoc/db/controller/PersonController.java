@@ -1,10 +1,10 @@
 package com.ironoc.db.controller;
 
-import java.util.List;
-
+import com.ironoc.db.model.Person;
+import com.ironoc.db.model.Person.PersonBuilder;
+import com.ironoc.db.service.PersonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.ironoc.db.model.Person;
-import com.ironoc.db.service.PersonService;
+import java.util.List;
 
 @Controller
 public class PersonController {
@@ -40,7 +39,7 @@ public class PersonController {
 		
 		List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
-        map.addAttribute("person", new Person());
+        map.addAttribute("person", new PersonBuilder().build());
 
         return "personList";
 	}
