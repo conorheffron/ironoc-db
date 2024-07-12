@@ -17,7 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -90,7 +90,7 @@ public class PersonControllerTest {
         when(personServiceMock.addPerson(ArgumentMatchers.any(Person.class))).thenReturn(true);
 
         // when
-        String result = personController.addperson(modelMapMock, personMock, bindingResultMock);
+        String result = personController.addPerson(modelMapMock, personMock, bindingResultMock);
 
         // then
         verify(bindingResultMock).hasErrors();
@@ -106,7 +106,7 @@ public class PersonControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(true);
 
         // when
-        String result = personController.addperson(modelMapMock, personMock, bindingResultMock);
+        String result = personController.addPerson(modelMapMock, personMock, bindingResultMock);
 
         // then
         verify(bindingResultMock).hasErrors();

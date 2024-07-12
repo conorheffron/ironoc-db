@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
@@ -36,6 +37,7 @@ public class PersonServiceTest {
     private static final String TEST_SURNAME = "Heffron";
     private Person person;
     private List<Person> persons;
+    private List<Person> personsFullRs;
 
     @Before
     public void setUp() {
@@ -49,6 +51,10 @@ public class PersonServiceTest {
                 .withAge(TEST_AGE)
                 .build();
         persons.addAll(Arrays.asList(personMock, person, personMock));
+
+        personsFullRs = new ArrayList<>();
+        personsFullRs.addAll(Arrays.asList(personMock, personMock, personMock, personMock, personMock, personMock,
+                personMock, personMock, personMock, personMock, personMock, personMock, personMock, personMock));
     }
 
     @Test
@@ -67,6 +73,21 @@ public class PersonServiceTest {
         assertThat(result.get(0), is(personMock));
         assertThat(result.get(1), is(person));
         assertThat(result.get(2), is(personMock));
+    }
+
+    @Test
+    public void test_getAllPersons_moreThanTen_success() {
+        // given
+        when(personDaoMock.findAll()).thenReturn(personsFullRs);
+
+        // when
+        List<Person> result = personService.getAllPersons();
+
+        // then
+        verify(personDaoMock).findAll();
+
+        assertThat(result, is(personsFullRs.stream().limit(10).collect(Collectors.toList())));
+        assertThat(result.size(), is(10));
     }
 
     @Test

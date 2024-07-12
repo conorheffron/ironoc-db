@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
@@ -77,5 +79,14 @@ public class AppConfigTest {
 
         // then
         verify(defaultServletHandlerConfigurerMock).enable();
+    }
+
+    @Test
+    public void test_enableDefaultServlet_success() {
+        // when
+        WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> result = appConfig.enableDefaultServlet();
+
+        // then
+        assertThat(result, is(notNullValue()));
     }
 }
