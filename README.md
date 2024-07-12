@@ -57,9 +57,7 @@ gradle build
 docker image build -t ironoc-db .
 docker compose up -d
 ```
-
-![image](https://github.com/user-attachments/assets/171bc3ad-f5d4-49aa-a768-8178a1560a5f)
-
+![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
 ## Tear-down:
 ```
@@ -68,18 +66,18 @@ docker remove test-mysql
 ```
 
 ## Alternatively, Docker Desktop is good if you prefer to not use the terminal/command line (CLI)
-![image](https://github.com/user-attachments/assets/955235dd-8280-41cd-9fe4-1f0c94dfb191)
+![docker-desktop-containers](./screenshots/docker-desktop-containers.png?raw=true "Docker Desktop containers")
 
 ## Can tail the logs by scrolling within the container logs:
-- ![image](https://github.com/user-attachments/assets/20e67697-fb22-4f1d-84f3-d37852ac076e)
+![docker-desktop-ironoc-db-logs](./screenshots/docker-desktop-ironoc-db-logs.png?raw=true "Docker Desktop ironoc-db logs")
 
 ## Screenshot Home
 ![Home](./screenshots/DBManager.png?raw=true "Home Page")
 
 ## Screenshot Form Validation Error for Add Person Call
-![image](https://github.com/user-attachments/assets/3b5edddb-4b6e-40a4-bbb5-99f5367bccad)
+![ui-form-validation](./screenshots/ui-form-validation.png?raw=true "UI form validation")
 
 ## Screenshot Form Validation Error for Delete Operation
-![image](https://github.com/user-attachments/assets/d4086af9-02a1-467e-9a75-93c507c7966d)
+![ui-delete-validation](./screenshots/ui-delete-validation.png?raw=true "UI delete validation")
 
 
