@@ -61,7 +61,7 @@ dependencies {
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version:'3.3.1'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.3.1'
-    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.25'
+    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.26'
     implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
     implementation group: 'taglibs', name: 'standard', version: '1.1.2'
     implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
