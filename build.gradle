@@ -65,7 +65,7 @@ dependencies {
     implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
     implementation group: 'taglibs', name: 'standard', version: '1.1.2'
     implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
-    implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
+    implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
     implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
     implementation group: 'jakarta.ws.rs', name: 'jakarta.ws.rs-api', version: '3.1.0'
 
