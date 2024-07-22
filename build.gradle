@@ -48,7 +48,7 @@ configurations {
 }
 
 dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.3.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.3.2'
     implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.21.0'
     implementation group: 'io.searchbox', name: 'jest', version:'6.3.1'
     implementation group: 'org.elasticsearch', name: 'elasticsearch', version:'8.14.3'
