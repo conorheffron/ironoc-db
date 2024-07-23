@@ -13,8 +13,8 @@ INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1001", "Mr John");
 INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1002", "Joe Bloggs");
 
 ALTER TABLE `test`.`person` 
-ADD COLUMN `first_name` VARCHAR(45) NULL AFTER `title`,
-ADD COLUMN `surname` VARCHAR(45) NULL AFTER `first_name`,
+ADD COLUMN `first_name` VARCHAR(45) NULL AFTER `title`;
+ADD COLUMN `surname` VARCHAR(45) NULL AFTER `first_name`;
 ADD COLUMN `age` INT NULL AFTER `surname`;
 
 UPDATE `test`.`person` SET `title`="Mr", `first_name`="Conor", `surname`="Heffron", `age`="30" WHERE `id`="1";
