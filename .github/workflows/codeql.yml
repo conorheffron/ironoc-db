@@ -80,6 +80,9 @@ jobs:
     - name: Build with Gradle 7.3
       run: gradle build
 
+    - name: Sql-Lint
+      uses: Bidaya0/sql-lint-in-action@v0.0.3
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
