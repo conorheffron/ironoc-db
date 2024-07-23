@@ -1,4 +1,8 @@
--- DROP TABLE `test`.`person`;
+DROP TABLE IF EXISTS `test`.`person`;
+
+DROP SCHEMA IF EXISTS `test`;
+
+CREATE SCHEMA `test`;
 
 CREATE TABLE `test`.`person` (
   `id` INT NULL AUTO_INCREMENT,
@@ -10,11 +14,11 @@ COLLATE = utf8_unicode_ci
 COMMENT = 'test person table';
 
 
-INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1", "Mr Conor");
+INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1000", "Mr Conor");
 
-INSERT INTO `test`.`person` (`id`, `title`) VALUES ("2", "Mr John");
+INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1001", "Mr John");
 
-INSERT INTO `test`.`person` (`id`, `title`) VALUES ("3", "Joe Bloggs");
+INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1002", "Joe Bloggs");
 
 ALTER TABLE `test`.`person` 
 ADD COLUMN `first_name` VARCHAR(45) NULL AFTER `title`,
@@ -27,3 +31,5 @@ UPDATE `test`.`person` SET `title`="Dr", `first_name`="John", `surname`="Jones",
 
 -- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'mypassword';
+
+ show variables like 'tx_isolation';
