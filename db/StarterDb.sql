@@ -21,7 +21,4 @@ UPDATE `test`.`person` SET `title`="Mr", `first_name`="Conor", `surname`="Heffro
 UPDATE `test`.`person` SET `title`="Mr", `first_name`="Joe", `surname`="Bloggs", `age`="40" WHERE `id`="2";
 UPDATE `test`.`person` SET `title`="Dr", `first_name`="John", `surname`="Jones", `age`="20" WHERE `id`="3";
 
--- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'mypassword';
-
-show variables like 'tx_isolation';
