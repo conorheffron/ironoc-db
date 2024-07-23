@@ -1,4 +1,8 @@
--- DROP TABLE `test`.`person`;
+DROP TABLE IF EXISTS `test`.`person`;
+
+DROP SCHEMA IF EXISTS `test`;
+
+CREATE SCHEMA `test`;
 
 CREATE TABLE `test`.`person` (
   `id` INT NULL AUTO_INCREMENT,
@@ -27,3 +31,5 @@ UPDATE `test`.`person` SET `title`="Dr", `first_name`="John", `surname`="Jones",
 
 -- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'mypassword';
+
+ show variables like 'tx_isolation';

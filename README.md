@@ -38,7 +38,7 @@ docker inspect network my-network
 
 ## Link container to same network for access:
 ```
-docker network connect test-mysql
+docker network connect my-network test-mysql
 ```
 
 ## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
@@ -49,7 +49,7 @@ docker inspect network my-network
 
 ## Build ironoc-db, run unit & integration tests, & generate war file.
 ```
-gradle build
+gradle clean build
 ```
 
 ## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
