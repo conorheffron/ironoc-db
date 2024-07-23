@@ -4,9 +4,9 @@ DROP SCHEMA IF EXISTS test;
 CREATE SCHEMA test;
 
 CREATE TABLE test.person (
-  id INT NULL AUTO_INCREMENT,
-  title VARCHAR(45) NOT NULL,
-  UNIQUE INDEX id_UNIQUE (id ASC));
+	id INT NULL AUTO_INCREMENT,
+    title VARCHAR(45) NOT NULL,
+    UNIQUE INDEX id_UNIQUE (id ASC));
 
 INSERT INTO test.person (id, title) VALUES ("1000", "Mr Conor");
 INSERT INTO test.person (id, title) VALUES ("1001", "Mr John");
