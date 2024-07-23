@@ -37,9 +37,6 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Sql-Lint
-        uses: Bidaya0/sql-lint-in-action@v0.0.3
         
       # Execute Codacy Analysis CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Run Codacy Analysis CLI
