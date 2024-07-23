@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS `test`.`person`;
-
 DROP SCHEMA IF EXISTS `test`;
 
 CREATE SCHEMA `test`;
@@ -7,17 +6,10 @@ CREATE SCHEMA `test`;
 CREATE TABLE `test`.`person` (
   `id` INT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-COMMENT = 'test person table';
-
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
 INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1000", "Mr Conor");
-
 INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1001", "Mr John");
-
 INSERT INTO `test`.`person` (`id`, `title`) VALUES ("1002", "Joe Bloggs");
 
 ALTER TABLE `test`.`person` 
@@ -32,4 +24,4 @@ UPDATE `test`.`person` SET `title`="Dr", `first_name`="John", `surname`="Jones",
 -- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 
- show variables like 'tx_isolation';
+show variables like 'tx_isolation';
