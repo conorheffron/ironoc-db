@@ -54,11 +54,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
-    implementation group: 'com.rabbitmq', name: 'amqp-client', version: '5.21.0'
-    implementation group: 'io.searchbox', name: 'jest', version:'6.3.1'
-    implementation group: 'org.elasticsearch', name: 'elasticsearch', version:'8.14.3'
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
-    implementation group: 'com.sparkpost', name: 'sparkpost-lib', version:'0.27'
     implementation group: 'com.h2database', name: 'h2', version:'2.3.230'
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
