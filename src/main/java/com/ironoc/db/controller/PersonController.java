@@ -5,8 +5,7 @@ import com.ironoc.db.model.Person.PersonBuilder;
 import com.ironoc.db.service.PersonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,22 +18,21 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class PersonController {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
-	
+
 	@Autowired
     private PersonService personService;
 	
 	@RequestMapping(value = "/*")
 	public RedirectView catchAll(HttpServletRequest httpServletRequest) {
-		LOGGER.info("Invaid request URL " + httpServletRequest.getRequestURI());
+		log.info("Invaid request URL " + httpServletRequest.getRequestURI());
         return new RedirectView("/", false);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap map) {
-		LOGGER.info("Entering personController method home");
+		log.info("Entering personController method home");
 		
 		List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
@@ -46,7 +44,7 @@ public class PersonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
 							BindingResult result) {
-		LOGGER.info("Entering personController method addPerson");
+		log.info("Entering personController method addPerson");
 		
 		// validation error handling
 		if (result.hasErrors()) {			
@@ -62,7 +60,7 @@ public class PersonController {
     
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deletePersonBySurname(ModelMap map, @RequestParam("surname") String surname) {
-		LOGGER.info("Entering personController method deletePersonBySurname");
+		log.info("Entering personController method deletePersonBySurname");
 		List<Person> persons = personService.findPersonBySurname(surname);
 		
 		if (!persons.isEmpty()) {
@@ -74,5 +72,4 @@ public class PersonController {
 
         return this.home(map);
 	}
-
 }
