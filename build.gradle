@@ -67,7 +67,7 @@ dependencies {
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.28'
     implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
-    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.1'
+    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.2'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
     implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
     implementation group: 'jakarta.ws.rs', name: 'jakarta.ws.rs-api', version: '4.0.0'
