@@ -17,7 +17,7 @@ apply plugin: 'idea'
 apply plugin: 'war'
 
 group = 'conorheffron'
-version = '4.3.9'
+version = '4.3.10'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
