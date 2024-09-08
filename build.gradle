@@ -127,9 +127,9 @@ publishing {
         }
     }
     publications {
-        register("jar", MavenPublication) {
-            from components.web
-        }
-    }
+        mavenWeb(MavenPublication) {
+		from components.web
+	}
+    } 
 }
 
