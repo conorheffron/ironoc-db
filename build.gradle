@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '4.4.5'
+version = '4.4.6'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
@@ -128,10 +128,7 @@ publishing {
     }
     publications {
         register("jar", MavenPublication) {
-            from(components["java"])
-            pom {
-                url.set("https://github.com/conorheffron/ironoc-db.git")
-            }
+            from components.web
         }
     }
 }
