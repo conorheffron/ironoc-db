@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '4.4.6'
+version = '4.4.7'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
@@ -121,8 +121,8 @@ publishing {
             name = "Github"
             url = uri("https://maven.pkg.github.com/conorheffron/ironoc-db")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
             }
         }
     }
