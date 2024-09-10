@@ -26,13 +26,13 @@ public class PersonController {
 	
 	@RequestMapping(value = "/*")
 	public RedirectView catchAll(HttpServletRequest httpServletRequest) {
-		log.info("Invaid request URL " + httpServletRequest.getRequestURI());
+		log.info("Invalid request URI " + httpServletRequest.getRequestURI());
         return new RedirectView("/", false);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap map) {
-		log.info("Entering personController method home");
+		log.info("Entering personController method home: map={}", map);
 		
 		List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
@@ -44,7 +44,7 @@ public class PersonController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
 							BindingResult result) {
-		log.info("Entering personController method addPerson");
+		log.info("Entering personController method addPerson: map={}, person={}", map, person);
 		
 		// validation error handling
 		if (result.hasErrors()) {			
@@ -60,7 +60,7 @@ public class PersonController {
     
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deletePersonBySurname(ModelMap map, @RequestParam("surname") String surname) {
-		log.info("Entering personController method deletePersonBySurname");
+		log.info("Entering personController method deletePersonBySurname: map={}, surname={}", map, surname);
 		List<Person> persons = personService.findPersonBySurname(surname);
 		
 		if (!persons.isEmpty()) {

@@ -11,9 +11,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Entity
 @Table(name="person")
+@Data
 public class Person {
 	
 	@Id
@@ -32,6 +34,7 @@ public class Person {
 	private String firstName;
 	
 	@Column(name="surname")
+	@NotEmpty(message = "Surname is not defined.")
 	@Size(min = 3, max = 30, message = "Surname should be between 3-30 characters.")
 	private String surname;
 	
@@ -40,46 +43,6 @@ public class Person {
 	@Max(value=90, message="Age is greater than 90.")
 	@NotNull(message = "Age is not defined.")
 	private Integer age;
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
 
 	public static class PersonBuilder {
 
