@@ -9,7 +9,7 @@ env:
   PROJECT_ID: 'ironoc-db'
   REGION: 'europe-north1' 
   SERVICE: 'ironoc-db' 
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/902038140834/locations/global/workloadIdentityPools/ironoc-db-pool/providers/my-provider'
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/902038140834/locations/global/workloadIdentityPools/ironocc-db-pool/providers/my-provider'
 
 jobs:
   deploy:
