@@ -11,10 +11,6 @@ CREATE TABLE `ironoc_db`.`person` (
   `title` VARCHAR(5) NOT NULL,
   UNIQUE (`id` ASC)
 );
--- ** Test Inserts for DEBUG ONLY **
-INSERT INTO `ironoc_db`.`person` (`id`, `title`, `first_name`, `surname`, `age`) VALUES (1001, "Mr", "Conor", "Heffron", 43);
-INSERT INTO `ironoc_db`.`person` (`id`, `title`, `first_name`, `surname`, `age`) VALUES (1002, "Mr", "Joe", "Bloggs", 44);
-INSERT INTO `ironoc_db`.`person` (`id`, `title`, `first_name`, `surname`, `age`) VALUES (1003, "Dr", "John", "Jones", 29);
 -- Enter passw as ENV VAR for docker image or alter here later via SQL client
 -- ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 -- View Data

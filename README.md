@@ -22,7 +22,7 @@ Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL, JSP, Gradle 8.5
 MySql
 ```
 docker pull mysql:latest
-docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -d mysql
+docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -p 3307:3306 mysql
 docker logs test-mysql
 docker exec -it test-mysql bash
 ```
