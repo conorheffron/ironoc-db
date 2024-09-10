@@ -18,11 +18,13 @@ Users can view, add, delete person objects from the database via web UI.
 Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL, JSP, Gradle 8.5
 
 ## Run
+### - See db.StarterDb.sql for sample Schema to get started with ironoc-db
 MySql
 ```
-docker run -p 3306:3306 -d --name test-mysql -e "MYSQL_ROOT_PASSWORD=mypassword" mysql
+docker pull mysql:latest
+docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -d mysql
 docker logs test-mysql
-docker inspect test-mysql
+docker exec -it test-mysql bash
 ```
 
 ![create-db-connection](./screenshots/db-connection.png?raw=true "Create DB Connection")
@@ -36,13 +38,13 @@ docker network create my-network
 docker inspect network my-network 
 ```
 
-## Link container to same network for access:
+## Link mysql container to same network for access:
 ```
-docker network connect my-network test-mysql
+docker network connect my-network <mysql_container_name:test-mysql>
 ```
 
 ## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
-- Get IP address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
+- Get IPv4Address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
 ```
 docker inspect network my-network 
 ```
@@ -56,6 +58,7 @@ gradle clean build
 ```
 docker image build -t ironoc-db .
 docker compose up -d
+docker logs ironoc-db-web-1 -f
 ```
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
