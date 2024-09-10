@@ -15,9 +15,10 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
+apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '4.3.8'
+version = '4.4.7'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
@@ -113,3 +114,22 @@ integrationTest {
         logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
 }
+
+publishing {
+    repositories {
+        maven {
+            name = "Github"
+            url = uri("https://maven.pkg.github.com/conorheffron/ironoc-db")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        mavenWeb(MavenPublication) {
+		from components.web
+	}
+    } 
+}
+
