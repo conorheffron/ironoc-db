@@ -22,7 +22,7 @@ Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL, JSP, Gradle 8.5
 MySql
 ```
 docker pull mysql:latest
-docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -d mysql
+docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -p 3307:3306 mysql
 docker logs test-mysql
 docker exec -it test-mysql bash
 ```
@@ -60,6 +60,11 @@ docker image build -t ironoc-db .
 docker compose up -d
 docker logs ironoc-db-web-1 -f
 ```
+### Run locally with Gradle & H2 database
+```
+gradle bootRun --args='--spring.profiles.active=h2'
+```
+
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
 ## Tear-down:

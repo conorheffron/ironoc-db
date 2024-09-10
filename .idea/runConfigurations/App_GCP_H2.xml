@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="App GCP H2" type="Application" factoryName="Application">
+    <envs>
+      <env name="spring.profiles.active" value="h2" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.ironoc.db.App" />
+    <module name="ironoc-db.main" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.ironoc.db.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
