@@ -32,7 +32,7 @@ name: 'Build and Deploy to Cloud Run'
 on:
   push:
     branches:
-      - '"main"'
+      - '"cld-run"'
 
 env:
   PROJECT_ID: 'ironoc-db'
