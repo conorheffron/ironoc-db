@@ -1,10 +1,10 @@
 FROM eclipse-temurin:21-jdk
 
-VOLUME /tmp
+# VOLUME /tmp
 # for CI
-ADD *.war app.war
+COPY *.war app.war
 # for local
-#ADD build/libs/*.war app.war
+#COPY build/libs/*.war app.war
 RUN sh -c 'touch /app.war'
 
 EXPOSE 8080
