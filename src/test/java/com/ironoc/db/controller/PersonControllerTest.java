@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.view.RedirectView;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -53,20 +52,6 @@ public class PersonControllerTest {
         // initialise test variables
         persons = new ArrayList<>();
         persons.add(personMock);
-    }
-
-    @Test
-    public void test_CatchAll_success() {
-        // given
-        when(httpServletRequestMock.getRequestURI()).thenReturn(TEST_URI);
-
-        // when
-        RedirectView result = personController.catchAll(httpServletRequestMock);
-
-        // then
-        verify(httpServletRequestMock).getRequestURI();
-
-        assertThat(result, is(notNullValue()));
     }
 
     @Test

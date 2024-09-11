@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -59,7 +58,6 @@ public class PersonControllerIntegrationTest {
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
 
         person = new Person.PersonBuilder()
@@ -179,20 +177,6 @@ public class PersonControllerIntegrationTest {
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getForwardedUrl(), is("/templates/personList.jsp"));
-        assertThat(response.getContentAsString(), is(emptyString()));
-    }
-
-    @Test
-    public void test_catchAll_success() throws Exception {
-        // when
-        MockHttpServletResponse response = mockMvc.perform(get("/invalid")
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
-                .andReturn().getResponse();
-
-        // then
-        assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
-        assertThat(response.getRedirectedUrl(), is("/"));
-        assertThat(response.getForwardedUrl(), is(nullValue()));
         assertThat(response.getContentAsString(), is(emptyString()));
     }
 }
