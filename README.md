@@ -65,6 +65,11 @@ docker logs ironoc-db-web-1 -f
 gradle bootRun --args='--spring.profiles.active=h2'
 ```
 
+### Run locally with Gradle & MySQL database
+```
+gradle bootRun --args='--spring.profiles.active=default'
+```
+
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
 ## Tear-down:

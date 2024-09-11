@@ -1,10 +1,8 @@
-FROM alpine/java:21-jdk
+FROM gradle:8.5-jdk21-alpine
 
-# for CI
-ADD *.war app.war
-# for local
-#COPY build/libs/*.war app.war
+COPY . /home/gradle
+RUN gradle build
 
 EXPOSE 8080
 
-ENTRYPOINT [ "sh", "-c", "java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=h2 -jar /app.war" ]
+ENTRYPOINT [ "sh", "-c", "gradle bootRun --args='--spring.profiles.active=h2'" ]
