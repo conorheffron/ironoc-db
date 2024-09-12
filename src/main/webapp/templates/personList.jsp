@@ -26,6 +26,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
+				<li class="active"><a href="/h2-console">DB Login</a></li>
 			</ul>
 		</div>
 	</nav>
