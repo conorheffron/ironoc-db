@@ -15,7 +15,7 @@ This project is a sample data manager. It provides a basic template for Java/Spr
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8.5
+Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8.10
 
 ## Run
 ### - See db.StarterDb.sql for sample Schema to get started with ironoc-db
