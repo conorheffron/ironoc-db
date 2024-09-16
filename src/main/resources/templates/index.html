@@ -17,8 +17,6 @@
         <br />
 		<h3>Manage data entries below</h3>
         <br />
-        <h4>View the first 10 items</h4>
-        <br />
 		<form action="#" th:action="@{/add}" th:object="${person}" method="post" class=".form-control">
             <label for="title"></label>
             <input type="text" th:field="*{title}" id="title" placeholder="Enter Title.....">
@@ -44,10 +42,10 @@
         </form>
 	</div>
 
-    <br />
-    <br />
-
 	<div th:switch="${personsList}" class="container">
+        <br />
+        <h5>View up to ten items.</h5>
+        <br />
         <div th:case="*">
             <h3>Employees</h3>
             <table class="table table-hover">
