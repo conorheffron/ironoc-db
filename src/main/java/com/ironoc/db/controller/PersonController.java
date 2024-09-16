@@ -1,19 +1,21 @@
 package com.ironoc.db.controller;
 
 import com.ironoc.db.model.Person;
-import com.ironoc.db.model.Person.PersonBuilder;
 import com.ironoc.db.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -22,18 +24,18 @@ public class PersonController {
 	@Autowired
     private PersonService personService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String home(ModelMap map) {
 		log.info("Entering personController.home: map={}", map);
 		
 		List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
-        map.addAttribute("person", new PersonBuilder().build());
+        map.addAttribute("person", Person.builder().build());
 
-        return "personList";
+        return "index";
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@PostMapping(value = "/add")
 	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
 							BindingResult result) {
 		log.info("Entering personController.addPerson: map={}, person={}", map, person);
@@ -42,26 +44,47 @@ public class PersonController {
 		if (result.hasErrors()) {			
 			List<Person> personslist = personService.getAllPersons();
 	        map.addAttribute("personsList", personslist);
-			return "personList";
+			return "index";
 		}
 
 		personService.addPerson(person);
-
-        return this.home(map);
+		return "redirect:/index";
 	}
     
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deletePersonBySurname(ModelMap map, @RequestParam("surname") String surname) {
-		log.info("Entering personController.deletePersonBySurname: map={}, surname={}", map, surname);
-		List<Person> persons = personService.findPersonBySurname(surname);
-		
-		if (!persons.isEmpty()) {
-			personService.deletePersonBySurname(surname);
+	@GetMapping(value = "/delete/{id}")
+	public String deletePersonById(ModelMap map, @PathVariable("id") Integer id) {
+		log.info("Entering personController.deletePersonBySurname: map={}, id={}", map, id.longValue());
+		Optional<Person> person = personService.findPersonById(id.longValue());
+		if (person.isPresent()) {
+			personService.deletePersonById(id.longValue());
 		} else {
 			// no matching entries to delete
 			map.addAttribute("deleteError", "There are no matching entries to delete");
 		}
+		return "redirect:/index";
+	}
 
-        return this.home(map);
+	@GetMapping("/edit/{id}")
+	public String showEditView(@PathVariable("id") Integer id, Model model) {
+		Optional<Person> person = personService.findPersonById(id.longValue());
+		if (person.isPresent()) {
+			model.addAttribute("person", person.get());
+		} else {
+			// no matching entries to delete
+			log.error("There are no matching entries to delete for id={}", id);
+		}
+		return "edit-person";
+	}
+
+	@PostMapping("/update/{id}")
+	public String updatePerson(@PathVariable("id") Integer id, @Valid Person person, BindingResult result) {
+		if (result.hasErrors()) {
+			person.setId(id.longValue());
+			return "index";
+		}
+
+		personService.addPerson(person);
+
+		return "redirect:/index";
 	}
 }

@@ -5,17 +5,20 @@ import com.ironoc.db.model.Person;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.*;
-import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonServiceTest {
@@ -43,12 +46,12 @@ public class PersonServiceTest {
     public void setUp() {
         // initialize test variables
         persons = new ArrayList<>();
-        person = new Person.PersonBuilder()
-                .withId(TEST_ID)
-                .withTitle(TEST_TITLE)
-                .withFirstName(TEST_FIRST_NAME)
-                .withSurname(TEST_SURNAME)
-                .withAge(TEST_AGE)
+        person = Person.builder()
+                .id(TEST_ID.longValue())
+                .title(TEST_TITLE)
+                .firstName(TEST_FIRST_NAME)
+                .surname(TEST_SURNAME)
+                .age(TEST_AGE)
                 .build();
         persons.addAll(Arrays.asList(personMock, person, personMock));
 
@@ -127,6 +130,15 @@ public class PersonServiceTest {
     }
 
     @Test
+    public void test_deletePersonById() {
+        // when
+        personService.deletePersonById(TEST_ID.longValue());
+
+        // then
+        verify(personDaoMock).deleteById(TEST_ID.longValue());
+    }
+
+    @Test
     public void test_findPersonBySurname_success() {
         // given
         when(personDaoMock.findBySurname(TEST_SURNAME)).thenReturn(persons);
@@ -142,11 +154,26 @@ public class PersonServiceTest {
         assertThat(result.get(0), is(personMock));
         Person personInstance = result.get(1);
         assertThat(personInstance, is(person));
-        assertThat(personInstance.getId(), is(TEST_ID));
+        assertThat(personInstance.getId(), is(TEST_ID.longValue()));
         assertThat(personInstance.getTitle(), is(TEST_TITLE));
         assertThat(personInstance.getFirstName(), is(TEST_FIRST_NAME));
         assertThat(personInstance.getSurname(), is(TEST_SURNAME));
         assertThat(personInstance.getAge(), is(TEST_AGE));
         assertThat(result.get(2), is(personMock));
+    }
+
+    @Test
+    public void test_findPersonById_success() {
+        // given
+        when(personDaoMock.findById(TEST_ID.longValue())).thenReturn(Optional.of(personMock));
+
+        // when
+        Optional<Person> optionalPerson = personService.findPersonById(TEST_ID.longValue());
+
+        // then
+        verify(personDaoMock).findById(TEST_ID.longValue());
+
+        Person result = optionalPerson.get();
+        assertThat(result, is(personMock));
     }
 }

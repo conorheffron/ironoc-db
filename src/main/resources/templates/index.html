@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>iRonoc DB - Sample Data Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/main.css">
+</head>
+<body>
+
+    <div th:include="navbar.html" />
+
+	<div class="container">
+        <br />
+		<h3>Add / delete entries below and view the first 10 results.</h3>
+        <br />
+		<form action="#" th:action="@{/add}" th:object="${person}" method="post" class=".form-control">
+            <label for="title">Title</label>
+            <input type="text" th:field="*{title}" id="title" placeholder="Enter Title.....">
+            <br />
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
+            <br />
+            <label for="firstName">First Name</label>
+            <input type="text" th:field="*{firstName}" id="firstName" placeholder="Enter First Name.....">
+            <br />
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>
+            <br />
+            <label for="surname">Surname</label>
+            <input type="text" th:field="*{surname}" id="surname" placeholder="Enter Surname.....">
+            <br />
+            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="error"></span>
+            <br />
+            <label for="age">Age</label>
+            <input type="number" th:field="*{age}" id="age" placeholder="Enter Age.....">
+            <br />
+            <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></span>
+            <br />
+            <input type="submit" value="Add Employee" class="btn btn-default">
+        </form>
+	</div>
+
+    <br />
+    <br />
+
+	<div th:switch="${personsList}" class="container">
+        <h4 th:case="null">No people yet!</h4>
+            <div th:case="*">
+                <h3>Employees</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>First Name</th>
+                            <th>Surname</th>
+                            <th>Age</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="person : ${personsList}">
+                        <td th:text="${person.id}"></td>
+                        <td th:text="${person.title}"></td>
+                        <td th:text="${person.firstName}"></td>
+                        <td th:text="${person.surname}"></td>
+                        <td th:text="${person.age}"></td>
+                        <td><a th:href="@{/edit/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button"><i class="fa fa-edit"></i></a></td>
+                        <td><a th:href="@{/delete/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button"><i class="fa fa-trash"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
