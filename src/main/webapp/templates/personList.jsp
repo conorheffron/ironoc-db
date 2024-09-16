@@ -19,70 +19,23 @@
 </head>
 <body>
 
-	<nav id="navbar" class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">iRonoc</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">Home</a></li>
-				<li class="active"><a href="/h2-console">DB Login</a></li>
-			</ul>
-		</div>
-	</nav>
+    <c:import url="nav.jsp" />
 
 	<div class="container">
 		<h3>Sample Data Manager</h3>
 		<p>Add / delete entries below and view the first 10 results.</p>
 
-		<form:form action="add" modelAttribute="person" class=".form-control">
-			<form:errors path="title" cssClass="error"></form:errors>
-			<form:input type="text" path="title" style="width:50%"
-				placeholder="Enter title....." />
-			<br />
-			<form:errors path="firstName" cssClass="error"></form:errors>
-			<form:input type="text" path="firstName" style="width:50%"
-				placeholder="Enter First Name....." />
-			<br />
-			<form:errors path="surname" cssClass="error"></form:errors>
-			<form:input type="text" path="surname" style="width:50%"
-				placeholder="Enter Surname....." />
-			<br />
-			<form:errors path="age" cssClass="error"></form:errors>
-			<form:input type="number" path="age" style="width:50%"
-				placeholder="Enter Age....." />
-			<br />
-			<input type="submit" value="Add Person" class="btn btn-default" />
-		</form:form>
+        <c:import url="addPerson.jsp">
+            <c:param name="person" value="${person}" />
+        </c:import>
 
-		<form action="delete" method="GET" class=".form-control">
-			<h5 class="error">${deleteError}</h5>
-			<input type="text" name="surname" style="width: 50%"
-				placeholder="Enter Surname....."><br /> <input
-				type="submit" value="Delete Person" class="btn btn-default" />
-		</form>
+        <c:import url="deletePerson.jsp" />
+
 	</div>
 
-	<c:if test="${!empty personsList}">
-		<div class="container">
-			<table class="table table-hover">
-				<tr>
-					<th>Title</th>
-					<th>First Name</th>
-					<th>Surname</th>
-					<th>Age</th>
-				</tr>
-				<c:forEach items="${personsList}" var="person">
-					<tr>
-						<td>${person.title}</td>
-						<td>${person.firstName}</td>
-						<td>${person.surname}</td>
-						<td>${person.age}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</c:if>
+    <c:import url="personTable.jsp">
+        <c:param name="personsList" value="${personsList}" />
+    </c:import>
 
 </body>
 </html>
