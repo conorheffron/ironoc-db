@@ -22,9 +22,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
@@ -53,19 +57,29 @@ public class PersonControllerIntegrationTest {
     private PersonController personController;// controller under test
 
     // Int test variables & constants
+    private static final Long TEST_ID = 7l;
     private static final String TEST_SURNAME = "Heffron";
     private Person person;
+    private static final String ADD_PERSON_TABLE_HTML = "<td>7</td>\n" +
+            "                        <td>Mr.</td>\n" +
+            "                        <td>Conor</td>\n" +
+            "                        <td>Heffron</td>\n" +
+            "                        <td>42</td>\n" +
+            "                        <td><a href=\"/edit/7\" class=\"btn btn-primary btn-sm rounded-0\" " +
+            "type=\"button\"><i class=\"fa fa-edit\"></i></a></td>\n" +
+            "                        <td><a href=\"/delete/7\" class=\"btn btn-primary btn-sm rounded-0\" " +
+            "type=\"button\"><i class=\"fa fa-trash\"></i></a></td>";
 
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
 
-        person = new Person.PersonBuilder()
-                .withFirstName("Conor")
-                .withSurname(TEST_SURNAME)
-                .withAge(42)
-                .withId(123)
-                .withTitle("Mr.")
+        person = Person.builder()
+                .firstName("Conor")
+                .surname(TEST_SURNAME)
+                .age(42)
+                .title("Mr.")
+                .id(7l)
                 .build();
     }
 
@@ -79,16 +93,15 @@ public class PersonControllerIntegrationTest {
         // when
         MockHttpServletResponse response = mockMvc.perform(post("/add")
                         .flashAttr("person", person)
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findAll();
+        verify(personDaoMock, never()).findAll();
         verify(personDaoMock).save(any(Person.class));
 
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getForwardedUrl(), is("/templates/personList.jsp"));
-        assertThat(response.getContentAsString(), is(emptyString()));
+        assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
+        assertThat(response.getContentAsString(), emptyString());
     }
 
     @Test
@@ -99,16 +112,17 @@ public class PersonControllerIntegrationTest {
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
         // when
-        MockHttpServletResponse response = mockMvc.perform(post("/add")
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        MockHttpServletResponse response = mockMvc.perform(get("/add")
+                        .flashAttr("person", Person.builder().build())
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isMethodNotAllowed())
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findAll();
+        verify(personDaoMock, never()).findAll();
         verify(personDaoMock, never()).save(any(Person.class));
 
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getForwardedUrl(), is("/templates/personList.jsp"));
+        assertThat(response.getStatus(), is(HttpStatus.METHOD_NOT_ALLOWED.value()));
+        assertThat(response.getForwardedUrl(), is(nullValue()));
         assertThat(response.getContentAsString(), is(emptyString()));
     }
 
@@ -117,22 +131,21 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findBySurname(TEST_SURNAME)).willReturn(persons);
+        given(personDaoMock.findById(TEST_ID)).willReturn(Optional.ofNullable(person));
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
         // when
-        MockHttpServletResponse response = mockMvc.perform(get("/delete")
-                        .queryParam("surname", TEST_SURNAME)
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        MockHttpServletResponse response = mockMvc.perform(get("/delete/" + TEST_ID)
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findBySurname(TEST_SURNAME);
-        verify(personDaoMock).deleteBySurname(TEST_SURNAME);
-        verify(personDaoMock).findAll();
+        verify(personDaoMock).findById(TEST_ID);
+        verify(personDaoMock).deleteById(Long.valueOf(TEST_ID));
+        verify(personDaoMock, never()).findAll();
 
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getForwardedUrl(), is("/templates/personList.jsp"));
+        assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
+        assertThat(response.getForwardedUrl(), is(nullValue()));
         assertThat(response.getContentAsString(), is(emptyString()));
     }
 
@@ -141,22 +154,21 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findBySurname(TEST_SURNAME)).willReturn(Collections.emptyList());
+        given(personDaoMock.findById(TEST_ID)).willReturn(Optional.empty());
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
         // when
-        MockHttpServletResponse response = mockMvc.perform(get("/delete")
-                        .queryParam("surname", TEST_SURNAME)
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        MockHttpServletResponse response = mockMvc.perform(get("/delete/" + TEST_ID)
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findBySurname(TEST_SURNAME);
-        verify(personDaoMock, never()).deleteBySurname(TEST_SURNAME);
-        verify(personDaoMock).findAll();
+        verify(personDaoMock).findById(TEST_ID);
+        verify(personDaoMock, never()).deleteById(Long.valueOf(TEST_ID));
+        verify(personDaoMock, never()).findAll();
 
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getForwardedUrl(), is("/templates/personList.jsp"));
+        assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
+        assertThat(response.getForwardedUrl(), is(nullValue()));
         assertThat(response.getContentAsString(), is(emptyString()));
     }
 
@@ -176,7 +188,6 @@ public class PersonControllerIntegrationTest {
         verify(personDaoMock).findAll();
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getForwardedUrl(), is("/templates/personList.jsp"));
-        assertThat(response.getContentAsString(), is(emptyString()));
+        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
     }
 }

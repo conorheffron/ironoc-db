@@ -1,0 +1,23 @@
+@charset "ISO-8859-1";
+
+.error {
+  color: red;
+  font-weight: bolder;
+}
+
+.navbar-custom {
+    background-color: #F5F5F5;
+}
+
+body {
+  color: navy;
+  background-color: #F1FBF7;
+}
+
+input {
+    width: 70%;
+}
+
+.table {
+    width: 70%;
+}

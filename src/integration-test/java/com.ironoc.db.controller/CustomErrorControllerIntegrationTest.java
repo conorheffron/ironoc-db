@@ -52,21 +52,38 @@ public class CustomErrorControllerIntegrationTest {
     public void test_not_found_uri_success_path() throws Exception {
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/invalid")
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
                 .andReturn().getResponse();
 
         // then
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
+        assertThat(response.getStatus(), is(HttpStatus.NOT_FOUND.value()));
         assertThat(response.getRedirectedUrl(), is(emptyOrNullString()));
-        assertThat(response.getForwardedUrl(), is("default"));
+        assertThat(response.getForwardedUrl(), is(nullValue()));
         assertThat(response.getContentAsString(), is(emptyString()));
-        assertThat(response.getErrorMessage(), is(emptyOrNullString()));
+        assertThat(response.getErrorMessage(), is("No static resource invalid."));
         assertThat(response.getIncludedUrl(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrls(), is(empty()));
     }
 
     @Test
     public void test_favicon_not_found_uri_fail_path() throws Exception {
+        // when
+        MockHttpServletResponse response = mockMvc.perform(get("/static/favicon.ico")
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
+                .andReturn().getResponse();
+
+        // then
+        assertThat(response.getStatus(), is(HttpStatus.NOT_FOUND.value()));
+        assertThat(response.getRedirectedUrl(), is(emptyOrNullString()));
+        assertThat(response.getForwardedUrl(), is(emptyOrNullString()));
+        assertThat(response.getContentAsString(), is(emptyOrNullString()));
+        assertThat(response.getErrorMessage(), is("No static resource static/favicon.ico."));
+        assertThat(response.getIncludedUrl(), is(emptyOrNullString()));
+        assertThat(response.getIncludedUrls(), is(empty()));
+    }
+
+    @Test
+    public void test_favicon_not_found_uri_success_path() throws Exception {
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/favicon.ico")
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
@@ -75,25 +92,8 @@ public class CustomErrorControllerIntegrationTest {
         // then
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getRedirectedUrl(), is(emptyOrNullString()));
-        assertThat(response.getForwardedUrl(), is(emptyOrNullString()));
-        assertThat(response.getContentAsString(), startsWith("\u0089PNG"));
-        assertThat(response.getErrorMessage(), is(emptyOrNullString()));
-        assertThat(response.getIncludedUrl(), is(emptyOrNullString()));
-        assertThat(response.getIncludedUrls(), is(empty()));
-    }
-
-    @Test
-    public void test_favicon_not_found_uri_success_path() throws Exception {
-        // when
-        MockHttpServletResponse response = mockMvc.perform(get("/static/imgs/favicon.ico")
-                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andReturn().getResponse();
-
-        // then
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getRedirectedUrl(), is(emptyOrNullString()));
-        assertThat(response.getForwardedUrl(), is("default"));
-        assertThat(response.getContentAsString(), is(emptyString()));
+        assertThat(response.getForwardedUrl(), is(nullValue()));
+        assertThat(response.getContentAsString(), startsWith("PNG"));
         assertThat(response.getErrorMessage(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrl(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrls(), is(empty()));

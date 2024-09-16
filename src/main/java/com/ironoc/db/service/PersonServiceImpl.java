@@ -1,6 +1,7 @@
 package com.ironoc.db.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,7 @@ import com.ironoc.db.dao.PersonDao;
 import com.ironoc.db.model.Person;
 
 @Service
-public class PersonServiceImpl implements
-		PersonService {
+public class PersonServiceImpl implements PersonService {
 
 	@Autowired
     private PersonDao personDao;
@@ -44,4 +44,13 @@ public class PersonServiceImpl implements
 		return (List<Person>) personDao.findBySurname(surname);
 	}
 
+	@Override
+	public Optional<Person> findPersonById(Long id) {
+		return personDao.findById(id);
+	}
+
+	@Override
+	public void deletePersonById(Long id) {
+		personDao.deleteById(id);
+	}
 }

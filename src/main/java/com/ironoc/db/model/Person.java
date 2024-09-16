@@ -11,17 +11,23 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="person")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
 	
 	@Id
 	@Column(name="id")
 	@GeneratedValue
-	private Integer id;
+	private Long id;
 	
 	@Column(name="title")
 	@NotEmpty(message = "Title is not defined.")
@@ -43,48 +49,4 @@ public class Person {
 	@Max(value=90, message="Age is greater than 90.")
 	@NotNull(message = "Age is not defined.")
 	private Integer age;
-
-	public static class PersonBuilder {
-
-		private Integer id;
-		private String title;
-		private String firstName;
-		private String surname;
-		private Integer age;
-
-		public PersonBuilder withId(Integer id) {
-			this.id = id;
-			return this;
-		}
-
-		public PersonBuilder withTitle(String title) {
-			this.title = title;
-			return this;
-		}
-
-		public PersonBuilder withFirstName(String firstName) {
-			this.firstName = firstName;
-			return this;
-		}
-
-		public PersonBuilder withSurname(String surname) {
-			this.surname = surname;
-			return this;
-		}
-
-		public PersonBuilder withAge(int age) {
-			this.age = age;
-			return this;
-		}
-
-		public Person build() {
-			Person person = new Person();
-			person.setId(this.id);
-			person.setTitle(this.title);
-			person.setFirstName(this.firstName);
-			person.setSurname(this.surname);
-			person.setAge(this.age);
-			return person;
-		}
-	}
 }

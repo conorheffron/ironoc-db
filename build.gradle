@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '4.7.2'
+version = '5.1.1'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
@@ -57,8 +57,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.49.0'
 
     // SQL
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
@@ -67,11 +69,7 @@ dependencies {
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'3.1.1'
     implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.12'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'10.1.29'
-    implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
-    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.2'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
-    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
-    implementation group: 'jakarta.ws.rs', name: 'jakarta.ws.rs-api', version: '4.0.0'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion) {
