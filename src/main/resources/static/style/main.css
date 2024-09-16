@@ -12,3 +12,11 @@
 body {
   background-color: #F1FBF7;
 }
+
+input {
+    width: 70%;
+}
+
+.table {
+    width: 70%;
+}
