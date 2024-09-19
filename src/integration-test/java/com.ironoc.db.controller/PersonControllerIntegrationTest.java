@@ -1,7 +1,7 @@
 package com.ironoc.db.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironoc.db.config.AppConfig;
+import com.ironoc.db.config.IronocDbConfig;
 import com.ironoc.db.dao.PersonDao;
 import com.ironoc.db.model.Person;
 import org.junit.Before;
@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(controllers = PersonController.class)
-@ContextConfiguration(classes = AppConfig.class)
+@ContextConfiguration(classes = IronocDbConfig.class)
 public class PersonControllerIntegrationTest {
 
     @Autowired
