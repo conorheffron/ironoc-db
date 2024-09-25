@@ -1,6 +1,9 @@
 package com.ironoc.db.config;
 
+import com.ironoc.db.enums.DataSourceKey;
 import com.ironoc.db.service.GoogleCloudClient;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -42,23 +45,36 @@ public class IronocDbConfigTest {
     // Static mocks
     private MockedStatic<DataSourceBuilder> dataSourceBuilderMockedStatic = mockStatic(DataSourceBuilder.class);
 
+    private static final String TEST_SECRET_KEY = "projects/123/secrets/<TEST_SECRET_NAME>/versions/33";
     private static final String TEST_SECRET_DATA = "TeSt_SeCr3t_V0l";
 
+    @Before
+    public void setUp() {
+        BDDMockito.given(DataSourceBuilder.create()).willReturn(dataSourceBuilderMock);
+    }
+
+    @After
+    public void tearDown() {
+        dataSourceBuilderMockedStatic.close();
+    }
+
     @Test
-    public void test_error_view_success() {
+    public void test_dataSource_success() {
         // given
         when(environmentMock.getRequiredProperty(anyString())).thenReturn(new String());
-        BDDMockito.given(DataSourceBuilder.create()).willReturn(dataSourceBuilderMock);
+        when(environmentMock.getRequiredProperty(DataSourceKey.GCP_SEC_VER.getKey())).thenReturn(TEST_SECRET_KEY);
         when(dataSourceBuilderMock.build()).thenReturn(dataSourceMock);
-        when(googleCloudClientMock.getSecret(anyString())).thenReturn(TEST_SECRET_DATA);
+        when(googleCloudClientMock.getSecret(TEST_SECRET_KEY)).thenReturn(TEST_SECRET_DATA);
 
         // when
         DataSource result = ironocDbConfig.dataSource(environmentMock, googleCloudClientMock);
 
         // then
+        dataSourceBuilderMockedStatic.verify(() -> DataSourceBuilder.create());
+        verify(environmentMock).getRequiredProperty(DataSourceKey.GCP_SEC_VER.getKey());
         verify(environmentMock, times(4)).getRequiredProperty(anyString());
         verify(dataSourceBuilderMock).build();
-        verify(googleCloudClientMock).getSecret(anyString());
+        verify(googleCloudClientMock).getSecret(TEST_SECRET_KEY);
 
         assertThat(result, is(dataSourceMock));
     }
