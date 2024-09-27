@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '5.2.4'
+version = '5.2.5'
 description = "Sample Data Manager"
 
 sourceCompatibility = 21
@@ -116,7 +116,7 @@ integrationTest {
 // Build executable war file
 tasks.war {
     enabled = true
-    // Remove `plain` postfix from jar file name
+    // Remove `plain` postfix from war file name
     archiveClassifier.set("")
 }
 
@@ -132,11 +132,8 @@ publishing {
         }
     }
     publications {
-        register("war", MavenPublication) {
-            from(components["java"])
-            pom {
-                url.set("https://github.com/conorheffron/ironoc-db.git")
-            }
-        }
+        mavenWeb(MavenPublication) {
+		    from components.web
+	    }
     }
 }

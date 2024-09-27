@@ -70,6 +70,14 @@
                         <td><a th:href="@{/edit/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button"><i class="fa fa-edit"></i></a></td>
                         <td><a th:href="@{/delete/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button"><i class="fa fa-trash"></i></a></td>
                     </tr>
+                    <tr>
+                        <td colspan="3" />
+                        <td><b th:text="${#aggregates.avg(personsList.![age])}" /> is the Average Employee Age</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" />
+                        <td><b th:text="${#aggregates.sum(personsList.![age])}" /> is the Sum of Ages</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
