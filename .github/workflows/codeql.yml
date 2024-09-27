@@ -82,7 +82,10 @@ jobs:
 
     - name: Sql-Lint
       uses: Bidaya0/sql-lint-in-action@v0.0.3
-
+      with:
+        path: .
+        driver: postgres
+    
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
