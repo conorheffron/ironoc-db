@@ -14,9 +14,10 @@ CREATE TABLE IRONOC_DB.PERSON (
 -- Enter passw as ENV VAR for docker image or alter here later via SQL client
 -- ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'mypassword';
 -- View Data
---SELECT `person`.`age`,
+-- SELECT `person`.`age`,
 --    `person`.`id`,
 --    `person`.`title`,
 --    `person`.`first_name`,
 --    `person`.`surname`
---FROM `ironoc_db`.`person`;
+-- FROM `ironoc_db`.`person`;
+-- SELECT * FROM IRONOC_DB.PERSON where title LIKE 'M%'; from H2 console
