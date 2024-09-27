@@ -113,6 +113,13 @@ integrationTest {
     }
 }
 
+// Build executable war file
+tasks.war {
+    enabled = true
+    // Remove `plain` postfix from jar file name
+    archiveClassifier.set("")
+}
+
 publishing {
     repositories {
         maven {
@@ -125,9 +132,11 @@ publishing {
         }
     }
     publications {
-        mavenWeb(MavenPublication) {
-		from components.web
-	}
-    } 
+        register("war", MavenPublication) {
+            from(components["java"])
+            pom {
+                url.set("https://github.com/conorheffron/ironoc-db.git")
+            }
+        }
+    }
 }
-
