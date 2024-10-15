@@ -9,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,10 +49,10 @@ public class PersonController {
 		}
 
 		personService.addPerson(person);
-		return "redirect:/index";
+		return "redirect:/";
 	}
     
-	@GetMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/delete/{id}")
 	public String deletePersonById(ModelMap map, @PathVariable("id") Integer id) {
 		log.info("Entering personController.deletePersonBySurname: map={}, id={}", map, id.longValue());
 		Optional<Person> person = personService.findPersonById(id.longValue());
@@ -61,11 +62,12 @@ public class PersonController {
 			// no matching entries to delete
 			map.addAttribute("deleteError", "There are no matching entries to delete");
 		}
-		return "redirect:/index";
+		return "redirect:/";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String showEditView(@PathVariable("id") Integer id, Model model) {
+		log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
 		Optional<Person> person = personService.findPersonById(id.longValue());
 		if (person.isPresent()) {
 			model.addAttribute("person", person.get());
@@ -77,14 +79,15 @@ public class PersonController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String updatePerson(@PathVariable("id") Integer id, @Valid Person person, BindingResult result) {
+	public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid Person person,
+							   BindingResult result) {
+		log.info("Entering personController.updatePerson: ID={}, person={}", id, person.toString());
 		if (result.hasErrors()) {
 			person.setId(id.longValue());
-			return "index";
+			map.addAttribute("person", person);
+			return "edit-person";
 		}
-
 		personService.addPerson(person);
-
-		return "redirect:/index";
+		return "redirect:/";
 	}
 }
