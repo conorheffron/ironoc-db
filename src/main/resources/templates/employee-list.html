@@ -23,8 +23,15 @@
                 <td th:text="${person.firstName}"></td>
                 <td th:text="${person.surname}"></td>
                 <td th:text="${person.age}"></td>
-                <td><a th:href="@{/edit/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button"><i class="fa fa-edit"></i></a></td>
-                <td><a th:href="@{/delete/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button"><i class="fa fa-trash"></i></a></td>
+                <td><a th:href="@{/edit/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button">
+                    <i class="fa fa-edit"></i></a>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/delete/{id}(id=${person.id})}" th:method="delete" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-primary btn-sm rounded-0"><i class="fa fa-trash"></i></a></button>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <td colspan="3" />
