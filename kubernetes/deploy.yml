@@ -94,7 +94,7 @@ metadata:
   name: ironoc-db-app-deployment
   namespace: ironoc-db-ns
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: ironoc-db-app-deployment
@@ -194,7 +194,7 @@ metadata:
   name: ironoc-db-app-deployment-hpa-kbij
   namespace: ironoc-db-ns
 spec:
-  maxReplicas: 1
+  maxReplicas: 3
   metrics:
     - resource:
         name: cpu
@@ -202,7 +202,7 @@ spec:
           averageUtilization: 80
           type: Utilization
       type: Resource
-  minReplicas: 1
+  minReplicas: 2
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
