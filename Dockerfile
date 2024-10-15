@@ -1,4 +1,4 @@
-FROM gradle:8.10.1-jdk21-alpine
+FROM gradle:8.10.2-jdk21-alpine
 
 COPY . /home/gradle
 RUN gradle build
