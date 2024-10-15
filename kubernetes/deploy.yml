@@ -94,7 +94,7 @@ metadata:
   name: ironoc-db-app-deployment
   namespace: ironoc-db-ns
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: ironoc-db-app-deployment
@@ -194,7 +194,7 @@ metadata:
   name: ironoc-db-app-deployment-hpa-kbij
   namespace: ironoc-db-ns
 spec:
-  maxReplicas: 5
+  maxReplicas: 3
   metrics:
     - resource:
         name: cpu
