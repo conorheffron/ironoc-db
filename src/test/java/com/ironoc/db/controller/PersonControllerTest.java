@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +29,6 @@ public class PersonControllerTest {
 
     @InjectMocks
     private PersonController personController;// controller under test
-
-    @Mock
-    private HttpServletRequest httpServletRequestMock;
 
     @Mock
     private PersonService personServiceMock;
@@ -88,7 +84,7 @@ public class PersonControllerTest {
         verify(personServiceMock).addPerson(personMock);
         verify(personServiceMock, never()).getAllPersons();
 
-        assertThat(result, is("redirect:/index"));
+        assertThat(result, is("redirect:/"));
     }
 
     @Test
@@ -97,13 +93,13 @@ public class PersonControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(true);
 
         // when
-        String result = personController.updatePerson(TEST_ID, personMock, bindingResultMock);
+        String result = personController.updatePerson(modelMapMock, TEST_ID, personMock, bindingResultMock);
 
         // then
         verify(bindingResultMock).hasErrors();
         verify(personServiceMock, never()).addPerson(personMock);
 
-        assertThat(result, is("index"));
+        assertThat(result, is("edit-person"));
     }
 
     @Test
@@ -112,13 +108,13 @@ public class PersonControllerTest {
         when(bindingResultMock.hasErrors()).thenReturn(false);
 
         // when
-        String result = personController.updatePerson(TEST_ID, personMock, bindingResultMock);
+        String result = personController.updatePerson(modelMapMock, TEST_ID, personMock, bindingResultMock);
 
         // then
         verify(bindingResultMock).hasErrors();
         verify(personServiceMock).addPerson(personMock);
 
-        assertThat(result, is("redirect:/index"));
+        assertThat(result, is("redirect:/"));
     }
 
     @Test
@@ -180,7 +176,7 @@ public class PersonControllerTest {
         verify(personServiceMock).deletePersonById(TEST_ID.longValue());
         verify(personServiceMock, never()).getAllPersons();
 
-        assertThat(result, is("redirect:/index"));
+        assertThat(result, is("redirect:/"));
     }
 
     @Test
@@ -197,6 +193,6 @@ public class PersonControllerTest {
         verify(modelMapMock).addAttribute("deleteError", "There are no matching entries to delete");
         verify(personServiceMock, never()).getAllPersons();
 
-        assertThat(result, is("redirect:/index"));
+        assertThat(result, is("redirect:/"));
     }
 }
