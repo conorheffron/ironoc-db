@@ -1,0 +1,47 @@
+<div th:switch="${personsList}" class="container">
+    <br />
+    <h5>View up to ten items.</h5>
+    <br />
+    <div th:case="*">
+        <h3>Employees</h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="person : ${personsList}">
+                <td th:text="${person.id}"></td>
+                <td th:text="${person.title}"></td>
+                <td th:text="${person.firstName}"></td>
+                <td th:text="${person.surname}"></td>
+                <td th:text="${person.age}"></td>
+                <td><a th:href="@{/edit/{id}(id=${person.id})}" class="btn btn-primary btn-sm rounded-0" type="button">
+                    <i class="fa fa-edit"></i></a>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/delete/{id}(id=${person.id})}" th:method="delete" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-primary btn-sm rounded-0"><i class="fa fa-trash"></i></a></button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" />
+                <td><b th:text="${#aggregates.avg(personsList.![age])}" /> is the Average Employee Age</td>
+            </tr>
+            <tr>
+                <td colspan="6" />
+                <td><b th:text="${#aggregates.sum(personsList.![age])}" /> is the Sum of Ages</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
