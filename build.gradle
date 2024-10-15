@@ -60,6 +60,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
+
+    // GC Secret Manager
     implementation 'com.google.cloud:google-cloud-secretmanager:2.52.0'
 
     // SQL

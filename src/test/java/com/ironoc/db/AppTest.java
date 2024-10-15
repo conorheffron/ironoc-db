@@ -16,7 +16,7 @@ public class AppTest {
     private MockedStatic<SpringApplication> springApplicationMockedStatic = mockStatic(SpringApplication.class);
 
     @Test
-    public void test() {
+    public void test_main_success() {
         // given
         String[] args = { "test" };
 
