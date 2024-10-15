@@ -33,6 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,15 +61,32 @@ public class PersonControllerIntegrationTest {
     private static final Long TEST_ID = 7l;
     private static final String TEST_SURNAME = "Heffron";
     private Person person;
-    private static final String ADD_PERSON_TABLE_HTML = "<td>7</td>\n" +
-            "                        <td>Mr.</td>\n" +
-            "                        <td>Conor</td>\n" +
-            "                        <td>Heffron</td>\n" +
-            "                        <td>42</td>\n" +
-            "                        <td><a href=\"/edit/7\" class=\"btn btn-primary btn-sm rounded-0\" " +
-            "type=\"button\"><i class=\"fa fa-edit\"></i></a></td>\n" +
-            "                        <td><a href=\"/delete/7\" class=\"btn btn-primary btn-sm rounded-0\" " +
-            "type=\"button\"><i class=\"fa fa-trash\"></i></a></td>";
+    private static final String ADD_PERSON_TABLE_HTML = "<tbody>\n" +
+            "            <tr>\n" +
+            "                <td>7</td>\n" +
+            "                <td>Mr.</td>\n" +
+            "                <td>Conor</td>\n" +
+            "                <td>Heffron</td>\n" +
+            "                <td>42</td>\n" +
+            "                <td><a href=\"/edit/7\" class=\"btn btn-primary btn-sm rounded-0\" type=\"button\">\n" +
+            "                    <i class=\"fa fa-edit\"></i></a>\n" +
+            "                </td>\n" +
+            "                <td>\n" +
+            "                    <form action=\"/delete/7\" method=\"post\" ><input type=\"hidden\" name=\"_method\" value=\"delete\"/>\n" +
+            "                        <input type=\"hidden\" name=\"_method\" value=\"delete\" />\n" +
+            "                        <button type=\"submit\" class=\"btn btn-primary btn-sm rounded-0\"><i class=\"fa fa-trash\"></i></a></button>\n" +
+            "                    </form>\n" +
+            "                </td>\n" +
+            "            </tr>\n" +
+            "            <tr>\n" +
+            "                <td colspan=\"3\" />\n" +
+            "                <td><b >42</b> is the Average Employee Age</td>\n" +
+            "            </tr>\n" +
+            "            <tr>\n" +
+            "                <td colspan=\"6\" />\n" +
+            "                <td><b >42</b> is the Sum of Ages</td>\n" +
+            "            </tr>\n" +
+            "            </tbody>";
 
     @Before
     public void setup() {
@@ -135,7 +153,7 @@ public class PersonControllerIntegrationTest {
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
         // when
-        MockHttpServletResponse response = mockMvc.perform(get("/delete/" + TEST_ID)
+        MockHttpServletResponse response = mockMvc.perform(delete("/delete/" + TEST_ID)
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
                 .andReturn().getResponse();
 
@@ -158,7 +176,7 @@ public class PersonControllerIntegrationTest {
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
         // when
-        MockHttpServletResponse response = mockMvc.perform(get("/delete/" + TEST_ID)
+        MockHttpServletResponse response = mockMvc.perform(delete("/delete/" + TEST_ID)
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
                 .andReturn().getResponse();
 
