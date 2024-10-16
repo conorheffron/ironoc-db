@@ -1,0 +1,28 @@
+<div class="container">
+    <br />
+    <h3>Manage data entries below</h3>
+    <br />
+    <form action="#" th:action="@{/add}" th:object="${person}" method="post" class=".form-control">
+        <label for="title"></label>
+        <input type="text" th:field="*{title}" id="title" placeholder="Enter Title.....">
+        <br />
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
+        <br />
+        <label for="firstName"></label>
+        <input type="text" th:field="*{firstName}" id="firstName" placeholder="Enter First Name.....">
+        <br />
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>
+        <br />
+        <label for="surname"></label>
+        <input type="text" th:field="*{surname}" id="surname" placeholder="Enter Surname.....">
+        <br />
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="error"></span>
+        <br />
+        <label for="age"></label>
+        <input type="number" th:field="*{age}" id="age" placeholder="Enter Age.....">
+        <br />
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></span>
+        <br />
+        <input type="submit" value="Add Employee" class="btn btn-default">
+    </form>
+</div>
