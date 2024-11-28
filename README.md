@@ -11,11 +11,13 @@
 [ironoc-db docker hub](https://hub.docker.com/repository/docker/conorheffron/ironoc-db/general)
 
 ## Summary
-This project is a sample data manager. It provides a basic template for Java/Spring developers. This project also includes form validation of controller model objects and request parameters.
+This project is a sample data manager. It provides a basic template for Java/Spring developers. 
+This project also includes form validation of controller model objects and request parameters.
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8.10
+Java 21 (LTS Version), Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8.10, 
+    GKE, Docker, minikube, & kubectl.
 
 ## Run
 ### - See db.StarterDb.sql for sample Schema to get started with ironoc-db
@@ -54,12 +56,14 @@ docker inspect network my-network
 gradle clean build
 ```
 
-## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
+## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or 
+## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
 ```
 docker image build -t ironoc-db .
 docker compose up -d
 docker logs ironoc-db-web-1 -f
 ```
+
 ### Run locally with Gradle & H2 database
 ```
 gradle bootRun --args='--spring.profiles.active=h2'
@@ -76,6 +80,52 @@ gradle bootRun --args='--spring.profiles.active=default'
 ```
 docker stop test-mysql
 docker remove test-mysql
+```
+
+## Run ironoc-db on local k8s cluster
+```    
+minikube start --driver=docker
+
+kubectl cluster-info 
+
+minikube dashboard 
+```
+— Then change namespace in browser after creation of 'ironoc-db' namespace.
+
+```
+docker images
+
+docker image build -t ironoc-db .
+minikube image load ironoc-db:latest
+
+kubectl create ns ironoc-db-ns
+kubectl get ns
+
+kubectl apply -f ./kubernetes/ironoc-db-local.yml --namespace=ironoc-db-ns 
+
+kubectl get pods --namespace=ironoc-db-ns
+kubectl get deployment --namespace=ironoc-db-ns
+
+kubectl expose deployment ironoc-db-app-deployment --type=NodePort --namespace=ironoc-db-ns
+kubectl get services --namespace=ironoc-db-ns
+
+minikube service ironoc-db-app-deployment --url --namespace=ironoc-db-ns
+```
+Open a new terminal tab & follow the logs
+```
+% kubectl get pods --namespace=ironoc-db-ns
+NAME                                        READY   STATUS    RESTARTS   AGE
+ironoc-db-app-deployment-6c566784bc-q29xs   1/1     Running   0          2m40s
+
+% kubectl logs ironoc-db-app-deployment-6c566784bc-q29xs -f --namespace=ironoc-db-ns   
+```  
+
+![minikube-dash](./screenshots/minikube-dash.png?raw=true "Minikube Dashboard")
+
+![deployment](./screenshots/deployment.png?raw=true "ironoc-db local k8s Deployment")
+
+```  
+minikube delete  
 ```
 
 ## Alternatively, Docker Desktop is good if you prefer to not use the terminal/command line (CLI)
