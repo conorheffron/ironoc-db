@@ -19,10 +19,15 @@ import javax.sql.DataSource;
 @Slf4j
 public class IronocDbConfig {
 
+    @Autowired
+    private Environment environment;
+
+    @Autowired
+    private GoogleCloudClient googleCloudClient;
+
     @Bean
     @Profile("h2")
-    @Autowired
-    public DataSource dataSource(Environment environment, GoogleCloudClient googleCloudClient) {
+    public DataSource dataSource() {
         DataSourceBuilder dsBuilder = DataSourceBuilder.create();
         dsBuilder.driverClassName(environment.getRequiredProperty(DataSourceKey.DRIVER_CLASS_NAME.getKey()));
         dsBuilder.url(environment.getRequiredProperty(DataSourceKey.DS_URL.getKey()));
