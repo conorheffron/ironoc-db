@@ -91,7 +91,8 @@ kubectl cluster-info
 minikube dashboard 
 ```
  - Then change namespace in browser after creation of 'ironoc-db' namespace.
-   ![minikube-dash](./screenshots/minikube-dash.png?raw=true "Minikube Dashboard")
+
+![minikube-dash](./screenshots/minikube-dash.png?raw=true "Minikube Dashboard")
 ```
 docker images
 
@@ -106,8 +107,6 @@ kubectl apply -f ./kubernetes/ironoc-db-local.yml --namespace=ironoc-db-ns
 kubectl get pods --namespace=ironoc-db-ns
 kubectl get deployment --namespace=ironoc-db-ns
 ```
-![deployment](./screenshots/deployment.png?raw=true "ironoc-db local k8s Deployment")
-
 ![minikube-dash-deployments](./screenshots/minikube-dash-deployments.png?raw=true "ironoc-db kube Deployment")
 ```
 kubectl expose deployment ironoc-db-app-deployment --type=NodePort --namespace=ironoc-db-ns
@@ -124,7 +123,9 @@ ironoc-db-app-deployment-6c566784bc-q29xs   1/1     Running   0          2m40s
 % kubectl logs ironoc-db-app-deployment-6c566784bc-q29xs -f --namespace=ironoc-db-ns   
 ```  
 
-![minikube-dash-logs](./screenshots/deployment.png?raw=true "ironoc-db kube logs viewer")
+![minikube-dash-logs](./screenshots/minikube-dash-logs.png?raw=true "ironoc-db kube logs viewer")
+
+![deployment](./screenshots/deployment.png?raw=true "ironoc-db local k8s Deployment")
 
 ```  
 minikube delete  
