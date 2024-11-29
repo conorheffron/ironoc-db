@@ -28,7 +28,7 @@ public class IronocDbConfig {
     @Bean
     @Profile("h2")
     public DataSource dataSource() {
-        DataSourceBuilder dsBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dsBuilder = DataSourceBuilder.create();
         dsBuilder.driverClassName(environment.getRequiredProperty(DataSourceKey.DRIVER_CLASS_NAME.getKey()));
         dsBuilder.url(environment.getRequiredProperty(DataSourceKey.DS_URL.getKey()));
         dsBuilder.username(environment.getRequiredProperty(DataSourceKey.DS_USERNAME.getKey()));
