@@ -90,7 +90,7 @@ kubectl cluster-info
 
 minikube dashboard 
 ```
- - Then change namespace in browser after creation of 'ironoc-db' namespace.
+- Then change namespace in browser after creation of 'ironoc-db' namespace.
 
 ![minikube-dash](./screenshots/minikube-dash.png?raw=true "Minikube Dashboard")
 ```
@@ -114,7 +114,7 @@ kubectl get services --namespace=ironoc-db-ns
 
 minikube service ironoc-db-app-deployment --url --namespace=ironoc-db-ns
 ```
- - Open a new terminal tab & follow the logs
+- Open a new terminal tab & follow the logs
 ```
 % kubectl get pods --namespace=ironoc-db-ns
 NAME                                        READY   STATUS    RESTARTS   AGE
