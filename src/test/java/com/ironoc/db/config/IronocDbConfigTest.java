@@ -67,7 +67,7 @@ public class IronocDbConfigTest {
         when(googleCloudClientMock.getSecret(TEST_SECRET_KEY)).thenReturn(TEST_SECRET_DATA);
 
         // when
-        DataSource result = ironocDbConfig.dataSource(environmentMock, googleCloudClientMock);
+        DataSource result = ironocDbConfig.dataSource();
 
         // then
         dataSourceBuilderMockedStatic.verify(() -> DataSourceBuilder.create());
