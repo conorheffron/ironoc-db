@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '5.4.2'
+version = '5.4.3'
 description = "Sample Data Manager"
 
 sourceCompatibility = 23
@@ -62,7 +62,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.52.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.54.0'
 
     // SQL
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
