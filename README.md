@@ -56,6 +56,18 @@ docker inspect network my-network
 gradle clean build
 ```
 
+## Login to gcloud project for authentication tokens etc. for save to local workspace
+### Accept & allow browser prompts.
+### Note: This is for direct app run, need to to do this in container or pod for virtualization.
+```
+gcloud auth application-default login
+```
+
+## Verify credentials (set appropriate svc / user account & project name)
+```
+gcloud config list
+```
+
 ## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or 
 ## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
 ```
@@ -143,7 +155,7 @@ minikube delete
 ## Screenshot Form Validation Error for Add Person Call
 ![ui-form-validation](./screenshots/ui-form-validation.png?raw=true "UI form validation")
 
-## Screenshot Form Validation Error for Delete Operation
-![ui-delete-validation](./screenshots/ui-delete-validation.png?raw=true "UI delete validation")
+## Screenshot Form Validation Error for Edit Operation
+![ui-edit-validation](./screenshots/ui-edit-validation.png?raw=true "UI Edit validation")
 
 
