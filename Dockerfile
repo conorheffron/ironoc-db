@@ -4,7 +4,7 @@ COPY . /home/gradle
 
 RUN apk update && apk upgrade --no-cache
 RUN apk add gcompat
-RUN LD_PRELOAD=/lib/libgcompat.so.0
+ENV LD_PRELOAD=/lib/libgcompat.so.0
 
 RUN gradle build
 
