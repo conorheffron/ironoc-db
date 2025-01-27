@@ -1,5 +1,3 @@
-![GitHub Sponsor](https://img.shields.io/github/sponsors/cph35?label=Sponsor&logo=GitHub)
-
 [![Java CI with Gradle](https://github.com/conorheffron/ironoc-db/actions/workflows/gradle.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/gradle.yml)
 
 ![Proof HTML](https://github.com/conorheffron/ironoc-db/actions/workflows/proof-html.yml/badge.svg)
