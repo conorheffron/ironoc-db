@@ -72,8 +72,14 @@ gcloud config list
 ## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
 ```
 docker image build -t ironoc-db .
+
 docker compose up -d
+
+docker ps
+
 docker logs ironoc-db-web-1 -f
+
+docker compose down
 ```
 
 ### Run locally with Gradle & H2 database
@@ -96,22 +102,8 @@ docker remove test-mysql
 
 ## Run ironoc-db on local k8s cluster
 ```shell  
-%   minikube start --driver=docker       
-😄  minikube v1.34.0 on Darwin 15.1.1
-❗  Both driver=docker and vm-driver=virtualbox have been set.
-
-    Since vm-driver is deprecated, minikube will default to driver=docker.
-
-    If vm-driver is set in the global config, please run "minikube config unset vm-driver" to resolve this warning.
-                        
-✨  Using the docker driver based on user configuration
-
-💣  Exiting due to PROVIDER_DOCKER_NOT_RUNNING: "docker version --format <no value>-<no value>:<no value>" exit status 1: Cannot connect to the Docker daemon at unix:///Users/conorheffron/.docker/run/docker.sock. Is the docker daemon running?
-💡  Suggestion: Start the Docker service
-📘  Documentation: https://minikube.sigs.k8s.io/docs/drivers/docker/
-
-%   minikube start --driver=docker
-😄  minikube v1.34.0 on Darwin 15.1.1
+%   minikube start --driver=docker  
+😄  minikube v1.35.0 on Darwin 15.3.1
 ❗  Both driver=docker and vm-driver=virtualbox have been set.
 
     Since vm-driver is deprecated, minikube will default to driver=docker.
@@ -121,9 +113,12 @@ docker remove test-mysql
 ✨  Using the docker driver based on user configuration
 📌  Using Docker Desktop driver with root privileges
 👍  Starting "minikube" primary control-plane node in "minikube" cluster
-🚜  Pulling base image v0.0.45 ...
+🚜  Pulling base image v0.0.46 ...
+💾  Downloading Kubernetes v1.32.0 preload ...
+    > preloaded-images-k8s-v18-v1...:  333.57 MiB / 333.57 MiB  100.00% 22.49 M
+    > gcr.io/k8s-minikube/kicbase...:  500.31 MiB / 500.31 MiB  100.00% 14.30 M
 🔥  Creating docker container (CPUs=2, Memory=4000MB) ...
-🐳  Preparing Kubernetes v1.31.0 on Docker 27.2.0 ...
+🐳  Preparing Kubernetes v1.32.0 on Docker 27.4.1 ...
     ▪ Generating certificates and keys ...
     ▪ Booting up control plane ...
     ▪ Configuring RBAC rules ...
@@ -143,8 +138,8 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 %   minikube dashboard 
 🔌  Enabling dashboard ...
-    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
     ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
 💡  Some dashboard features require the metrics-server addon. To enable all features please run:
 
         minikube addons enable metrics-server
@@ -152,7 +147,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 🤔  Verifying dashboard health ...
 🚀  Launching proxy ...
 🤔  Verifying proxy health ...
-🎉  Opening http://127.0.0.1:52168/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+🎉  Opening http://127.0.0.1:65357/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
 ```
 - Then change namespace in browser after creation of 'ironoc-db' namespace.
 
@@ -162,24 +157,6 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 REPOSITORY                    TAG       IMAGE ID       CREATED        SIZE
 gcr.io/k8s-minikube/kicbase   v0.0.45   e7c9bc3bc515   3 months ago   1.81GB
 gcr.io/k8s-minikube/kicbase   <none>    81df28859520   3 months ago   1.81GB
-
-
-%   docker image build -t ironoc-db .
-[+] Building 44.1s (9/9) FINISHED                                                                                                                                                                                                                                                           docker:desktop-linux
- => [internal] load build definition from Dockerfile                                                                                                                                                                                                                                                        0.0s
- => => transferring dockerfile: 266B                                                                                                                                                                                                                                                                        0.0s
- => [internal] load metadata for docker.io/library/gradle:8.11.1-jdk23-alpine                                                                                                                                                                                                                               1.3s
- => [auth] library/gradle:pull token for registry-1.docker.io                                                                                                                                                                                                                                               0.0s
- => [internal] load .dockerignore                                                                                                                                                                                                                                                                           0.0s
- => => transferring context: 2B                                                                                                                                                                                                                                                                             0.0s
- => [internal] load build context                                                                                                                                                                                                                                                                           2.4s
- => => transferring context: 105.79MB                                                                                                                                                                                                                                                                       2.3s
- => CACHED [1/4] FROM docker.io/library/gradle:8.11.1-jdk23-alpine@sha256:a61858da62eeb4ba9a10e1a188fff2303ebcde278d629d9e2161adeca8455543                                                                                                                                                                  0.0s
- => => resolve docker.io/library/gradle:8.11.1-jdk23-alpine@sha256:a61858da62eeb4ba9a10e1a188fff2303ebcde278d629d9e2161adeca8455543                                                                                                                                                                         0.0s
- => [2/4] COPY . /home/gradle                                                                                                                                                                                                                                                                               2.1s
- => [3/4] RUN export LD_BIND_NOW=1                                                                                                                                                                                                                                                                          0.3s
- => CANCELED [4/4] RUN gradle build                                                                                                                                                                                                                                                                        37.8s
-ERROR: failed to solve: Canceled: context canceled                                                                                                                                                                                                                                                               
 
 
 %   docker image build -t ironoc-db .
@@ -279,36 +256,31 @@ Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reus
 
 > Task :bootRun
 
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | _| | '_ \/ _ | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
+.__ __________                                  ________             __           ___.                            
+|__|\______   \  ____    ____    ____    ____   \______ \  _____   _/  |_ _____   \_ |__  _____     ______  ____  
+|  | |       _/ /  _ \  /    \  /  _ \ _/ ___\   |    |  \ \__  \  \   __\\__  \   | __ \ \__  \   /  ___/_/ __ \ 
+|  | |    |   \(  <_> )|   |  \(  <_> )\  \___   |    `   \ / __ \_ |  |   / __ \_ | \_\ \ / __ \_ \___ \ \  ___/ 
+|__| |____|_  / \____/ |___|  / \____/  \___  > /_______  /(____  / |__|  (____  / |___  /(____  //____  > \___  >
+            \/              \/              \/          \/      \/             \/      \/      \/      \/      \/ 
 
- :: Spring Boot ::                (v3.4.0)
 
-2024-12-13T18:07:08.237Z  INFO 148 --- [           main] com.ironoc.db.App                        : Starting App using Java 23.0.1 with PID 148 (/home/gradle/build/classes/java/main started by root in /home/gradle)
-2024-12-13T18:07:08.242Z  INFO 148 --- [           main] com.ironoc.db.App                        : The following 1 profile is active: "h2"
-2024-12-13T18:07:10.111Z  INFO 148 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-12-13T18:07:10.206Z  INFO 148 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 1 JPA repository interface.
-2024-12-13T18:07:11.711Z  INFO 148 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2024-12-13T18:07:11.742Z  INFO 148 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2024-12-13T18:07:11.742Z  INFO 148 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.1]
-2024-12-13T18:07:12.349Z  INFO 148 --- [           main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-2024-12-13T18:07:12.446Z  INFO 148 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2024-12-13T18:07:12.463Z  INFO 148 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4038 ms
-2024-12-13T18:07:12.527Z  INFO 148 --- [           main] c.i.db.service.GoogleCloudClientImpl     : Entering GoogleCloudClient.getSecret for secretVersion=projects/************/secrets/MY_SQL_PASSWORD/versions/1
-2024-12-13T18:07:13.787Z  INFO 148 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-12-13T18:07:14.484Z  INFO 148 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ironoc_db user=ROOT
-2024-12-13T18:07:14.488Z  INFO 148 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-12-13T18:07:14.533Z  INFO 148 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ironoc_db'
-2024-12-13T18:07:14.852Z  INFO 148 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-12-13T18:07:15.000Z  INFO 148 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.2.Final
-2024-12-13T18:07:15.107Z  INFO 148 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-12-13T18:07:15.710Z  INFO 148 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-12-13T18:07:15.757Z  WARN 148 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-12-13T18:07:15.777Z  INFO 148 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-02-20T19:35:28.390Z  INFO 143 --- [           main] com.ironoc.db.App                        : Starting App using Java 23.0.1 with PID 143 (/home/gradle/build/classes/java/main started by root in /home/gradle)
+2025-02-20T19:35:28.396Z  INFO 143 --- [           main] com.ironoc.db.App                        : The following 1 profile is active: "h2"
+2025-02-20T19:35:30.088Z  INFO 143 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-20T19:35:30.171Z  INFO 143 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 1 JPA repository interface.
+2025-02-20T19:35:31.099Z  INFO 143 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-20T19:35:31.125Z  INFO 143 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-20T19:35:31.126Z  INFO 143 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.3]
+2025-02-20T19:35:31.496Z  INFO 143 --- [           main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-20T19:35:31.504Z  INFO 143 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-20T19:35:31.506Z  INFO 143 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2878 ms
+2025-02-20T19:35:31.579Z  INFO 143 --- [           main] c.i.db.service.GoogleCloudClientImpl     : Entering GoogleCloudClient.getSecret ****
+2025-02-20T19:35:32.290Z  INFO 143 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-20T19:35:32.374Z  INFO 143 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-02-20T19:35:32.437Z  INFO 143 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-02-20T19:35:32.863Z  INFO 143 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-20T19:35:32.905Z  WARN 143 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-20T19:35:32.923Z  INFO 143 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
         Database JDBC URL [undefined/unknown]
         Database driver: undefined/unknown
         Database version: 2.1.214
@@ -316,23 +288,60 @@ Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reus
         Isolation level: <unknown>
         Minimum pool size: undefined/unknown
         Maximum pool size: undefined/unknown
+2025-02-20T19:35:34.217Z  INFO 143 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-02-20T19:35:34.498Z  INFO 143 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ironoc_db user=ROOT
+2025-02-20T19:35:34.502Z  INFO 143 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 Hibernate: create global temporary table HTE_person(age integer, rn_ integer not null, title varchar(5), id bigint, first_name varchar(30), surname varchar(30), primary key (rn_)) TRANSACTIONAL
-2024-12-13T18:07:17.719Z  INFO 148 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-20T19:35:34.855Z  INFO 143 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists person cascade 
 Hibernate: drop sequence if exists person_seq
 Hibernate: create sequence person_seq start with 1 increment by 50
 Hibernate: create table person (age integer not null check ((age<=90) and (age>=1)), title varchar(5) not null, id bigint not null, first_name varchar(30) not null, surname varchar(30) not null, primary key (id))
-2024-12-13T18:07:17.797Z  INFO 148 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-12-13T18:07:18.869Z  WARN 148 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-12-13T18:07:18.914Z  INFO 148 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2024-12-13T18:07:20.132Z  INFO 148 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2024-12-13T18:07:20.147Z  INFO 148 --- [           main] com.ironoc.db.App                        : Started App in 12.67 seconds (process running for 13.407)
-2024-12-13T18:08:23.985Z  INFO 148 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-12-13T18:08:23.986Z  INFO 148 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2024-12-13T18:08:23.991Z  INFO 148 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2024-12-13T18:08:24.139Z  INFO 148 --- [nio-8080-exec-1] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+2025-02-20T19:35:34.979Z  INFO 143 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-20T19:35:35.829Z  WARN 143 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-20T19:35:35.875Z  INFO 143 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-20T19:35:36.600Z  INFO 143 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ironoc_db'
+2025-02-20T19:35:36.870Z  INFO 143 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-20T19:35:36.910Z  INFO 143 --- [           main] com.ironoc.db.App                        : Started App in 10.139 seconds (process running for 11.365)
+2025-02-20T19:36:02.454Z  INFO 143 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-20T19:36:02.455Z  INFO 143 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-20T19:36:02.457Z  INFO 143 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-02-20T19:36:02.520Z  INFO 143 --- [nio-8080-exec-1] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
-2024-12-13T18:08:43.017Z  INFO 148 --- [nio-8080-exec-5] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+2025-02-20T19:38:20.100Z  INFO 143 --- [nio-8080-exec-7] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={}, id=1001
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0 where p1_0.id=?
+Hibernate: delete from person where id=?
+2025-02-20T19:38:20.287Z  INFO 143 --- [nio-8080-exec-9] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+2025-02-20T19:38:21.570Z  INFO 143 --- [nio-8080-exec-3] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={}, id=1002
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0 where p1_0.id=?
+Hibernate: delete from person where id=?
+2025-02-20T19:38:21.585Z  INFO 143 --- [nio-8080-exec-4] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+2025-02-20T19:38:23.162Z  INFO 143 --- [nio-8080-exec-5] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={}, id=1003
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0 where p1_0.id=?
+Hibernate: delete from person where id=?
+2025-02-20T19:38:23.179Z  INFO 143 --- [nio-8080-exec-8] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+2025-02-20T19:38:32.353Z  INFO 143 --- [nio-8080-exec-6] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={person=Person(id=null, title=Ms, firstName=Halle, surname=Movie, age=4747), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'person' on field 'age': rejected value [4747]; codes [Max.person.age,Max.age,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age],90]; default message [Age is greater than 90.]}, person=Person(id=null, title=Ms, firstName=Halle, surname=Movie, age=4747)
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+2025-02-20T19:38:34.940Z  INFO 143 --- [nio-8080-exec-7] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={person=Person(id=null, title=Ms, firstName=Halle, surname=Movie, age=47), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 0 errors}, person=Person(id=null, title=Ms, firstName=Halle, surname=Movie, age=47)
+Hibernate: select next value for person_seq
+Hibernate: insert into person (age,first_name,surname,title,id) values (?,?,?,?,?)
+2025-02-20T19:38:35.114Z  INFO 143 --- [nio-8080-exec-9] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+2025-02-20T19:38:37.202Z  INFO 143 --- [io-8080-exec-10] c.ironoc.db.controller.PersonController  : Entering personController.showEditView: ID=1, model={}
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0 where p1_0.id=?
+2025-02-20T19:38:41.423Z  INFO 143 --- [nio-8080-exec-1] c.ironoc.db.controller.PersonController  : Entering personController.updatePerson: ID=1, person=Person(id=1, title=Ms, firstName=Halle, surname=Movie, age=52)
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0 where p1_0.id=?
+Hibernate: update person set age=?,first_name=?,surname=?,title=? where id=?
+2025-02-20T19:38:41.466Z  INFO 143 --- [nio-8080-exec-2] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+2025-02-20T19:38:43.210Z  INFO 143 --- [nio-8080-exec-3] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={}, id=1
+Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0 where p1_0.id=?
+Hibernate: delete from person where id=?
+2025-02-20T19:38:43.227Z  INFO 143 --- [nio-8080-exec-4] c.ironoc.db.controller.PersonController  : Entering personController.home: map={}
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
 ```  
 
