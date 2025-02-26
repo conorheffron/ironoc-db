@@ -40,6 +40,9 @@ public class CustomErrorControllerIntegrationTest {
     @MockitoBean
     private PersonDao personDaoMock;
 
+    @MockitoBean
+    private VersionController versionControllerMock;
+
     @InjectMocks
     private CustomErrorController customErrorController;// controller under test
 

@@ -1,3 +1,4 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar navbar-custom navbar-expand border border-dark">
     <div class="container" >
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -15,6 +16,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/conorheffron/ironoc-db" target="_blank">Github</a>
+                </li>
+                <li class="nav-item">
+                    <th:block th:text="${applicationVersion}"></th:block>
                 </li>
             </ul>
         </div>

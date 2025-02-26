@@ -139,3 +139,7 @@ publishing {
 	    }
     }
 }
+
+springBoot {
+    buildInfo()
+}
