@@ -54,6 +54,9 @@ public class PersonControllerIntegrationTest {
     @MockitoBean
     private PersonDao personDaoMock;
 
+    @MockitoBean
+    private VersionController versionControllerMock;
+
     @InjectMocks
     private PersonController personController;// controller under test
 
