@@ -130,8 +130,8 @@ docker remove test-mysql
 
 
 %   kubectl cluster-info 
-Kubernetes control plane is running at https://127.0.0.1:51600
-CoreDNS is running at https://127.0.0.1:51600/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Kubernetes control plane is running at https://127.0.0.1:54912
+CoreDNS is running at https://127.0.0.1:54912/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
@@ -147,7 +147,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 🤔  Verifying dashboard health ...
 🚀  Launching proxy ...
 🤔  Verifying proxy health ...
-🎉  Opening http://127.0.0.1:65357/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+🎉  Opening http://127.0.0.1:54976/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
 ```
 - Then change namespace in browser after creation of 'ironoc-db' namespace.
 
@@ -217,7 +217,7 @@ horizontalpodautoscaler.autoscaling/ironoc-db-app-deployment-hpa-kbij created
 
 %   kubectl get pods --namespace=ironoc-db-ns
 NAME                                        READY   STATUS    RESTARTS   AGE
-ironoc-db-app-deployment-6c566784bc-xvt6c   1/1     Running   0          10s
+ironoc-db-app-deployment-d5c59b4c5-rzmhz   1/1     Running   0          10s
 
 
 %   kubectl get deployment --namespace=ironoc-db-ns
@@ -233,21 +233,21 @@ service/ironoc-db-app-deployment exposed
 
 %   kubectl get services --namespace=ironoc-db-ns
 NAME                       TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
-ironoc-db-app-deployment   NodePort   10.98.99.20   <none>        8080:31200/TCP   7s
+ironoc-db-app-deployment   NodePort   10.96.135.232   <none>        8080:31797/TCP   8s
 
 
 %   minikube service ironoc-db-app-deployment --url --namespace=ironoc-db-ns
-http://127.0.0.1:52851
+http://127.0.0.1:55519
 ❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
 ```
 - Open a new terminal tab & follow the logs
 ```shell
 %   kubectl get pods --namespace=ironoc-db-ns
 NAME                                        READY   STATUS    RESTARTS   AGE
-ironoc-db-app-deployment-6c566784bc-xvt6c   1/1     Running   0          2m54s
+ironoc-db-app-deployment-d5c59b4c5-rzmhz   1/1     Running   0          2m54s
 
 
-%   kubectl logs ironoc-db-app-deployment-6c566784bc-xvt6c -f --namespace=ironoc-db-ns
+%   kubectl logs ironoc-db-app-deployment-d5c59b4c5-rzmhz -f --namespace=ironoc-db-ns
 Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
 > Task :compileJava UP-TO-DATE
 > Task :processResources UP-TO-DATE
