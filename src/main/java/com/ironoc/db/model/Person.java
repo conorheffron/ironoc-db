@@ -3,6 +3,9 @@ package com.ironoc.db.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -15,7 +18,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name="person")
@@ -23,12 +27,11 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Person {
 	
 	@Id
 	@Column(name="id")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="title")
@@ -51,4 +54,7 @@ public class Person {
 	@Max(value=90, message="Age is greater than 90.")
 	@NotNull(message = "Age is not defined.")
 	private Integer age;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", orphanRemoval = true)
+	private List<Employer> employers;
 }
