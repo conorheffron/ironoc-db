@@ -3,6 +3,7 @@ package com.ironoc.db.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.config.IronocDbConfig;
 import com.ironoc.db.dao.PersonDao;
+import com.ironoc.db.model.Employer;
 import com.ironoc.db.model.Person;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,6 +81,29 @@ public class PersonControllerIntegrationTest {
             "                        <button type=\"submit\" class=\"btn btn-primary btn-sm rounded-0\"><i class=\"fa fa-trash\"></i></a></button>\n" +
             "                    </form>\n" +
             "                </td>\n" +
+            "                <td>\n" +
+            "                    <table style=\"border: 1\">\n" +
+            "                        <thead>\n" +
+            "                        <tr>\n" +
+            "                            <th>Job Title</th>\n" +
+            "                            <th>Employer Name</th>\n" +
+            "                            <th>Start Year</th>\n" +
+            "                        </tr>\n" +
+            "                        </thead>\n" +
+            "                        <tbody>\n" +
+            "                            <tr>\n" +
+            "                                <td></td>\n" +
+            "                                <td>Morgan Stanley</td>\n" +
+            "                                <td>2017</td>\n" +
+            "                            </tr>\n" +
+            "                            <tr>\n" +
+            "                                <td></td>\n" +
+            "                                <td>BSkyB</td>\n" +
+            "                                <td>2014</td>\n" +
+            "                            </tr>\n" +
+            "                        </tbody>\n" +
+            "                    </table>\n" +
+            "                </td>\n" +
             "            </tr>\n" +
             "            <tr>\n" +
             "                <td colspan=\"3\" />\n" +
@@ -100,7 +124,9 @@ public class PersonControllerIntegrationTest {
                 .surname(TEST_SURNAME)
                 .age(42)
                 .title("Mr.")
-                .id(7l)
+                .id(7L)
+                .employers(List.of(Employer.builder().employerName("Morgan Stanley").startYear(2017).employer_id(22L).build(),
+                        Employer.builder().employerName("BSkyB").startYear(2014).employer_id(23L).build()))
                 .build();
     }
 
