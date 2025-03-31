@@ -110,6 +110,13 @@ spec:
           ports:
             - containerPort: 8080
           name: ironoc-db-app-sha256-1
+          env:
+            - name: PROJECT_ID
+              value: "ironoc-db"
+            - name: SECRET_ID
+              value: "MY_SQL_PASSWORD"
+            - name: SECRET_VERSION
+              value: "latest"
           resources:
             limits:
               ephemeral-storage: 1Gi
@@ -121,6 +128,7 @@ spec:
             capabilities:
               drop:
                 - NET_RAW
+      serviceAccountName: default
       securityContext:
         seccompProfile:
           type: RuntimeDefault
