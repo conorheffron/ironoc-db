@@ -50,8 +50,8 @@ configurations {
 
 dependencies {
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.36'
-    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
 
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
