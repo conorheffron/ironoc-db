@@ -1,4 +1,4 @@
-FROM gradle:8.11.1-jdk23-alpine
+FROM gradle:8.13.0-jdk23-alpine
 
 COPY . /home/gradle
 
