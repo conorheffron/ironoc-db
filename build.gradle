@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '6.1.8'
+version = '6.1.9'
 description = "Sample Data Manager"
 
 sourceCompatibility = 23
