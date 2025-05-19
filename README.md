@@ -16,7 +16,7 @@ This project also includes form validation of controller model objects and reque
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 23, Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8.11, 
+Java 23, Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8, 
     GKE, Docker, minikube, & kubectl.
 
 ## Run
