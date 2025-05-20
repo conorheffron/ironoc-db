@@ -16,7 +16,7 @@ This project also includes form validation of controller model objects and reque
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 23, Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8, 
+Java 24, Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 8, 
     GKE, Docker, minikube, & kubectl.
 
 ## Run
@@ -268,23 +268,23 @@ Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reus
             \/              \/              \/          \/      \/             \/      \/      \/      \/      \/ 
 
 
-2025-05-19T19:20:01.917Z  INFO 147 --- [           main] com.ironoc.db.App                        : Starting App using Java 23.0.2 with PID 147 (/home/gradle/build/classes/java/main started by root in /home/gradle)
-2025-05-19T19:20:01.921Z  INFO 147 --- [           main] com.ironoc.db.App                        : The following 1 profile is active: "h2"
-2025-05-19T19:20:03.528Z  INFO 147 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-19T19:20:03.599Z  INFO 147 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 1 JPA repository interface.
-2025-05-19T19:20:04.342Z  INFO 147 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-05-19T19:20:04.375Z  INFO 147 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-05-19T19:20:04.375Z  INFO 147 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.7]
-2025-05-19T19:20:04.717Z  INFO 147 --- [           main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-2025-05-19T19:20:04.724Z  INFO 147 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-05-19T19:20:04.726Z  INFO 147 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2623 ms
-2025-05-19T19:20:04.796Z  INFO 147 --- [           main] c.i.db.service.GoogleCloudClientImpl     : Entering GoogleCloudClient.getSecret for secretVersion=projects/902038140834/secrets/MY_SQL_PASSWORD/versions/latest
-2025-05-19T19:20:05.222Z  INFO 147 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-19T19:20:05.280Z  INFO 147 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
-2025-05-19T19:20:05.340Z  INFO 147 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-05-19T19:20:05.910Z  INFO 147 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-19T19:20:06.134Z  WARN 147 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-19T19:20:06.182Z  INFO 147 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-05-20T00:46:38.947Z  INFO 150 --- [           main] com.ironoc.db.App                        : Starting App using Java 24.0.1 with PID 150 (/home/gradle/build/classes/java/main started by root in /home/gradle)
+2025-05-20T00:46:38.952Z  INFO 150 --- [           main] com.ironoc.db.App                        : The following 1 profile is active: "h2"
+2025-05-20T00:46:40.736Z  INFO 150 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-20T00:46:40.816Z  INFO 150 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 1 JPA repository interface.
+2025-05-20T00:46:42.198Z  INFO 150 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-20T00:46:42.262Z  INFO 150 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-20T00:46:42.263Z  INFO 150 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.7]
+2025-05-20T00:46:42.708Z  INFO 150 --- [           main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-05-20T00:46:42.718Z  INFO 150 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-20T00:46:42.719Z  INFO 150 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3603 ms
+2025-05-20T00:46:42.802Z  INFO 150 --- [           main] c.i.db.service.GoogleCloudClientImpl     : Entering GoogleCloudClient.getSecret for secretVersion=projects/902038140834/secrets/MY_SQL_PASSWORD/versions/latest
+2025-05-20T00:46:43.377Z  INFO 150 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-20T00:46:43.426Z  INFO 150 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-20T00:46:43.476Z  INFO 150 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-20T00:46:43.876Z  INFO 150 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-20T00:46:43.907Z  WARN 150 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-20T00:46:43.923Z  INFO 150 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
         Database JDBC URL [undefined/unknown]
         Database driver: undefined/unknown
         Database version: 2.1.214
@@ -292,70 +292,57 @@ Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reus
         Isolation level: <unknown>
         Minimum pool size: undefined/unknown
         Maximum pool size: undefined/unknown
-2025-05-19T19:20:08.450Z  INFO 147 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-20T00:46:45.066Z  INFO 150 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists employer cascade 
-2025-05-19T19:20:08.468Z  INFO 147 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-05-19T19:20:08.797Z  INFO 147 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ironoc_db user=ROOT
-2025-05-19T19:20:08.801Z  INFO 147 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-20T00:46:45.082Z  INFO 150 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-20T00:46:45.297Z  INFO 150 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:ironoc_db user=ROOT
+2025-05-20T00:46:45.300Z  INFO 150 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 Hibernate: drop table if exists person cascade 
 Hibernate: create table employer (start_year integer, employee_id bigint, employer_id bigint generated by default as identity, employer_name varchar(255), title varchar(255), primary key (employer_id))
 Hibernate: create table person (age integer not null check ((age<=90) and (age>=1)), title varchar(5) not null, id bigint generated by default as identity, first_name varchar(30) not null, surname varchar(30) not null, primary key (id))
 Hibernate: alter table if exists employer add constraint FKncw2hjus3cwslwhelmj9kryiu foreign key (employee_id) references person
-2025-05-19T19:20:08.898Z  INFO 147 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-19T19:20:09.509Z  WARN 147 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-19T19:20:09.538Z  INFO 147 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2025-05-19T19:20:09.990Z  INFO 147 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ironoc_db'
-2025-05-19T19:20:10.119Z  INFO 147 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-05-19T19:20:10.128Z  INFO 147 --- [           main] com.ironoc.db.App                        : Started App in 9.162 seconds (process running for 9.801)
+2025-05-20T00:46:45.363Z  INFO 150 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-20T00:46:46.122Z  WARN 150 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-20T00:46:46.149Z  INFO 150 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-05-20T00:46:46.810Z  INFO 150 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:ironoc_db'
+2025-05-20T00:46:47.022Z  INFO 150 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-20T00:46:47.040Z  INFO 150 --- [           main] com.ironoc.db.App                        : Started App in 9.124 seconds (process running for 9.703)
 .
 .
 .
-2025-05-19T19:20:59.096Z  INFO 147 --- [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-05-19T19:20:59.096Z  INFO 147 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-05-19T19:20:59.099Z  INFO 147 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-05-19T19:20:59.163Z  INFO 147 --- [nio-8080-exec-2] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.1}
+2025-05-20T00:49:03.513Z  INFO 150 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-20T00:49:03.513Z  INFO 150 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-20T00:49:03.519Z  INFO 150 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2025-05-20T00:49:03.613Z  INFO 150 --- [nio-8080-exec-1] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.2}
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
-2025-05-19T19:22:31.713Z  INFO 147 --- [nio-8080-exec-8] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={applicationVersion=Version: 6.2.1}, id=1000
+2025-05-20T00:49:12.061Z  INFO 150 --- [nio-8080-exec-5] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={applicationVersion=Version: 6.2.2}, id=1000
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title,e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from person p1_0 left join employer e1_0 on p1_0.id=e1_0.employee_id where p1_0.id=?
 Hibernate: delete from employer where employer_id=?
 Hibernate: delete from employer where employer_id=?
 Hibernate: delete from person where id=?
-2025-05-19T19:22:31.887Z  INFO 147 --- [nio-8080-exec-9] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.1}
+2025-05-20T00:49:12.197Z  INFO 150 --- [nio-8080-exec-6] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.2}
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
-2025-05-19T19:22:35.588Z  INFO 147 --- [nio-8080-exec-1] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={applicationVersion=Version: 6.2.1}, id=2000
-Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title,e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from person p1_0 left join employer e1_0 on p1_0.id=e1_0.employee_id where p1_0.id=?
-Hibernate: delete from employer where employer_id=?
-Hibernate: delete from person where id=?
-2025-05-19T19:22:35.614Z  INFO 147 --- [nio-8080-exec-3] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.1}
+2025-05-20T00:49:28.488Z  INFO 150 --- [nio-8080-exec-7] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={applicationVersion=Version: 6.2.2, person=Person(id=null, title=Mr , firstName=Conor, surname=Heffron, age=null, employers=null), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'person' on field 'age': rejected value [null]; codes [NotNull.person.age,NotNull.age,NotNull.java.lang.Integer,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age]]; default message [Age is not defined.]}, person=Person(id=null, title=Mr , firstName=Conor, surname=Heffron, age=null, employers=null)
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
-2025-05-19T19:22:36.401Z  INFO 147 --- [nio-8080-exec-4] c.ironoc.db.controller.PersonController  : Entering personController.deletePersonBySurname: map={applicationVersion=Version: 6.2.1}, id=3000
-Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title,e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from person p1_0 left join employer e1_0 on p1_0.id=e1_0.employee_id where p1_0.id=?
-Hibernate: delete from employer where employer_id=?
-Hibernate: delete from person where id=?
-2025-05-19T19:22:36.423Z  INFO 147 --- [nio-8080-exec-6] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.1}
+Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
+2025-05-20T00:49:30.888Z  INFO 150 --- [nio-8080-exec-8] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={applicationVersion=Version: 6.2.2, person=Person(id=null, title=Mr , firstName=Conor, surname=Heffron, age=99, employers=null), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'person' on field 'age': rejected value [99]; codes [Max.person.age,Max.age,Max.java.lang.Integer,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age],90]; default message [Age is greater than 90.]}, person=Person(id=null, title=Mr , firstName=Conor, surname=Heffron, age=99, employers=null)
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
-2025-05-19T19:22:38.092Z  INFO 147 --- [nio-8080-exec-7] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={applicationVersion=Version: 6.2.1, person=Person(id=null, title=, firstName=, surname=, age=null, employers=null), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 7 errors
-Field error in object 'person' on field 'title': rejected value []; codes [Size.person.title,Size.title,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.title,title]; arguments []; default message [title],5,2]; default message [Title should be between 2-5 characters.]
-Field error in object 'person' on field 'firstName': rejected value []; codes [NotEmpty.person.firstName,NotEmpty.firstName,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.firstName,firstName]; arguments []; default message [firstName]]; default message [First Name is not defined.]
-Field error in object 'person' on field 'age': rejected value [null]; codes [NotNull.person.age,NotNull.age,NotNull.java.lang.Integer,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.age,age]; arguments []; default message [age]]; default message [Age is not defined.]
-Field error in object 'person' on field 'title': rejected value []; codes [NotEmpty.person.title,NotEmpty.title,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.title,title]; arguments []; default message [title]]; default message [Title is not defined.]
-Field error in object 'person' on field 'surname': rejected value []; codes [NotEmpty.person.surname,NotEmpty.surname,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.surname,surname]; arguments []; default message [surname]]; default message [Surname is not defined.]
-Field error in object 'person' on field 'firstName': rejected value []; codes [Size.person.firstName,Size.firstName,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.firstName,firstName]; arguments []; default message [firstName],30,3]; default message [First Name should be between 3-30 characters.]
-Field error in object 'person' on field 'surname': rejected value []; codes [Size.person.surname,Size.surname,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.surname,surname]; arguments []; default message [surname],30,3]; default message [Surname should be between 3-30 characters.]}, person=Person(id=null, title=, firstName=, surname=, age=null, employers=null)
-Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
-2025-05-19T19:23:01.266Z  INFO 147 --- [nio-8080-exec-8] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={applicationVersion=Version: 6.2.1, person=Person(id=null, title=Ms, firstName=Desree, surname=GB, age=47, employers=null), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 1 errors
-Field error in object 'person' on field 'surname': rejected value [GB]; codes [Size.person.surname,Size.surname,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [person.surname,surname]; arguments []; default message [surname],30,3]; default message [Surname should be between 3-30 characters.]}, person=Person(id=null, title=Ms, firstName=Desree, surname=GB, age=47, employers=null)
-Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
-2025-05-19T19:23:17.848Z  INFO 147 --- [nio-8080-exec-9] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={applicationVersion=Version: 6.2.1, person=Person(id=null, title=Ms, firstName=Desree, surname=yGB, age=47, employers=null), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 0 errors}, person=Person(id=null, title=Ms, firstName=Desree, surname=yGB, age=47, employers=null)
+Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
+Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
+2025-05-20T00:49:36.350Z  INFO 150 --- [nio-8080-exec-9] c.ironoc.db.controller.PersonController  : Entering personController.addPerson: map={applicationVersion=Version: 6.2.2, person=Person(id=null, title=Mr , firstName=Conor, surname=Heffron, age=23, employers=null), org.springframework.validation.BindingResult.person=org.springframework.validation.BeanPropertyBindingResult: 0 errors}, person=Person(id=null, title=Mr , firstName=Conor, surname=Heffron, age=23, employers=null)
 Hibernate: insert into person (age,first_name,surname,title,id) values (?,?,?,?,default)
-2025-05-19T19:23:17.973Z  INFO 147 --- [nio-8080-exec-5] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.1}
+2025-05-20T00:49:36.394Z  INFO 150 --- [io-8080-exec-10] c.ironoc.db.controller.PersonController  : Entering personController.home: map={applicationVersion=Version: 6.2.2}
 Hibernate: select p1_0.id,p1_0.age,p1_0.first_name,p1_0.surname,p1_0.title from person p1_0
+Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
+Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
 Hibernate: select e1_0.employee_id,e1_0.employer_id,e1_0.employer_name,e1_0.start_year,e1_0.title from employer e1_0 where e1_0.employee_id=?
 ```  
 
