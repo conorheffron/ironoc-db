@@ -9,7 +9,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -19,10 +19,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/conorheffron/ironoc-db" target="_blank">Github</a>
                 </li>
-                <li class="nav-item">
-                    <span class="navbar-text text-light" th:text="${applicationVersion}"></span>
-                </li>
             </ul>
+            <a class="navbar-text version-badge ml-3"
+               th:href="'https://github.com/conorheffron/ironoc-db/releases/tag/v' + ${#strings.replace(applicationVersion, 'Version: ', '')}"
+               target="_blank"
+               th:text="${applicationVersion}"></a>
         </div>
     </div>
 </nav>

@@ -2,10 +2,45 @@
 
 .error {
   color: red;
-  font-weight: bold;
 }
 
 body {
   background-color: #f1fbf7;
   color: navy;
+}
+
+.version-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #6f42c1, #007bff);
+  color: #fff;
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-weight: 600;
+  font-size: 1em;
+  margin-left: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: background 0.4s, transform 0.3s, box-shadow 0.3s, color 0.3s;
+  animation: versionPulse 2.4s infinite;
+}
+
+@keyframes versionPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(111, 66, 193, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(111, 66, 193, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(111, 66, 193, 0);
+  }
+}
+
+.version-badge:hover,
+.version-badge:focus {
+  background: linear-gradient(90deg, #007bff, #6f42c1);
+  color: #ffd700;
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.22);
+  text-shadow: 0 1px 6px rgba(255,255,255,0.3);
+  cursor: pointer;
 }
