@@ -2,22 +2,10 @@
 
 .error {
   color: red;
-  font-weight: bolder;
-}
-
-.navbar-custom {
-  background-color: #f5f5f5;
+  font-weight: bold;
 }
 
 body {
   background-color: #f1fbf7;
   color: navy;
-}
-
-input {
-  width: 70%;
-}
-
-.table {
-  width: 70%;
 }
