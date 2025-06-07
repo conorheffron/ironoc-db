@@ -1,15 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<nav class="navbar navbar-custom navbar-expand border border-dark">
-    <div class="container" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border border-dark py-2">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/robot-logo.png" id="logo" class="img-fluid" style="max-height: 40px;" alt="iRonoc DB Logo" />
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand mr-auto" href="/"><img src="/img/robot-logo.png" id="logo" /></a>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar nav mx-auto">
+            <ul class="navbar-nav mx-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/h2-console" target="_blank">DB-Login</a>
@@ -18,9 +20,12 @@
                     <a class="nav-link" href="https://github.com/conorheffron/ironoc-db" target="_blank">Github</a>
                 </li>
                 <li class="nav-item">
-                    <th:block th:text="${applicationVersion}"></th:block>
+                    <span class="navbar-text text-light" th:text="${applicationVersion}"></span>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>

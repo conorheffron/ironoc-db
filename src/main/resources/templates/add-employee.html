@@ -1,28 +1,30 @@
-<div class="container">
-    <br />
-    <h3>Manage data entries below</h3>
-    <br />
-    <form action="#" th:action="@{/add}" th:object="${person}" method="post" class=".form-control">
-        <label for="title"></label>
-        <input type="text" th:field="*{title}" id="title" placeholder="Enter Title.....">
-        <br />
-        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
-        <br />
-        <label for="firstName"></label>
-        <input type="text" th:field="*{firstName}" id="firstName" placeholder="Enter First Name.....">
-        <br />
-        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>
-        <br />
-        <label for="surname"></label>
-        <input type="text" th:field="*{surname}" id="surname" placeholder="Enter Surname.....">
-        <br />
-        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="error"></span>
-        <br />
-        <label for="age"></label>
-        <input type="number" th:field="*{age}" id="age" placeholder="Enter Age.....">
-        <br />
-        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></span>
-        <br />
-        <input type="submit" value="Add Employee" class="btn btn-default">
-    </form>
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h3 class="card-title mb-4">Add New Employee</h3>
+        <form action="#" th:action="@{/add}" th:object="${person}" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="title">Title</label>
+                    <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Enter Title...">
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger small"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="firstName">First Name</label>
+                    <input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Enter First Name...">
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger small"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="surname">Surname</label>
+                    <input type="text" th:field="*{surname}" class="form-control" id="surname" placeholder="Enter Surname...">
+                    <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="text-danger small"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="age">Age</label>
+                    <input type="number" th:field="*{age}" class="form-control" id="age" placeholder="Enter Age...">
+                    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="text-danger small"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Employee</button>
+        </form>
+    </div>
 </div>
