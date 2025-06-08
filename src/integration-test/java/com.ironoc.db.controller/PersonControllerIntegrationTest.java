@@ -65,55 +65,77 @@ public class PersonControllerIntegrationTest {
     private static final Long TEST_ID = 7l;
     private static final String TEST_SURNAME = "Heffron";
     private Person person;
-    private static final String ADD_PERSON_TABLE_HTML = "<tbody>\n" +
-            "            <tr>\n" +
-            "                <td>7</td>\n" +
-            "                <td>Mr.</td>\n" +
-            "                <td>Conor</td>\n" +
-            "                <td>Heffron</td>\n" +
-            "                <td>42</td>\n" +
-            "                <td><a href=\"/edit/7\" class=\"btn btn-primary btn-sm rounded-0\" type=\"button\">\n" +
-            "                    <i class=\"fa fa-edit\"></i></a>\n" +
-            "                </td>\n" +
-            "                <td>\n" +
-            "                    <form action=\"/delete/7\" method=\"post\" ><input type=\"hidden\" name=\"_method\" value=\"delete\"/>\n" +
-            "                        <input type=\"hidden\" name=\"_method\" value=\"delete\" />\n" +
-            "                        <button type=\"submit\" class=\"btn btn-primary btn-sm rounded-0\"><i class=\"fa fa-trash\"></i></a></button>\n" +
-            "                    </form>\n" +
-            "                </td>\n" +
-            "                <td>\n" +
-            "                    <table style=\"border: 1\">\n" +
-            "                        <thead>\n" +
-            "                        <tr>\n" +
-            "                            <th>Job Title</th>\n" +
-            "                            <th>Employer Name</th>\n" +
-            "                            <th>Start Year</th>\n" +
-            "                        </tr>\n" +
-            "                        </thead>\n" +
-            "                        <tbody>\n" +
-            "                            <tr>\n" +
-            "                                <td></td>\n" +
-            "                                <td>Morgan Stanley</td>\n" +
-            "                                <td>2017</td>\n" +
-            "                            </tr>\n" +
-            "                            <tr>\n" +
-            "                                <td></td>\n" +
-            "                                <td>BSkyB</td>\n" +
-            "                                <td>2014</td>\n" +
-            "                            </tr>\n" +
-            "                        </tbody>\n" +
-            "                    </table>\n" +
-            "                </td>\n" +
-            "            </tr>\n" +
-            "            <tr>\n" +
-            "                <td colspan=\"3\" />\n" +
-            "                <td><b >42</b> is the Average Employee Age</td>\n" +
-            "            </tr>\n" +
-            "            <tr>\n" +
-            "                <td colspan=\"6\" />\n" +
-            "                <td><b >42</b> is the Sum of Ages</td>\n" +
-            "            </tr>\n" +
-            "            </tbody>";
+    private static final String ADD_PERSON_TABLE_HTML = "<table class=\"table table-hover table-bordered w-100\">\n" +
+            "                    <thead class=\"thead-light\">\n" +
+            "                    <tr>\n" +
+            "                        <th>#</th>\n" +
+            "                        <th>Title</th>\n" +
+            "                        <th>First Name</th>\n" +
+            "                        <th>Surname</th>\n" +
+            "                        <th>Age</th>\n" +
+            "                        <th>Edit</th>\n" +
+            "                        <th>Delete</th>\n" +
+            "                        <th>Job History</th>\n" +
+            "                    </tr>\n" +
+            "                    </thead>\n" +
+            "                    <tbody>\n" +
+            "                    <tr>\n" +
+            "                        <td>7</td>\n" +
+            "                        <td>Mr.</td>\n" +
+            "                        <td>Conor</td>\n" +
+            "                        <td>Heffron</td>\n" +
+            "                        <td>42</td>\n" +
+            "                        <td>\n" +
+            "                            <a href=\"/edit/7\" class=\"btn btn-primary btn-sm rounded-0\" title=\"Edit\">\n" +
+            "                                <i class=\"fa fa-edit\"></i>\n" +
+            "                            </a>\n" +
+            "                        </td>\n" +
+            "                        <td>\n" +
+            "                            <form action=\"/delete/7\" method=\"post\" class=\"d-inline\"><input type=\"hidden\" name=\"_method\" value=\"delete\"/>\n" +
+            "                                <input type=\"hidden\" name=\"_method\" value=\"delete\" />\n" +
+            "                                <button type=\"submit\" class=\"btn btn-danger btn-sm rounded-0\" title=\"Delete\">\n" +
+            "                                    <i class=\"fa fa-trash\"></i>\n" +
+            "                                </button>\n" +
+            "                            </form>\n" +
+            "                        </td>\n" +
+            "                        <td>\n" +
+            "                            <table class=\"table table-sm mb-0\">\n" +
+            "                                <thead>\n" +
+            "                                <tr>\n" +
+            "                                    <th>Job Title</th>\n" +
+            "                                    <th>Employer Name</th>\n" +
+            "                                    <th>Start Year</th>\n" +
+            "                                </tr>\n" +
+            "                                </thead>\n" +
+            "                                <tbody>\n" +
+            "                                <tr>\n" +
+            "                                    <td></td>\n" +
+            "                                    <td>Morgan Stanley</td>\n" +
+            "                                    <td>2017</td>\n" +
+            "                                </tr>\n" +
+            "                                <tr>\n" +
+            "                                    <td></td>\n" +
+            "                                    <td>BSkyB</td>\n" +
+            "                                    <td>2014</td>\n" +
+            "                                </tr>\n" +
+            "                                </tbody>\n" +
+            "                            </table>\n" +
+            "                        </td>\n" +
+            "                    </tr>\n" +
+            "                    <tr>\n" +
+            "                        <td colspan=\"4\"></td>\n" +
+            "                        <td colspan=\"4\">\n" +
+            "                            <b>42</b> is the Average Employee Age\n" +
+            "                        </td>\n" +
+            "                    </tr>\n" +
+            "                    <tr>\n" +
+            "                        <td colspan=\"6\"></td>\n" +
+            "                        <td colspan=\"2\">\n" +
+            "                            <b>42</b> is the Sum of Ages\n" +
+            "                        </td>\n" +
+            "                    </tr>\n" +
+            "                    </tbody>\n" +
+            "                </table>";
 
     @Before
     public void setup() {

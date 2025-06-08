@@ -2,11 +2,6 @@
 
 .error {
   color: red;
-  font-weight: bolder;
-}
-
-.navbar-custom {
-  background-color: #f5f5f5;
 }
 
 body {
@@ -14,10 +9,40 @@ body {
   color: navy;
 }
 
-input {
-  width: 70%;
+.version-badge {
+  animation: versionPulse 2.4s infinite;
+  background: linear-gradient(90deg, #6f42c1, #007bff);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 600;
+  margin-left: 1rem;
+  padding: 4px 16px;
+  transition: background 0.4s, transform 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
-.table {
-  width: 70%;
+@keyframes versionPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(111, 66, 193, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba(111, 66, 193, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(111, 66, 193, 0);
+  }
+}
+
+.version-badge:hover,
+.version-badge:focus {
+  background: linear-gradient(90deg, #007bff, #6f42c1);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.22);
+  color: #ffd700;
+  cursor: pointer;
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.3);
+  transform: scale(1.08) rotate(-2deg);
 }
