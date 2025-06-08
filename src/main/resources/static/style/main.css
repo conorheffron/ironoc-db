@@ -13,7 +13,7 @@ body {
   animation: versionPulse 2.4s infinite;
   background: linear-gradient(90deg, #6f42c1, #007bff);
   border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   color: #fff;
   display: inline-block;
   font-size: 1em;
@@ -43,6 +43,6 @@ body {
   box-shadow: 0 6px 18px rgba(0, 123, 255, 0.22);
   color: #ffd700;
   cursor: pointer;
-  text-shadow: 0 1px 6px rgba(255,255,255,0.3);
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.3);
   transform: scale(1.08) rotate(-2deg);
 }
