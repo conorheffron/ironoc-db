@@ -1,4 +1,12 @@
+[![Gradle Package](https://github.com/conorheffron/ironoc-db/actions/workflows/gradle-publish.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/gradle-publish.yml)
+
 [![Java CI with Gradle](https://github.com/conorheffron/ironoc-db/actions/workflows/gradle.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/gradle.yml)
+
+[![Codacy Security Scan](https://github.com/conorheffron/ironoc-db/actions/workflows/codacy.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/codacy.yml)
+
+[![Docker Image CI](https://github.com/conorheffron/ironoc-db/actions/workflows/docker-image.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/docker-image.yml)
+
+[![Docker Publish](https://github.com/conorheffron/ironoc-db/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/docker-publish.yml)
 
 ![Proof HTML](https://github.com/conorheffron/ironoc-db/actions/workflows/proof-html.yml/badge.svg)
 
