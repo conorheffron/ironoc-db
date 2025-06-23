@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.5.0'
+        springBootVersion = '3.5.3'
     }
     repositories {
         mavenCentral()
@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '6.2.7'
+version = '6.2.8'
 description = "Sample Data Manager"
 
 sourceCompatibility = 24
@@ -62,7 +62,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.64.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.66.0'
 
     // SQL
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
