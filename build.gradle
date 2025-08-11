@@ -62,7 +62,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.70.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.71.0'
 
     // SQL
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
