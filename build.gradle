@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.5.5'
+        springBootVersion = '3.5.6'
     }
     repositories {
         mavenCentral()
@@ -18,7 +18,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 
 group = 'conorheffron'
-version = '6.4.1'
+version = '6.4.2'
 description = "Sample Data Manager"
 
 sourceCompatibility = 24
@@ -50,8 +50,8 @@ configurations {
 
 dependencies {
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.40'
-    annotationProcessor 'org.projectlombok:lombok:1.18.40'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
