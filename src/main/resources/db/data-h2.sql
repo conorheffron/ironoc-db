@@ -1,3 +1,5 @@
+SET NOCOUNT ON;
+
 -- h2 initial data load INSERTS
 INSERT INTO IRONOC_DB.PERSON (id, title, first_name, surname, age) VALUES (1000, 'Ms', 'Sade', 'Song', 47);
 INSERT INTO IRONOC_DB.PERSON (id, title, first_name, surname, age) VALUES (2000, 'Mrs', 'Nora', 'Jones', 29);
