@@ -111,6 +111,12 @@ task integrationTest(type: Test) {
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
 
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
 integrationTest {
     // show standard out and standard error of the test JVM(s) on the console, without this
     // the text output printed by the tests won't show.
