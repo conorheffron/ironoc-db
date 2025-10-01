@@ -25,7 +25,6 @@ sonar {
   properties {
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
-	property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco.xml"
   }
 }
 
@@ -107,12 +106,12 @@ test {
     reports {
 		junitXml.getRequired().set(true)
     }
-	finalizedBy jacocoTestReport
 }
 
 task integrationTest(type: Test) {
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
+	finalizedBy jacocoTestReport
 }
 
 check.dependsOn integrationTest
@@ -121,11 +120,12 @@ integrationTest.mustRunAfter test
 jacocoTestReport {
     reports {
         xml.required = true
-        xml.destination file("${buildDir}/reports/jacoco.xml")
     }
 }
 
 jacocoTestReport.mustRunAfter integrationTest
+
+build.dependsOn jacocoTestReport
 
 integrationTest {
     // show standard out and standard error of the test JVM(s) on the console, without this
