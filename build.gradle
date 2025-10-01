@@ -16,10 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'maven-publish'
-
-plugins {
-  id "org.sonarqube" version "6.3.1.5724"
-}
+apply plugin: 'org.sonarqube' version '6.3.1.5724'
 
 sonar {
   properties {
