@@ -4,9 +4,11 @@ buildscript {
     }
     repositories {
         mavenCentral()
+		gradlePluginPortal()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:6.3.1.5724")
     }
 }
 
@@ -16,9 +18,18 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'maven-publish'
+apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
+
+sonar {
+  properties {
+    property "sonar.projectKey", "conorheffron_ironoc-db"
+    property "sonar.organization", "conorheffron"
+  }
+}
 
 group = 'conorheffron'
-version = '6.4.5'
+version = '6.4.6'
 description = "Sample Data Manager"
 
 sourceCompatibility = 24
@@ -69,7 +80,7 @@ dependencies {
     implementation group: 'com.h2database', name: 'h2', version:'2.4.240'
 
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'4.0.0'
-    implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.13'
+	implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.13'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.11'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
 
@@ -91,6 +102,10 @@ test {
         // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
         logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
+	useJUnitPlatform()
+    reports {
+		junitXml.getRequired().set(true)
+    }
 }
 
 task integrationTest(type: Test) {
@@ -100,6 +115,14 @@ task integrationTest(type: Test) {
 
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+jacocoTestReport.mustRunAfter integrationTest
 
 integrationTest {
     // show standard out and standard error of the test JVM(s) on the console, without this
