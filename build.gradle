@@ -1,24 +1,17 @@
-buildscript {
-    ext {
-        springBootVersion = '3.5.6'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
-    }
+ext {
+	springBootVersion = '3.5.6'
 }
 
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'war'
-apply plugin: 'maven-publish'
-apply plugin: 'org.sonarqube'
-apply plugin: 'jacoco'
+plugins{
+	id 'java'
+	id 'org.springframework.boot'
+	id 'eclipse'
+	id 'idea'
+	id 'war'
+	id 'maven-publish'
+	id 'org.sonarqube' version "6.3.1.5724" // Use the latest version
+	id 'jacoco'
+}
 
 sonarqube {
   properties {
