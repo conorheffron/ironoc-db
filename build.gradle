@@ -19,7 +19,7 @@ apply plugin: 'war'
 apply plugin: 'maven-publish'
 apply plugin: 'org.sonarqube'
 
-sonar {
+sonarqube {
   properties {
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
