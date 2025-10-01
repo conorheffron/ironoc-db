@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -14,7 +15,7 @@ public class CustomErrorController implements ErrorController {
 
     protected static final String PATH = "/error";
 
-    @RequestMapping(value = PATH)
+    @RequestMapping(value = PATH, method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
     public RedirectView error(HttpServletRequest request) {
         log.error("Unexpected error occurred. {}, The HTTP status is: {}",
                 request.getAttribute(RequestDispatcher.ERROR_MESSAGE),
