@@ -152,3 +152,9 @@ publishing {
 springBoot {
     buildInfo()
 }
+
+tasks.withType(Test) {
+	reports {
+		junitXml.outputLocation = file("$buildDir/test-results")
+	}
+}
