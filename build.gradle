@@ -25,7 +25,7 @@ sonar {
   properties {
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
-	property "sonar.coverage.jacoco.xmlReportPath", "${buildDir}/reports/jacoco.xml"
+	property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco.xml"
   }
 }
 
