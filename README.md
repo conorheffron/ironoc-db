@@ -12,13 +12,13 @@
 
 ![Auto Assign](https://github.com/conorheffron/ironoc-db/actions/workflows/auto-assign.yml/badge.svg)
 
-## SonarQube
+## Sonar (Static Application Security Testing SAST tool)
 
 [![SonarQube](https://github.com/conorheffron/ironoc-db/actions/workflows/sonar.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/sonar.yml)
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=conorheffron_ironoc-db)](https://sonarcloud.io/summary/new_code?id=conorheffron_ironoc-db)
 
-[SonarQube Scan Analysis & JaCoCo Test Coverage Report - Overal Summary](https://sonarcloud.io/summary/overall?id=conorheffron_ironoc-db&branch=main)
+[Sonar Scan Analysis & JaCoCo Test Coverage Report - Overall Summary](https://sonarcloud.io/summary/overall?id=conorheffron_ironoc-db&branch=main)
 
 # Sample Data Manager
 ================
