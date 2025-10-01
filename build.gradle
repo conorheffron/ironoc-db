@@ -118,9 +118,11 @@ check.dependsOn integrationTest
 integrationTest.mustRunAfter test
 
 jacocoTestReport {
-    reports {
-        xml.required = true
-    }
+	reports{
+		html.enabled=true
+		xml.enabled=true
+		csv.enabled=true
+	}
 }
 
 integrationTest {
