@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
     }
 }
 
@@ -22,10 +22,8 @@ apply plugin: 'jacoco'
 
 sonarqube {
   properties {
-	property "sonar.projectName","ironoc-db"
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
-	property "sonar.projectKey", "org.sonarqubeJacocoCodeCoverage"
     property "sonar.reportPath" , "${project.buildDir}/jacoco/test.exec"
   }
 }
@@ -81,8 +79,8 @@ dependencies {
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
     implementation group: 'com.h2database', name: 'h2', version:'2.4.240'
 
-	implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.13'
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'4.0.0'
+	implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.13'
     implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.11'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
 
