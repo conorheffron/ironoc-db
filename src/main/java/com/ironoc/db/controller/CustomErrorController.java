@@ -15,7 +15,7 @@ public class CustomErrorController implements ErrorController {
 
     protected static final String PATH = "/error";
 
-    @RequestMapping(value = PATH, method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
+    @RequestMapping(value = PATH, method = RequestMethod.GET)
     public RedirectView error(HttpServletRequest request) {
         log.error("Unexpected error occurred. {}, The HTTP status is: {}",
                 request.getAttribute(RequestDispatcher.ERROR_MESSAGE),
