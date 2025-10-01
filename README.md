@@ -16,8 +16,6 @@
 
 [![SonarQube](https://github.com/conorheffron/ironoc-db/actions/workflows/sonar.yml/badge.svg)](https://github.com/conorheffron/ironoc-db/actions/workflows/sonar.yml)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=conorheffron_ironoc-db&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=conorheffron_ironoc-db)
-
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=conorheffron_ironoc-db)](https://sonarcloud.io/summary/new_code?id=conorheffron_ironoc-db)
 
 [SonarQube Scan Analysis & JaCoCo Test Coverage Report - Overal Summary](https://sonarcloud.io/summary/overall?id=conorheffron_ironoc-db&branch=main)
