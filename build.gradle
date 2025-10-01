@@ -155,18 +155,6 @@ springBoot {
     buildInfo()
 }
 
-jacocoTestReport {
-    reports {
-        xml.required = true
-    }
-}
-
-tasks.withType(Test) {
-   reports {
-       junitXml.outputLocation = file("$buildDir/test-results")
-   }
-}
-
 project.tasks["sonar"].dependsOn "test"
 project.tasks["sonar"].dependsOn "jacocoTestReport"
 
