@@ -154,20 +154,3 @@ publishing {
 springBoot {
     buildInfo()
 }
-
-project.tasks["sonar"].dependsOn "test"
-project.tasks["sonar"].dependsOn "jacocoTestReport"
-
-jacocoTestReport {
-  dependsOn test
-  reports {
-	xml {
-	  required = true
-	  outputLocation = file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
-	}
-	html {
-	  required = true
-	  destination = file("${buildDir}/reports/jacoco/test/html")
-	}
-  }
-}
