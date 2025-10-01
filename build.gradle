@@ -17,6 +17,17 @@ apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'maven-publish'
 
+plugins {
+  id "org.sonarqube" version "6.3.1.5724"
+}
+
+sonar {
+  properties {
+    property "sonar.projectKey", "conorheffron_ironoc-db"
+    property "sonar.organization", "conorheffron"
+  }
+}
+
 group = 'conorheffron'
 version = '6.4.6'
 description = "Sample Data Manager"
