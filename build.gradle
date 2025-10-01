@@ -25,6 +25,7 @@ sonar {
   properties {
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
+	property "sonar.coverage.jacoco.xmlReportPath", "${buildDir}/reports/jacoco.xml"
   }
 }
 
@@ -118,7 +119,9 @@ integrationTest.mustRunAfter test
 
 jacocoTestReport {
     reports {
+		xml.enabled true
         xml.required = true
+        xml.destination file("${buildDir}/reports/jacoco.xml")
     }
 }
 
