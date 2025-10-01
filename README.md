@@ -20,8 +20,6 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=conorheffron_ironoc-db)](https://sonarcloud.io/summary/new_code?id=conorheffron_ironoc-db)
 
-[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=conorheffron_ironoc-db)
-
 [SonarQube Scan Analysis & JaCoCo Test Coverage Report - Overal Summary](https://sonarcloud.io/summary/overall?id=conorheffron_ironoc-db&branch=main)
 
 # Sample Data Manager
