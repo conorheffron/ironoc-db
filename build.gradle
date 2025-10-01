@@ -158,3 +158,15 @@ tasks.withType(Test) {
 		junitXml.outputLocation = file("$buildDir/test-results")
 	}
 }
+
+jacoco {
+	toolVersion = "0.8.13"
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		xml.destination file("${buildDir}/reports/jacoco.xml")
+		html.enabled true
+	}
+}
