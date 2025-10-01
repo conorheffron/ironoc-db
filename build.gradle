@@ -23,10 +23,13 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.sonarqube'
 apply plugin: 'jacoco'
 
-sonar {
+sonarqube {
   properties {
+	property "sonar.projectName","ironoc-db"
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
+	property "sonar.projectKey", "org.sonarqubeJacocoCodeCoverage"
+    property "sonar.reportPath" , "${project.buildDir}/jacoco/test.exec"
   }
 }
 
