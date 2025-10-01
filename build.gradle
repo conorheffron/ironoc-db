@@ -25,7 +25,6 @@ sonar {
   properties {
     property "sonar.projectKey", "conorheffron_ironoc-db"
     property "sonar.organization", "conorheffron"
-    property "sonar.reportPath" , "${project.buildDir}/jacoco/test.exec"
   }
 }
 
