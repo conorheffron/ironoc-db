@@ -101,6 +101,7 @@ test {
         // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
         logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
+	finalizedBy jacocoTestReport
 }
 
 task integrationTest(type: Test) {
@@ -164,4 +165,21 @@ tasks.withType(Test) {
    reports {
        junitXml.outputLocation = file("$buildDir/test-results")
    }
+}
+
+project.tasks["sonar"].dependsOn "test"
+project.tasks["sonar"].dependsOn "jacocoTestReport"
+
+jacocoTestReport {
+  dependsOn test
+  reports {
+	xml {
+	  required = true
+	  outputLocation = file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+	}
+	html {
+	  required = true
+	  destination = file("${buildDir}/reports/jacoco/test/html")
+	}
+  }
 }
