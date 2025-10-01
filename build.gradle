@@ -22,10 +22,17 @@ apply plugin: 'jacoco'
 apply plugin: 'org.sonarqube'
 
 sonar {
-  properties {
-    property "sonar.projectKey", "conorheffron_ironoc-db"
-    property "sonar.organization", "conorheffron"
-  }
+	properties {
+		property "sonar.projectKey", "conorheffron_ironoc-db"
+		property "sonar.organization", "conorheffron"
+		property "sonar.java.coveragePlugin", "jacoco"
+		property "sonar.sources", ["src/test", "src/main/java"]
+		property "sonar.tests", ["src/test", "src/integration-test"]
+		property "sonar.test.inclusions", "**/*Test.java"
+		property "sonar.sourceEncoding", "UTF-8"
+		property "sonar.sources", "src/main/java"
+		property "sonar.java.coveragePlugin", "jacoco"
+	}
 }
 
 group = 'conorheffron'
