@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3")
-		classpath("org.jacoco:jacoco-maven-plugin:0.8.13")
     }
 }
 
@@ -155,20 +154,8 @@ springBoot {
     buildInfo()
 }
 
-tasks.withType(Test) {
-	reports {
-		junitXml.outputLocation = file("$buildDir/test-results")
-	}
-}
-
-jacoco {
-	toolVersion = "0.8.13"
-}
-
 jacocoTestReport {
-	reports {
-		xml.enabled true
-		xml.destination file("${buildDir}/reports/jacoco.xml")
-		html.enabled true
-	}
+    reports {
+        xml.required = true
+    }
 }
