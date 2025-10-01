@@ -107,7 +107,7 @@ test {
         // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
         logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
-
+	useJUnitPlatform()
     reports {
         junitXml.enabled = true
         html.enabled = true
