@@ -118,12 +118,12 @@ check.dependsOn integrationTest
 integrationTest.mustRunAfter test
 
 jacocoTestReport {
-	reports{
-		html.enabled=true
-		xml.enabled=true
-		csv.enabled=true
-	}
+    reports {
+        xml.required = true
+    }
 }
+
+jacocoTestReport.mustRunAfter integrationTest
 
 integrationTest {
     // show standard out and standard error of the test JVM(s) on the console, without this
