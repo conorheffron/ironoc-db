@@ -107,6 +107,7 @@ test {
     reports {
 		junitXml.getRequired().set(true)
     }
+	finalizedBy jacocoTestReport
 }
 
 task integrationTest(type: Test) {
