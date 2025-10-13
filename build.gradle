@@ -36,7 +36,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '6.4.7'
+version = '6.4.8'
 description = "iRonoc-DB Sample Data Manager"
 
 sourceCompatibility = 24
