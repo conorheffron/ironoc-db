@@ -88,7 +88,7 @@ dependencies {
 
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'4.0.0'
 	implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.14'
-    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.11'
+    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.12'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
