@@ -102,7 +102,7 @@ dependencies {
 
 	testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.20.0'
 	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.20.0'
-	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.20.0'
+	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.2.0'
 	testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.17.8'
 }
 
