@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '3.5.6'
+		mockitoVersion = '5.20.0'
     }
     repositories {
         mavenCentral()
@@ -100,8 +101,8 @@ dependencies {
 		exclude(module: 'mockito-core')
     }
 
-	testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.20.0'
-	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.20.0'
+	testImplementation group: 'org.mockito', name: 'mockito-core', version: mockitoVersion
+	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: mockitoVersion
 	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.2.0'
 	testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.17.8'
 }
