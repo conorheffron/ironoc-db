@@ -100,9 +100,10 @@ dependencies {
 		exclude(module: 'mockito-core')
     }
 
-	testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.11.0'
-	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.11.0'
-	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '4.11.0'
+	testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.20.0'
+	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.20.0'
+	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.20.0'
+	testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.17.8'
 }
 
 test {
