@@ -36,11 +36,11 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '6.4.8'
+version = '7.0.0'
 description = "iRonoc-DB Sample Data Manager"
 
-sourceCompatibility = 24
-targetCompatibility = 24
+sourceCompatibility = 25
+targetCompatibility = 25
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
