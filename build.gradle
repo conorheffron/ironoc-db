@@ -96,7 +96,8 @@ dependencies {
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion) {
-		exclude(module: 'commons-logging', module: 'mockito-core')
+		exclude(module: 'commons-logging')
+		exclude(module: 'mockito-core')
     }
 
 	testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.11.0'
