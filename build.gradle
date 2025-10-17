@@ -101,6 +101,7 @@ dependencies {
 }
 
 test {
+	jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
     // show standard out and standard error of the test JVM(s) on the console, without this
     // the text output printed by the tests won't show.
     // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
@@ -115,6 +116,7 @@ test {
 }
 
 task integrationTest(type: Test) {
+	jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
 	finalizedBy jacocoTestReport
