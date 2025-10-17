@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '3.5.6'
+		mockitoVersion = '5.20.0'
     }
     repositories {
         mavenCentral()
@@ -36,11 +37,14 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '6.4.8'
+version = '7.0.0'
 description = "iRonoc-DB Sample Data Manager"
 
-sourceCompatibility = 24
-targetCompatibility = 24
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -94,10 +98,17 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion) {
 		exclude(module: 'commons-logging')
+		exclude(module: 'mockito-core')
     }
+
+	testImplementation group: 'org.mockito', name: 'mockito-core', version: mockitoVersion
+	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: mockitoVersion
+	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.2.0'
+	testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.17.8'
 }
 
 test {
+	jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
     // show standard out and standard error of the test JVM(s) on the console, without this
     // the text output printed by the tests won't show.
     // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
@@ -112,6 +123,7 @@ test {
 }
 
 task integrationTest(type: Test) {
+	jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
 	finalizedBy jacocoTestReport
