@@ -39,9 +39,9 @@ group = 'conorheffron'
 version = '7.0.0'
 description = "iRonoc-DB Sample Data Manager"
 
-allprojects {
-    sourceCompatibility = 25
-    targetCompatibility = 25
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.withType(JavaCompile) {
