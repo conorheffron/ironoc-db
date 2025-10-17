@@ -39,8 +39,11 @@ group = 'conorheffron'
 version = '7.0.0'
 description = "iRonoc-DB Sample Data Manager"
 
-sourceCompatibility = 25
-targetCompatibility = 25
+allprojects {
+    sourceCompatibility = 25
+    targetCompatibility = 25
+}
+
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
