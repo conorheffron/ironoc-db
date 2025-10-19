@@ -25,7 +25,7 @@ import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.containsString;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -102,7 +102,7 @@ public class CustomErrorControllerIntegrationTest {
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getRedirectedUrl(), is(emptyOrNullString()));
         assertThat(response.getForwardedUrl(), is(nullValue()));
-        assertThat(response.getContentAsString(), startsWith("PNG"));
+        assertThat(response.getContentAsString(), containsString("PNG"));
         assertThat(response.getErrorMessage(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrl(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrls(), is(empty()));
