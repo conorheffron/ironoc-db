@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.FetchType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,7 @@ public class Employer {
     @Id
     @Column(name="employer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employer_id;
+    private Long employerId;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")

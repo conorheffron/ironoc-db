@@ -36,7 +36,7 @@ jobs:
         cache-disabled: true
     
     - name: Build with Gradle 9.1.0
-      run: gradle build
+      run: ./gradlew build
 
   dependency-submission:
 

@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class VersionController {
 
-    @Autowired
-    private BuildProperties buildProperties;
+    private final BuildProperties buildProperties;
+
+    public VersionController(@Autowired BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
+    }
 
     @ModelAttribute("applicationVersion")
     public String getApplicationVersion() {

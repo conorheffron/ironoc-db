@@ -1,5 +1,7 @@
 package com.ironoc.db.controller;
 
+import module java.base;
+
 import com.ironoc.db.model.Person;
 import com.ironoc.db.service.PersonService;
 import jakarta.validation.Valid;
@@ -15,14 +17,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import module java.base;
-
 @Controller
 @Slf4j
 public class PersonController {
 
-	@Autowired
-    private PersonService personService;
+    private final PersonService personService;
+
+    public PersonController(@Autowired PersonService personService) {
+        this.personService = personService;
+    }
 
 	@GetMapping(value = "/")
 	public String home(ModelMap map) {

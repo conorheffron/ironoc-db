@@ -12,11 +12,11 @@ import com.ironoc.db.model.Person;
 public interface PersonDao extends CrudRepository<Person, Long> {
 	
 	@Transactional
-    public Long deleteBySurname(String surname);
+    Long deleteBySurname(String surname);
 
     @Transactional
-    public List<Person> findBySurname(String surname);
+    List<Person> findBySurname(String surname);
 
     @Transactional
-    public Optional<Person> findById(Long id);
+    Optional<Person> findById(Long id);
 }

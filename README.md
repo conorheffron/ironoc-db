@@ -100,12 +100,12 @@ docker compose down
 
 ### Run locally with Gradle & H2 database
 ```
-gradle bootRun --args='--spring.profiles.active=h2'
+./gradlew bootRun --args='--spring.profiles.active=h2'
 ```
 
 ### Run locally with Gradle & MySQL database
 ```
-gradle bootRun --args='--spring.profiles.active=default'
+./gradlew bootRun --args='--spring.profiles.active=default'
 ```
 
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")

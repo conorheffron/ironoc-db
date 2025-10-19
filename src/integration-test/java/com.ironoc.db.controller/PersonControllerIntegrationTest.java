@@ -145,8 +145,15 @@ public class PersonControllerIntegrationTest {
                 .age(42)
                 .title("Mr.")
                 .id(7L)
-                .employers(List.of(Employer.builder().employerName("Morgan Stanley").startYear(2017).employer_id(22L).build(),
-                        Employer.builder().employerName("BSkyB").startYear(2014).employer_id(23L).build()))
+                .employers(List.of(Employer.builder()
+                                .employerName("Morgan Stanley")
+                                .startYear(2017)
+                                .employerId(22L)
+                                .build(),
+                        Employer.builder()
+                                .employerName("BSkyB")
+                                .startYear(2014)
+                                .employerId(23L).build()))
                 .build();
     }
 
