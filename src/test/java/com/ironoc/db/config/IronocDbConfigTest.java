@@ -61,7 +61,7 @@ public class IronocDbConfigTest {
     @Test
     public void test_dataSource_success() {
         // given
-        when(environmentMock.getRequiredProperty(anyString())).thenReturn(new String());
+        when(environmentMock.getRequiredProperty(anyString())).thenReturn("");
         when(environmentMock.getRequiredProperty(DataSourceKey.GCP_SEC_VER.getKey())).thenReturn(TEST_SECRET_KEY);
         when(dataSourceBuilderMock.build()).thenReturn(dataSourceMock);
         when(googleCloudClientMock.getSecret(TEST_SECRET_KEY)).thenReturn(TEST_SECRET_DATA);
@@ -70,7 +70,7 @@ public class IronocDbConfigTest {
         DataSource result = ironocDbConfig.dataSource();
 
         // then
-        dataSourceBuilderMockedStatic.verify(() -> DataSourceBuilder.create());
+        dataSourceBuilderMockedStatic.verify(DataSourceBuilder::create);
         verify(environmentMock).getRequiredProperty(DataSourceKey.GCP_SEC_VER.getKey());
         verify(environmentMock, times(4)).getRequiredProperty(anyString());
         verify(dataSourceBuilderMock).build();

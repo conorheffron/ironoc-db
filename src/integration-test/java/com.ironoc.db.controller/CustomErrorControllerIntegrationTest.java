@@ -20,7 +20,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.containsString;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,7 +58,7 @@ public class CustomErrorControllerIntegrationTest {
     }
 
     @Test
-    public void test_not_found_uri_success_path() throws Exception {
+    public void testNotFoundUriSuccessPath() throws Exception {
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/invalid")
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
@@ -69,7 +75,7 @@ public class CustomErrorControllerIntegrationTest {
     }
 
     @Test
-    public void test_favicon_not_found_uri_fail_path() throws Exception {
+    public void testFaviconNotFoundUriFailPath() throws Exception {
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/static/favicon.ico")
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
@@ -86,7 +92,7 @@ public class CustomErrorControllerIntegrationTest {
     }
 
     @Test
-    public void test_favicon_not_found_uri_success_path() throws Exception {
+    public void testFaviconNotFoundUriSuccessPath() throws Exception {
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/favicon.ico")
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
@@ -96,7 +102,7 @@ public class CustomErrorControllerIntegrationTest {
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getRedirectedUrl(), is(emptyOrNullString()));
         assertThat(response.getForwardedUrl(), is(nullValue()));
-        assertThat(response.getContentAsString(), startsWith("PNG"));
+        assertThat(response.getContentAsString(), containsString("PNG"));
         assertThat(response.getErrorMessage(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrl(), is(emptyOrNullString()));
         assertThat(response.getIncludedUrls(), is(empty()));

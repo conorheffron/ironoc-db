@@ -10,7 +10,7 @@ public enum DataSourceKey {
     DS_USERNAME("spring.datasource.username"),
     GCP_SEC_VER("google.cloud.db.secret.version");
 
-    private String key;
+    private final String key;
 
     DataSourceKey(String key) {
         this.key = key;

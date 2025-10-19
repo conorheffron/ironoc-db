@@ -32,7 +32,7 @@ This project also includes form validation of controller model objects and reque
 Users can view, add, delete person objects from the database via web UI.
 
 ## Technologies Used
-Java 25, Spring Boot 3, Hibernate, MySQL or H2 databases supported, JSP, Gradle 9, 
+Java 25, Spring Boot 3, Thymeleaf Templates, Hibernate, MySQL or H2 databases supported, Gradle 9, 
     GKE, Docker, minikube, & kubectl.
 
 ## Run
@@ -100,12 +100,12 @@ docker compose down
 
 ### Run locally with Gradle & H2 database
 ```
-gradle bootRun --args='--spring.profiles.active=h2'
+./gradlew bootRun --args='--spring.profiles.active=h2'
 ```
 
 ### Run locally with Gradle & MySQL database
 ```
-gradle bootRun --args='--spring.profiles.active=default'
+./gradlew bootRun --args='--spring.profiles.active=default'
 ```
 
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")

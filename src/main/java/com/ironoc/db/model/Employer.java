@@ -25,7 +25,7 @@ public class Employer {
     @Id
     @Column(name="employer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employer_id;
+    private Long employerId;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")

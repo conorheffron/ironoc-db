@@ -41,7 +41,7 @@ public class GoogleCloudClientServiceTest {
     @Mock
     private SecretManagerServiceClient secretManagerServiceClientMock;
 
-    private MockedStatic<SecretManagerServiceClient> secretManagerServiceClientMockedStatic =
+    private final MockedStatic<SecretManagerServiceClient> secretManagerServiceClientMockedStatic =
             mockStatic(SecretManagerServiceClient.class);
 
     private static final String TEST_SECRET_DATA = "TeSt_SeCr3t_V0l";
@@ -69,7 +69,7 @@ public class GoogleCloudClientServiceTest {
         String result = googleCloudClient.getSecret(TEST_SECRET_KEY);
 
         // then
-        secretManagerServiceClientMockedStatic.verify(() -> SecretManagerServiceClient.create());
+        secretManagerServiceClientMockedStatic.verify(SecretManagerServiceClient::create);
         verify(secretManagerServiceClientMock).accessSecretVersion(anyString());
         verify(accessSecretVersionResponseMock).getPayload();
         verify(secretPayloadMock).getData();
@@ -87,7 +87,7 @@ public class GoogleCloudClientServiceTest {
         String result = googleCloudClient.getSecret(TEST_SECRET_KEY);
 
         // then
-        secretManagerServiceClientMockedStatic.verify(() -> SecretManagerServiceClient.create());
+        secretManagerServiceClientMockedStatic.verify(SecretManagerServiceClient::create);
         verify(secretManagerServiceClientMock).accessSecretVersion(anyString());
         verify(accessSecretVersionResponseMock, never()).getPayload();
         verify(secretPayloadMock, never()).getData();

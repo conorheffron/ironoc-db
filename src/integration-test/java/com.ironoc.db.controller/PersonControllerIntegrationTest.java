@@ -21,9 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import module java.base;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -62,80 +60,81 @@ public class PersonControllerIntegrationTest {
     private PersonController personController;// controller under test
 
     // Int test variables & constants
-    private static final Long TEST_ID = 7l;
+    private static final Long TEST_ID = 7L;
     private static final String TEST_SURNAME = "Heffron";
     private Person person;
-    private static final String ADD_PERSON_TABLE_HTML = "<table class=\"table table-hover table-bordered w-100\">\n" +
-            "                    <thead class=\"thead-light\">\n" +
-            "                    <tr>\n" +
-            "                        <th>#</th>\n" +
-            "                        <th>Title</th>\n" +
-            "                        <th>First Name</th>\n" +
-            "                        <th>Surname</th>\n" +
-            "                        <th>Age</th>\n" +
-            "                        <th>Edit</th>\n" +
-            "                        <th>Delete</th>\n" +
-            "                        <th>Job History</th>\n" +
-            "                    </tr>\n" +
-            "                    </thead>\n" +
-            "                    <tbody>\n" +
-            "                    <tr>\n" +
-            "                        <td>7</td>\n" +
-            "                        <td>Mr.</td>\n" +
-            "                        <td>Conor</td>\n" +
-            "                        <td>Heffron</td>\n" +
-            "                        <td>42</td>\n" +
-            "                        <td>\n" +
-            "                            <a href=\"/edit/7\" class=\"btn btn-primary btn-sm rounded-0\" title=\"Edit\">\n" +
-            "                                <i class=\"fa fa-edit\"></i>\n" +
-            "                            </a>\n" +
-            "                        </td>\n" +
-            "                        <td>\n" +
-            "                            <form action=\"/delete/7\" method=\"post\" class=\"d-inline\"><input type=\"hidden\" name=\"_method\" value=\"delete\"/>\n" +
-            "                                <input type=\"hidden\" name=\"_method\" value=\"delete\" />\n" +
-            "                                <button type=\"submit\" class=\"btn btn-danger btn-sm rounded-0\" title=\"Delete\">\n" +
-            "                                    <i class=\"fa fa-trash\"></i>\n" +
-            "                                </button>\n" +
-            "                            </form>\n" +
-            "                        </td>\n" +
-            "                        <td>\n" +
-            "                            <table class=\"table table-sm mb-0\">\n" +
-            "                                <thead>\n" +
-            "                                <tr>\n" +
-            "                                    <th>Job Title</th>\n" +
-            "                                    <th>Employer Name</th>\n" +
-            "                                    <th>Start Year</th>\n" +
-            "                                </tr>\n" +
-            "                                </thead>\n" +
-            "                                <tbody>\n" +
-            "                                <tr>\n" +
-            "                                    <td></td>\n" +
-            "                                    <td>Morgan Stanley</td>\n" +
-            "                                    <td>2017</td>\n" +
-            "                                </tr>\n" +
-            "                                <tr>\n" +
-            "                                    <td></td>\n" +
-            "                                    <td>BSkyB</td>\n" +
-            "                                    <td>2014</td>\n" +
-            "                                </tr>\n" +
-            "                                </tbody>\n" +
-            "                            </table>\n" +
-            "                        </td>\n" +
-            "                    </tr>\n" +
-            "                    <tr>\n" +
-            "                        <td colspan=\"4\"></td>\n" +
-            "                        <td colspan=\"4\">\n" +
-            "                            <b>42</b> is the Average Employee Age\n" +
-            "                        </td>\n" +
-            "                    </tr>\n" +
-            "                    <tr>\n" +
-            "                        <td colspan=\"6\"></td>\n" +
-            "                        <td colspan=\"2\">\n" +
-            "                            <b>42</b> is the Sum of Ages\n" +
-            "                        </td>\n" +
-            "                    </tr>\n" +
-            "                    </tbody>\n" +
-            "                </table>";
+    private static final String ADD_PERSON_TABLE_HTML = """
+            <table class="table table-hover table-bordered w-100">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>First Name</th>
+                                    <th>Surname</th>
+                                    <th>Age</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th>Job History</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Mr.</td>
+                                    <td>Conor</td>
+                                    <td>Heffron</td>
+                                    <td>42</td>
+                                    <td>
+                                        <a href="/edit/7" class="btn btn-primary btn-sm rounded-0" title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="/delete/7" method="post" class="d-inline"><input type="hidden" name="_method" value="delete"/>
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button type="submit" class="btn btn-danger btn-sm rounded-0" title="Delete">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <table class="table table-sm mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Job Title</th>
+                                                <th>Employer Name</th>
+                                                <th>Start Year</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td>Morgan Stanley</td>
+                                                <td>2017</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>BSkyB</td>
+                                                <td>2014</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td colspan="4">
+                                        <b>42</b> is the Average Employee Age
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"></td>
+                                    <td colspan="2">
+                                        <b>42</b> is the Sum of Ages
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>""";
 
     @Before
     public void setup() {
@@ -147,8 +146,15 @@ public class PersonControllerIntegrationTest {
                 .age(42)
                 .title("Mr.")
                 .id(7L)
-                .employers(List.of(Employer.builder().employerName("Morgan Stanley").startYear(2017).employer_id(22L).build(),
-                        Employer.builder().employerName("BSkyB").startYear(2014).employer_id(23L).build()))
+                .employers(List.of(Employer.builder()
+                                .employerName("Morgan Stanley")
+                                .startYear(2017)
+                                .employerId(22L)
+                                .build(),
+                        Employer.builder()
+                                .employerName("BSkyB")
+                                .startYear(2014)
+                                .employerId(23L).build()))
                 .build();
     }
 
@@ -210,7 +216,7 @@ public class PersonControllerIntegrationTest {
 
         // then
         verify(personDaoMock).findById(TEST_ID);
-        verify(personDaoMock).deleteById(Long.valueOf(TEST_ID));
+        verify(personDaoMock).deleteById(TEST_ID);
         verify(personDaoMock, never()).findAll();
 
         assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
@@ -233,7 +239,7 @@ public class PersonControllerIntegrationTest {
 
         // then
         verify(personDaoMock).findById(TEST_ID);
-        verify(personDaoMock, never()).deleteById(Long.valueOf(TEST_ID));
+        verify(personDaoMock, never()).deleteById(TEST_ID);
         verify(personDaoMock, never()).findAll();
 
         assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));

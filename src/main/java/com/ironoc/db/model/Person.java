@@ -1,6 +1,9 @@
 package com.ironoc.db.model;
 
+import module java.base;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +21,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name="person")
@@ -55,6 +56,6 @@ public class Person {
 	@NotNull(message = "Age is not defined.")
 	private Integer age;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.ALL)
 	private List<Employer> employers;
 }

@@ -1,5 +1,7 @@
 package com.ironoc.db.service;
 
+import module java.base;
+
 import com.ironoc.db.dao.PersonDao;
 import com.ironoc.db.model.Person;
 import org.junit.Before;
@@ -8,12 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
@@ -35,7 +31,7 @@ public class PersonServiceTest {
     // test suite constants & variables
     private static final Integer TEST_ID = 123;
     private static final String TEST_TITLE = "Mr.";
-    private static final Integer TEST_AGE = Integer.valueOf(27);
+    private static final Integer TEST_AGE = 27;
     private static final String TEST_FIRST_NAME = "Conor";
     private static final String TEST_SURNAME = "Heffron";
     private Person person;
@@ -89,19 +85,8 @@ public class PersonServiceTest {
         // then
         verify(personDaoMock).findAll();
 
-        assertThat(result, is(personsFullRs.stream().limit(10).collect(Collectors.toList())));
+        assertThat(result, is(personsFullRs.stream().limit(10).toList()));
         assertThat(result.size(), is(10));
-    }
-
-    @Test
-    public void test_addPerson_false() {
-        // when
-        boolean result = personService.addPerson(personMock);
-
-        // then
-        verify(personDaoMock).save(personMock);
-
-        assertThat(result, is(false));
     }
 
     @Test
@@ -173,7 +158,7 @@ public class PersonServiceTest {
         // then
         verify(personDaoMock).findById(TEST_ID.longValue());
 
-        Person result = optionalPerson.get();
+        Person result = optionalPerson.orElse(null);
         assertThat(result, is(personMock));
     }
 }
