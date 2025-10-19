@@ -19,11 +19,15 @@ import javax.sql.DataSource;
 @Slf4j
 public class IronocDbConfig {
 
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
+
+    private final GoogleCloudClient googleCloudClient;
 
     @Autowired
-    private GoogleCloudClient googleCloudClient;
+    public IronocDbConfig(Environment environment, GoogleCloudClient googleCloudClient) {
+        this.environment = environment;
+        this.googleCloudClient = googleCloudClient;
+    }
 
     @Bean
     @Profile("h2")

@@ -5,15 +5,14 @@ import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.SpringApplication;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.*;
-import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AppTest {
 
     // mocks
-    private MockedStatic<SpringApplication> springApplicationMockedStatic = mockStatic(SpringApplication.class);
+    private final MockedStatic<SpringApplication> springApplicationMockedStatic = mockStatic(SpringApplication.class);
 
     @Test
     public void test_main_success() {

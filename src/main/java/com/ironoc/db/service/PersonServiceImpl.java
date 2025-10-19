@@ -10,8 +10,11 @@ import com.ironoc.db.model.Person;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-	@Autowired
-    private PersonDao personDao;
+    public final PersonDao personDao;
+
+    public PersonServiceImpl(@Autowired PersonDao personDao) {
+        this.personDao = personDao;
+    }
 
 	@Override
 	public List<Person> getAllPersons() {
@@ -25,11 +28,9 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Boolean addPerson(Person person) {
-		if (personDao.save(person) != null) {
-			return true;
-		}
-		return false;
-	}
+        personDao.save(person);
+        return true;
+    }
 
 	@Override
 	public Boolean deletePersonBySurname(String surname) {
