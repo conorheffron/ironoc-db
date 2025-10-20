@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.2'
+version = '7.0.3'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -84,7 +84,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.76.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.77.0'
 
     // SQL
     implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
@@ -92,7 +92,7 @@ dependencies {
 
     implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'4.0.0'
 	implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.14'
-    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.12'
+    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.13'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
