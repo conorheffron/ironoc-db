@@ -1,5 +1,7 @@
 package com.ironoc.db.service;
 
+import module java.base;
+
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretPayload;
@@ -13,8 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyString;
