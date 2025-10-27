@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.5.6'
+        springBootVersion = '3.5.7'
 		mockitoVersion = '5.20.0'
     }
     repositories {
