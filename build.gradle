@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.5'
+version = '7.0.6'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
