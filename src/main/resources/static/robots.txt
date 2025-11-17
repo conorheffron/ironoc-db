@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-SITEMAP: https://ironoc-hibernate.herokuapp.com/
