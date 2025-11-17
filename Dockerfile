@@ -1,4 +1,4 @@
-FROM gradle:9.1.0-jdk25-alpine
+FROM gradle:9.2.0-jdk25-alpine
 
 COPY . /home/gradle
 
