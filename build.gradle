@@ -87,24 +87,24 @@ dependencies {
     implementation 'com.google.cloud:google-cloud-secretmanager:2.78.0'
 
     // SQL
-    implementation group: 'mysql', name: 'mysql-connector-java', version:'8.0.33'
-    implementation group: 'com.h2database', name: 'h2', version:'2.4.240'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'com.h2database:h2:2.4.240'
 
-    implementation group: 'org.apache.maven.reporting', name: 'maven-reporting-api', version:'4.0.0'
-	implementation group: 'org.jacoco', name: 'jacoco-maven-plugin', version:'0.8.14'
-    implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version:'11.0.13'
-    implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.1'
+    implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
+	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.13'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
-    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
-    testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion) {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation('org.springframework.boot:spring-boot-starter-test:' + springBootVersion) {
 		exclude(module: 'commons-logging')
 		exclude(module: 'mockito-core')
     }
 
-	testImplementation group: 'org.mockito', name: 'mockito-core', version: mockitoVersion
-	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: mockitoVersion
-	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.2.0'
-	testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.17.8'
+	testImplementation 'org.mockito:mockito-core:' + mockitoVersion
+	testImplementation 'org.mockito:mockito-junit-jupiter:' + mockitoVersion
+	testImplementation 'org.mockito:mockito-inline:5.2.0'
+	testImplementation 'net.bytebuddy:byte-buddy:1.17.8'
 }
 
 test {
@@ -167,4 +167,9 @@ publishing {
 
 springBoot {
     buildInfo()
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += "--enable-native-access=ALL-UNNAMED"
+    jvmArgs += "--sun-misc-unsafe-memory-access=allow"
 }
