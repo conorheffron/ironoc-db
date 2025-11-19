@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: com.ironoc.db.App
+Start-Class: com.ironoc.db.App
+Spring-Boot-Version: 3.5.7
+Build-Jdk: 25

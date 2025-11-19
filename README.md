@@ -67,48 +67,52 @@ docker network connect my-network <mysql_container_name:test-mysql>
 
 ## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
 - Get IPv4Address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
-```
+```shell
 docker inspect network my-network 
 ```
 
 ## Build ironoc-db, run unit & integration tests, & generate war file.
-```
-gradle clean build
+```shell
+./gradlew clean build
 ```
 
 ## Login to gcloud project for authentication tokens etc. for save to local workspace
 ### Accept & allow browser prompts.
 ### Note: This is for direct app run, need to to do this in container or pod for virtualization.
-```
+```shell
 gcloud auth application-default login
 ```
 
 ## Verify credentials (set appropriate svc / user account & project name)
-```
+```shell
 gcloud config list
 ```
 
 ## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or 
 ## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
-```
+```shell
 docker image build -t ironoc-db .
-
+```
+```shell
 docker compose up -d
-
+```
+```shell
 docker ps
-
+```
+```shell
 docker logs ironoc-db-web-1 -f
-
+```
+```shell
 docker compose down
 ```
 
 ### Run locally with Gradle & H2 database
-```
+```shell
 ./gradlew bootRun --args='--spring.profiles.active=h2'
 ```
 
 ### Run locally with Gradle & MySQL database
-```
+```shell
 ./gradlew bootRun --args='--spring.profiles.active=default'
 ```
 
