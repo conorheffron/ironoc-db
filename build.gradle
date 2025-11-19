@@ -45,8 +45,8 @@ java {
 	targetCompatibility = JavaVersion.VERSION_25
 }
 
-tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 repositories {
@@ -109,24 +109,18 @@ dependencies {
 
 test {
 	jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
-    // show standard out and standard error of the test JVM(s) on the console, without this
-    // the text output printed by the tests won't show.
-    // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
     testLogging.showStandardStreams = true
     def testCount = 0
     afterTest { descriptor, result ->
-        // descriptor is of type TestDescriptor, result is of type TestResult
-        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestDescriptor.html
-        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
         logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
 }
 
-task integrationTest(type: Test) {
-	jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
+tasks.register('integrationTest', Test) {
+    jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
-	finalizedBy jacocoTestReport
+    finalizedBy jacocoTestReport
 }
 
 check.dependsOn integrationTest
@@ -139,15 +133,9 @@ jacocoTestReport {
 }
 
 integrationTest {
-    // show standard out and standard error of the test JVM(s) on the console, without this
-    // the text output printed by the tests won't show.
-    // ref: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
     testLogging.showStandardStreams = true
     def testCount = 0
     afterTest { descriptor, result ->
-        // descriptor is of type TestDescriptor, result is of type TestResult
-        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestDescriptor.html
-        // ref: https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestResult.html
         logger.lifecycle("Test {count: ${++testCount} name: $descriptor.name result: $result.resultType}")
     }
 }
