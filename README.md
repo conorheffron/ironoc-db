@@ -107,12 +107,12 @@ docker compose down
 ```
 
 ### Run locally with Gradle & H2 database
-```
+```shell
 ./gradlew bootRun --args='--spring.profiles.active=h2'
 ```
 
 ### Run locally with Gradle & MySQL database
-```
+```shell
 ./gradlew bootRun --args='--spring.profiles.active=default'
 ```
 
