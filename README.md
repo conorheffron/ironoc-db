@@ -73,7 +73,7 @@ docker inspect network my-network
 
 ## Build ironoc-db, run unit & integration tests, & generate war file.
 ```
-gradle clean build
+./gradlew clean build
 ```
 
 ## Login to gcloud project for authentication tokens etc. for save to local workspace
