@@ -42,11 +42,20 @@ Java 25, Spring Boot 3, Thymeleaf Templates, Hibernate, MySQL or H2 databases su
 ## Run
 ### - See db.StarterDb.sql for sample Schema to get started with ironoc-db
 MySql
-```
+```shell
 docker pull mysql:latest
+```
+```shell
 docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -p 3307:3306 mysql
+```
+```shell
 docker logs test-mysql
+```
+```shell
 docker exec -it test-mysql bash
+```
+```shell
+docker ps
 ```
 
 ![create-db-connection](./screenshots/db-connection.png?raw=true "Create DB Connection")
@@ -55,14 +64,16 @@ docker exec -it test-mysql bash
 ![verify-db](./screenshots/verify-db-load.png?raw=true "Verify DB")
 
 ## Create Network
-```
+```shell
 docker network create my-network
+```
+```shell
 docker inspect network my-network 
 ```
 
 ## Link mysql container to same network for access:
 ```
-docker network connect my-network <mysql_container_name:test-mysql>
+docker network connect my-network test-mysql
 ```
 
 ## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
@@ -102,9 +113,6 @@ docker ps
 ```shell
 docker logs ironoc-db-web-1 -f
 ```
-```shell
-docker compose down
-```
 
 ### Run locally with Gradle & H2 database
 ```shell
@@ -116,11 +124,17 @@ docker compose down
 ./gradlew bootRun --args='--spring.profiles.active=default'
 ```
 
+```shell
+docker compose down
+```
+
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
 ## Tear-down:
-```
+```shell
 docker stop test-mysql
+```
+```shell
 docker remove test-mysql
 ```
 

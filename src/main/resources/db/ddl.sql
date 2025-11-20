@@ -29,8 +29,8 @@ CREATE TABLE IRONOC_DB.EMPLOYER (
 -- *** from H2 console
 -- SELECT * FROM IRONOC_DB.PERSON where title LIKE 'M%';
 -- *** View Data from both tables by Inner Join
---SELECT * FROM IRONOC_DB.PERSON INNER JOIN IRONOC_DB.EMPLOYER ON id = employee_id;
---SELECT a.id, b.employee_id, b.title
+-- SELECT * FROM IRONOC_DB.PERSON INNER JOIN IRONOC_DB.EMPLOYER ON id = employee_id;
+-- SELECT a.id, b.employee_id, b.title
 --    FROM IRONOC_DB.PERSON AS a
 --    INNER JOIN IRONOC_DB.EMPLOYER AS b
 --    ON id = employee_id
