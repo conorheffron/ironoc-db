@@ -40,8 +40,7 @@ Java 25, Spring Boot 3, Thymeleaf Templates, Hibernate, MySQL or H2 databases su
     GKE, Docker, minikube, & kubectl.
 
 ## Run
-### - See db.StarterDb.sql for sample Schema to get started with ironoc-db
-MySql
+### - See `src/main/resources/db/ddl.sql` for sample Schema to get started with ironoc-db instances using MySQL or H2
 ```shell
 docker pull mysql:latest
 ```
@@ -99,7 +98,7 @@ gcloud auth application-default login
 gcloud config list
 ```
 
-## Run 'com.ironoc.db.App.java' directly from IntelliJ (can use localhost for spring.datasource.url) or 
+## Run `com.ironoc.db.App.java` directly from IntelliJ (can use localhost for spring.datasource.url) or 
 ## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
 ```shell
 docker image build -t ironoc-db .
@@ -119,7 +118,7 @@ docker logs ironoc-db-web-1 -f
 ./gradlew bootRun --args='--spring.profiles.active=h2'
 ```
 
-### Run locally with Gradle & MySQL database
+### Run locally with Gradle & MySQL database (Default run profile)
 ```shell
 ./gradlew bootRun --args='--spring.profiles.active=default'
 ```
