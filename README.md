@@ -40,8 +40,7 @@ Java 25, Spring Boot 3, Thymeleaf Templates, Hibernate, MySQL or H2 databases su
     GKE, Docker, minikube, & kubectl.
 
 ## Run
-### - See db.StarterDb.sql for sample Schema to get started with ironoc-db
-MySql
+### - See `src/main/resources/db/ddl.sql` for sample Schema to get started with ironoc-db MySQL/H2
 ```shell
 docker pull mysql:latest
 ```
