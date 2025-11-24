@@ -92,7 +92,7 @@ dependencies {
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
 	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.13'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
     testImplementation 'junit:junit:4.13.2'
