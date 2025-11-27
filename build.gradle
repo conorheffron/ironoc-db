@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.10'
+version = '7.0.11'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -84,7 +84,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.78.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.80.0'
 
     // SQL
     implementation 'mysql:mysql-connector-java:8.0.33'
