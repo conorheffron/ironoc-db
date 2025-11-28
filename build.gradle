@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.10'
+version = '7.0.11'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -84,7 +84,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.78.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.80.0'
 
     // SQL
     implementation 'mysql:mysql-connector-java:8.0.33'
@@ -92,7 +92,7 @@ dependencies {
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
 	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.13'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
     testImplementation 'junit:junit:4.13.2'
@@ -104,7 +104,7 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-junit-jupiter:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-inline:5.2.0'
-	testImplementation 'net.bytebuddy:byte-buddy:1.17.8'
+	testImplementation 'net.bytebuddy:byte-buddy:1.18.1'
 }
 
 test {
