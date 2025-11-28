@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.5.7'
+        springBootVersion = '3.5.8'
 		mockitoVersion = '5.20.0'
     }
     repositories {
@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:6.3.1.5724")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.1.0.6387")
     }
 }
 
@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.11'
+version = '7.0.12'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
