@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.5.8'
+        springBootVersion = '4.0.0'
 		mockitoVersion = '5.20.0'
     }
     repositories {
@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.12'
+version = '7.0.13'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
