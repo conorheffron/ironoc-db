@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '3.5.8'
+        springBootVersion = '4.0.0'
 		mockitoVersion = '5.20.0'
     }
     repositories {
@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.12'
+version = '7.0.13'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -75,6 +75,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.42'
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
 
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.1'
+
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
@@ -95,6 +98,7 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
+    testImplementation 'org.springframework.boot:spring-boot-webmvc-test:' + springBootVersion
     testImplementation 'junit:junit:4.13.2'
     testImplementation('org.springframework.boot:spring-boot-starter-test:' + springBootVersion) {
 		exclude(module: 'commons-logging')
