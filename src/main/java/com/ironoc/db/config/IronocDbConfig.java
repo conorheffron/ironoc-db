@@ -1,5 +1,6 @@
 package com.ironoc.db.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.enums.DataSourceKey;
 import com.ironoc.db.service.GoogleCloudClient;
 import com.zaxxer.hikari.HikariDataSource;
@@ -40,5 +41,10 @@ public class IronocDbConfig {
                 DataSourceKey.GCP_SEC_VER.getKey())));
         dsBuilder.type(HikariDataSource.class);
         return dsBuilder.build();
+    }
+
+    @Bean
+    ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }
