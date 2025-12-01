@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.14'
+version = '7.0.15'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -108,7 +108,7 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-junit-jupiter:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-inline:5.2.0'
-	testImplementation 'net.bytebuddy:byte-buddy:1.18.1'
+	testImplementation 'net.bytebuddy:byte-buddy:1.18.2'
 }
 
 test {
