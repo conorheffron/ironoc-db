@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '4.0.0'
+        springBootVersion = '3.5.8'
 		mockitoVersion = '5.20.0'
     }
     repositories {
@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.0.15'
+version = '7.1.0'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -85,12 +85,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-validation:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-devtools:' + springBootVersion
 
     // GC Secret Manager
     implementation 'com.google.cloud:google-cloud-secretmanager:2.80.0'
 
     // SQL
-    implementation 'mysql:mysql-connector-java:8.0.33'
+//    implementation 'mysql:mysql-connector-java:8.0.33' NOT FOR PRODUCTION
     implementation 'com.h2database:h2:2.4.240'
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
@@ -98,7 +99,7 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
-    testImplementation 'org.springframework.boot:spring-boot-webmvc-test:' + springBootVersion
+//    testImplementation 'org.springframework.boot:spring-boot-webmvc-test:' + springBootVersion TODO needed for spring boot 4
     testImplementation 'junit:junit:4.13.2'
     testImplementation('org.springframework.boot:spring-boot-starter-test:' + springBootVersion) {
 		exclude(module: 'commons-logging')
