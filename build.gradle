@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.1.0.6387")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.2.0.6526")
     }
 }
 
