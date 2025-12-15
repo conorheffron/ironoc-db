@@ -96,7 +96,7 @@ dependencies {
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
 	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.14'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.15'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
 //    testImplementation 'org.springframework.boot:spring-boot-webmvc-test:' + springBootVersion TODO needed for spring boot 4
