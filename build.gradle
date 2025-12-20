@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.2.0.6526")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.2.1.6560")
     }
 }
 
@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.1.1'
+version = '7.1.2'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
