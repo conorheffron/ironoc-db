@@ -7,11 +7,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.web.servlet.view.RedirectView;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
@@ -29,7 +27,7 @@ public class CustomErrorControllerTest {
     @Test
     public void test_error_view_success() {
         // when
-        RedirectView result = customErrorController.error(httpServletRequestMock);
+        String result = customErrorController.error(httpServletRequestMock);
 
         // then
         verify(httpServletRequestMock, times(3)).getAttribute(anyString());
@@ -38,7 +36,7 @@ public class CustomErrorControllerTest {
         verify(httpServletRequestMock).getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
 
         assertThat(result, is(notNullValue()));
-        assertThat(result, isA(RedirectView.class));
+        assertThat(result, is("error404"));
     }
 
     @Test

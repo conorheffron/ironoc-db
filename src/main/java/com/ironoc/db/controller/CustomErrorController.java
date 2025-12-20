@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.webmvc.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @Slf4j
@@ -15,13 +14,12 @@ public class CustomErrorController implements ErrorController {
     protected static final String PATH = "/error";
 
     @GetMapping(value = PATH)
-    public RedirectView error(HttpServletRequest request) {
+    public String error(HttpServletRequest request) {
         log.error("Unexpected error occurred. {}, The HTTP status is: {}",
                 request.getAttribute(RequestDispatcher.ERROR_MESSAGE),
                 request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
-        RedirectView redirectView = new RedirectView("/", false);
         log.error("Bad request for {}. Redirecting to home",
                 request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI));
-        return redirectView;
+        return "error404";
     }
 }
