@@ -76,7 +76,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     // Jackson
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.1'
 
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
