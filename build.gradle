@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '4.0.3'
+        springBootVersion = '4.0.4'
 		mockitoVersion = '5.20.0'
     }
     repositories {
@@ -76,7 +76,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.44'
 
     // Jackson
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.2'
 
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
@@ -88,7 +88,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-h2console:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.87.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.88.0'
 
     // SQL
 //    implementation 'mysql:mysql-connector-java:8.0.33' NOT FOR PRODUCTION
@@ -96,7 +96,7 @@ dependencies {
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
 	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.18'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.20'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
     testImplementation 'org.springframework.boot:spring-boot-webmvc-test:' + springBootVersion
