@@ -3,6 +3,7 @@ package com.ironoc.db.controller;
 import module java.base;
 
 import com.ironoc.db.dto.PersonDto;
+import com.ironoc.db.mapper.PersonMapper;
 import com.ironoc.db.model.Person;
 import com.ironoc.db.service.PersonService;
 import jakarta.validation.Valid;
@@ -23,9 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PersonController {
 
     private final PersonService personService;
+    private final PersonMapper personMapper;
 
-    public PersonController(@Autowired PersonService personService) {
+    public PersonController(@Autowired PersonService personService, @Autowired PersonMapper personMapper) {
         this.personService = personService;
+        this.personMapper = personMapper;
     }
 
 	@GetMapping(value = "/")
@@ -51,7 +54,7 @@ public class PersonController {
 			return "index";
 		}
 
-		personService.addPerson(toPerson(person));
+		personService.addPerson(personMapper.toPerson(person));
 		return "redirect:/";
 	}
     
@@ -73,7 +76,7 @@ public class PersonController {
 		log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
 		Optional<Person> person = personService.findPersonById(id.longValue());
 		if (person.isPresent()) {
-			model.addAttribute("person", toPersonDto(person.get()));
+			model.addAttribute("person", personMapper.toPersonDto(person.get()));
 		} else {
 			// no matching entries to delete
 			log.error("There are no matching entries to delete for id={}", id);
@@ -91,27 +94,7 @@ public class PersonController {
 			return "edit-person";
 		}
 		person.setId(id.longValue());
-		personService.addPerson(toPerson(person));
+		personService.addPerson(personMapper.toPerson(person));
 		return "redirect:/";
-	}
-
-	private Person toPerson(PersonDto personDto) {
-		return Person.builder()
-				.id(personDto.getId())
-				.title(personDto.getTitle())
-				.firstName(personDto.getFirstName())
-				.surname(personDto.getSurname())
-				.age(personDto.getAge())
-				.build();
-	}
-
-	private PersonDto toPersonDto(Person person) {
-		return PersonDto.builder()
-				.id(person.getId())
-				.title(person.getTitle())
-				.firstName(person.getFirstName())
-				.surname(person.getSurname())
-				.age(person.getAge())
-				.build();
 	}
 }
