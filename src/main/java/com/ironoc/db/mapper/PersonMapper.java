@@ -10,8 +10,12 @@ import org.springframework.stereotype.Component;
 public class PersonMapper {
 
     public Person toPerson(PersonDto personDto) {
+        return toPerson(null, personDto);
+    }
+
+    public Person toPerson(Long id, PersonDto personDto) {
         return Person.builder()
-                .id(personDto.getId())
+                .id(id)
                 .title(personDto.getTitle())
                 .firstName(personDto.getFirstName())
                 .surname(personDto.getSurname())
