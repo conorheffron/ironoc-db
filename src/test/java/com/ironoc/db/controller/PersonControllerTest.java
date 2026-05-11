@@ -106,13 +106,12 @@ public class PersonControllerTest {
     @Test
     public void test_updatePerson_success() {
         when(bindingResultMock.hasErrors()).thenReturn(false);
-        when(personMapperMock.toPerson(personDtoMock)).thenReturn(personMock);
+        when(personMapperMock.toPerson(TEST_ID.longValue(), personDtoMock)).thenReturn(personMock);
 
         String result = personController.updatePerson(modelMapMock, TEST_ID, personDtoMock, bindingResultMock);
 
         verify(bindingResultMock).hasErrors();
-        verify(personDtoMock).setId(TEST_ID.longValue());
-        verify(personMapperMock).toPerson(personDtoMock);
+        verify(personMapperMock).toPerson(TEST_ID.longValue(), personDtoMock);
         verify(personServiceMock).addPerson(personMock);
 
         assertThat(result, is("redirect:/"));

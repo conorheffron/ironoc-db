@@ -93,8 +93,7 @@ public class PersonController {
 			map.addAttribute("person", person);
 			return "edit-person";
 		}
-		person.setId(id.longValue());
-		personService.addPerson(personMapper.toPerson(person));
+		personService.addPerson(personMapper.toPerson(id.longValue(), person));
 		return "redirect:/";
 	}
 }
