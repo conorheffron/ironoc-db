@@ -2,6 +2,7 @@ package com.ironoc.db.controller;
 
 import module java.base;
 
+import com.ironoc.db.dto.PersonDto;
 import com.ironoc.db.model.Person;
 import com.ironoc.db.service.PersonService;
 import jakarta.validation.Valid;
@@ -33,13 +34,13 @@ public class PersonController {
 		
 		List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
-        map.addAttribute("person", Person.builder().build());
+        map.addAttribute("person", PersonDto.builder().build());
 
         return "index";
 	}
 	
 	@PostMapping(value = "/add")
-	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
+	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") PersonDto person,
 							BindingResult result) {
 		log.info("Entering personController.addPerson: map={}, person={}", map, person);
 		
@@ -50,7 +51,7 @@ public class PersonController {
 			return "index";
 		}
 
-		personService.addPerson(person);
+		personService.addPerson(toPerson(person));
 		return "redirect:/";
 	}
     
@@ -72,7 +73,7 @@ public class PersonController {
 		log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
 		Optional<Person> person = personService.findPersonById(id.longValue());
 		if (person.isPresent()) {
-			model.addAttribute("person", person.get());
+			model.addAttribute("person", toPersonDto(person.get()));
 		} else {
 			// no matching entries to delete
 			log.error("There are no matching entries to delete for id={}", id);
@@ -81,15 +82,36 @@ public class PersonController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid Person person,
+	public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid @ModelAttribute("person") PersonDto person,
 							   BindingResult result) {
-		log.info("Entering personController.updatePerson: ID={}, person={}", id, person.toString());
+		log.info("Entering personController.updatePerson: ID={}, person={}", id, person);
 		if (result.hasErrors()) {
 			person.setId(id.longValue());
 			map.addAttribute("person", person);
 			return "edit-person";
 		}
-		personService.addPerson(person);
+		person.setId(id.longValue());
+		personService.addPerson(toPerson(person));
 		return "redirect:/";
+	}
+
+	private Person toPerson(PersonDto personDto) {
+		return Person.builder()
+				.id(personDto.getId())
+				.title(personDto.getTitle())
+				.firstName(personDto.getFirstName())
+				.surname(personDto.getSurname())
+				.age(personDto.getAge())
+				.build();
+	}
+
+	private PersonDto toPersonDto(Person person) {
+		return PersonDto.builder()
+				.id(person.getId())
+				.title(person.getTitle())
+				.firstName(person.getFirstName())
+				.surname(person.getSurname())
+				.age(person.getAge())
+				.build();
 	}
 }
