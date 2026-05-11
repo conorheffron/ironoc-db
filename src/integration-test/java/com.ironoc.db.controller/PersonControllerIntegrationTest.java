@@ -3,6 +3,7 @@ package com.ironoc.db.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.config.IronocDbConfig;
 import com.ironoc.db.dao.PersonDao;
+import com.ironoc.db.dto.PersonDto;
 import com.ironoc.db.model.Employer;
 import com.ironoc.db.model.Person;
 import org.junit.Before;
@@ -165,9 +166,17 @@ public class PersonControllerIntegrationTest {
 
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
+        PersonDto personDto = PersonDto.builder()
+                .firstName(person.getFirstName())
+                .surname(person.getSurname())
+                .age(person.getAge())
+                .title(person.getTitle())
+                .id(person.getId())
+                .build();
+
         // when
         MockHttpServletResponse response = mockMvc.perform(post("/add")
-                        .flashAttr("person", person)
+                        .flashAttr("person", personDto)
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound())
                 .andReturn().getResponse();
 
@@ -188,7 +197,7 @@ public class PersonControllerIntegrationTest {
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/add")
-                        .flashAttr("person", Person.builder().build())
+                        .flashAttr("person", PersonDto.builder().build())
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isMethodNotAllowed())
                 .andReturn().getResponse();
 

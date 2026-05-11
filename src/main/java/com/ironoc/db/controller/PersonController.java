@@ -3,6 +3,8 @@ package com.ironoc.db.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.ironoc.db.dto.PersonDto;
+import com.ironoc.db.mapper.PersonMapper;
 import com.ironoc.db.model.Person;
 import com.ironoc.db.service.PersonService;
 import jakarta.validation.Valid;
@@ -23,9 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PersonController {
 
     private final PersonService personService;
+    private final PersonMapper personMapper;
 
-    public PersonController(@Autowired PersonService personService) {
+    public PersonController(@Autowired PersonService personService, @Autowired PersonMapper personMapper) {
         this.personService = personService;
+        this.personMapper = personMapper;
     }
 
     @GetMapping(value = "/")
@@ -34,13 +38,13 @@ public class PersonController {
 
         List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
-        map.addAttribute("person", Person.builder().build());
+        map.addAttribute("person", PersonDto.builder().build());
 
         return "index";
     }
 
     @PostMapping(value = "/add")
-    public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
+    public String addPerson(ModelMap map, @Valid @ModelAttribute("person") PersonDto person,
                             BindingResult result) {
         log.info("Entering personController.addPerson: map={}, person={}", map, person);
 
@@ -52,7 +56,7 @@ public class PersonController {
             return "index";
         }
 
-        personService.addPerson(person);
+        personService.addPerson(personMapper.toPerson(person));
         return "redirect:/";
     }
 
@@ -74,7 +78,7 @@ public class PersonController {
         log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
         Optional<Person> person = personService.findPersonById(id.longValue());
         if (person.isPresent()) {
-            model.addAttribute("person", person.get());
+            model.addAttribute("person", personMapper.toPersonDto(person.get()));
         } else {
             // no matching entries to delete
             log.error("There are no matching entries to delete for id={}", id);
@@ -83,16 +87,15 @@ public class PersonController {
     }
 
     @PostMapping("/update/{id}")
-    public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid Person person,
+    public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid @ModelAttribute("person") PersonDto person,
                                BindingResult result) {
-        log.info("Entering personController.updatePerson: ID={}, person={}", id, person.toString());
+        log.info("Entering personController.updatePerson: ID={}, person={}", id, person);
         if (result.hasErrors()) {
             person.setId(id.longValue());
             map.addAttribute("person", person);
             return "edit-person";
         }
-        person.setId(id.longValue());
-        personService.addPerson(person);
+        personService.addPerson(personMapper.toPerson(id.longValue(), person));
         return "redirect:/";
     }
 }
