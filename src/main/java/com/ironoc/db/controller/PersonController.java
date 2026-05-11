@@ -78,7 +78,7 @@ public class PersonController {
         log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
         Optional<Person> person = personService.findPersonById(id.longValue());
         if (person.isPresent()) {
-            model.addAttribute("person", person.get());
+            model.addAttribute("person", personMapper.toPersonDto(person.get()));
         } else {
             // no matching entries to delete
             log.error("There are no matching entries to delete for id={}", id);
@@ -87,16 +87,15 @@ public class PersonController {
     }
 
     @PostMapping("/update/{id}")
-    public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid Person person,
+    public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid @ModelAttribute("person") PersonDto person,
                                BindingResult result) {
-        log.info("Entering personController.updatePerson: ID={}, person={}", id, person.toString());
+        log.info("Entering personController.updatePerson: ID={}, person={}", id, person);
         if (result.hasErrors()) {
             person.setId(id.longValue());
             map.addAttribute("person", person);
             return "edit-person";
         }
-        person.setId(id.longValue());
-        personService.addPerson(person);
+        personService.addPerson(personMapper.toPerson(id.longValue(), person));
         return "redirect:/";
     }
 }
