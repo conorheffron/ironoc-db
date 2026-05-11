@@ -152,6 +152,7 @@ public class PersonControllerTest {
         verify(bindingResultMock).hasErrors();
         verify(personServiceMock, never()).addPerson(ArgumentMatchers.any(Person.class));
         verify(personServiceMock).getAllPersons();
+        verify(modelMapMock).addAttribute("person", personDtoMock);
 
         assertThat(result, is("index"));
     }

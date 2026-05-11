@@ -44,7 +44,7 @@ public class PersonController {
     }
 
     @PostMapping(value = "/add")
-    public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
+    public String addPerson(ModelMap map, @Valid @ModelAttribute("person") PersonDto person,
                             BindingResult result) {
         log.info("Entering personController.addPerson: map={}, person={}", map, person);
 
@@ -56,7 +56,7 @@ public class PersonController {
             return "index";
         }
 
-        personService.addPerson(person);
+        personService.addPerson(personMapper.toPerson(person));
         return "redirect:/";
     }
 
