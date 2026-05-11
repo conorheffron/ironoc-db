@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.2.3.7755")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.3.0.8198")
     }
 }
 
@@ -88,7 +88,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-h2console:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.90.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.92.0'
 
     // SQL
 //    implementation 'mysql:mysql-connector-java:8.0.33' NOT FOR PRODUCTION
@@ -96,7 +96,7 @@ dependencies {
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
 	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.21'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.22'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
     testImplementation 'org.springframework.boot:spring-boot-webmvc-test:' + springBootVersion
