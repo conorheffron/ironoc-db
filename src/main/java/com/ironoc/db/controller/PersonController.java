@@ -1,6 +1,7 @@
 package com.ironoc.db.controller;
 
-import module java.base;
+import java.util.List;
+import java.util.Optional;
 
 import com.ironoc.db.dto.PersonDto;
 import com.ironoc.db.mapper.PersonMapper;
@@ -31,69 +32,71 @@ public class PersonController {
         this.personMapper = personMapper;
     }
 
-	@GetMapping(value = "/")
-	public String home(ModelMap map) {
-		log.info("Entering personController.home: map={}", map);
-		
-		List<Person> personslist = personService.getAllPersons();
+    @GetMapping(value = "/")
+    public String home(ModelMap map) {
+        log.info("Entering personController.home: map={}", map);
+
+        List<Person> personslist = personService.getAllPersons();
         map.addAttribute("personsList", personslist);
         map.addAttribute("person", PersonDto.builder().build());
 
         return "index";
-	}
-	
-	@PostMapping(value = "/add")
-	public String addPerson(ModelMap map, @Valid @ModelAttribute("person") PersonDto person,
-							BindingResult result) {
-		log.info("Entering personController.addPerson: map={}, person={}", map, person);
-		
-		// validation error handling
-		if (result.hasErrors()) {			
-			List<Person> personslist = personService.getAllPersons();
-	        map.addAttribute("personsList", personslist);
-			return "index";
-		}
+    }
 
-		personService.addPerson(personMapper.toPerson(person));
-		return "redirect:/";
-	}
-    
-	@DeleteMapping(value = "/delete/{id}")
-	public String deletePersonById(ModelMap map, @PathVariable("id") Integer id) {
-		log.info("Entering personController.deletePersonBySurname: map={}, id={}", map, id.longValue());
-		Optional<Person> person = personService.findPersonById(id.longValue());
-		if (person.isPresent()) {
-			personService.deletePersonById(id.longValue());
-		} else {
-			// no matching entries to delete
-			map.addAttribute("deleteError", "There are no matching entries to delete");
-		}
-		return "redirect:/";
-	}
+    @PostMapping(value = "/add")
+    public String addPerson(ModelMap map, @Valid @ModelAttribute("person") Person person,
+                            BindingResult result) {
+        log.info("Entering personController.addPerson: map={}, person={}", map, person);
 
-	@GetMapping("/edit/{id}")
-	public String showEditView(@PathVariable("id") Integer id, Model model) {
-		log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
-		Optional<Person> person = personService.findPersonById(id.longValue());
-		if (person.isPresent()) {
-			model.addAttribute("person", personMapper.toPersonDto(person.get()));
-		} else {
-			// no matching entries to delete
-			log.error("There are no matching entries to delete for id={}", id);
-		}
-		return "edit-person";
-	}
+        // validation error handling
+        if (result.hasErrors()) {
+            List<Person> personslist = personService.getAllPersons();
+            map.addAttribute("personsList", personslist);
+            map.addAttribute("person", person);
+            return "index";
+        }
 
-	@PostMapping("/update/{id}")
-	public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid @ModelAttribute("person") PersonDto person,
-							   BindingResult result) {
-		log.info("Entering personController.updatePerson: ID={}, person={}", id, person);
-		if (result.hasErrors()) {
-			person.setId(id.longValue());
-			map.addAttribute("person", person);
-			return "edit-person";
-		}
-		personService.addPerson(personMapper.toPerson(id.longValue(), person));
-		return "redirect:/";
-	}
+        personService.addPerson(person);
+        return "redirect:/";
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public String deletePersonById(ModelMap map, @PathVariable("id") Integer id) {
+        log.info("Entering personController.deletePersonBySurname: map={}, id={}", map, id.longValue());
+        Optional<Person> person = personService.findPersonById(id.longValue());
+        if (person.isPresent()) {
+            personService.deletePersonById(id.longValue());
+        } else {
+            // no matching entries to delete
+            map.addAttribute("deleteError", "There are no matching entries to delete");
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditView(@PathVariable("id") Integer id, Model model) {
+        log.info("Entering personController.showEditView: ID={}, model={}", id, model.asMap());
+        Optional<Person> person = personService.findPersonById(id.longValue());
+        if (person.isPresent()) {
+            model.addAttribute("person", person.get());
+        } else {
+            // no matching entries to delete
+            log.error("There are no matching entries to delete for id={}", id);
+        }
+        return "edit-person";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updatePerson(ModelMap map, @PathVariable("id") Integer id, @Valid Person person,
+                               BindingResult result) {
+        log.info("Entering personController.updatePerson: ID={}, person={}", id, person.toString());
+        if (result.hasErrors()) {
+            person.setId(id.longValue());
+            map.addAttribute("person", person);
+            return "edit-person";
+        }
+        person.setId(id.longValue());
+        personService.addPerson(person);
+        return "redirect:/";
+    }
 }
