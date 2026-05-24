@@ -81,6 +81,7 @@ dependencies {
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-cache:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
