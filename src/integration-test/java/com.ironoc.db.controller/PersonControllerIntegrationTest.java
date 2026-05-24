@@ -2,10 +2,10 @@ package com.ironoc.db.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.config.IronocDbConfig;
-import com.ironoc.db.dao.PersonDao;
 import com.ironoc.db.dto.PersonDto;
 import com.ironoc.db.model.Employer;
 import com.ironoc.db.model.Person;
+import com.ironoc.db.service.PersonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -34,6 +33,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -56,7 +56,7 @@ public class PersonControllerIntegrationTest {
     private ObjectMapper mapper;
 
     @MockitoBean
-    private PersonDao personDaoMock;
+    private PersonService personServiceMock;
 
     @MockitoBean
     private VersionController versionControllerMock;
@@ -168,7 +168,7 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
+        given(personServiceMock.getAllPersons()).willReturn(persons).willReturn(persons);
 
         PersonDto personDto = PersonDto.builder()
                 .firstName(person.getFirstName())
@@ -185,8 +185,8 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock, never()).findAll();
-        verify(personDaoMock).save(any(Person.class));
+        verify(personServiceMock, never()).getAllPersons();
+        verify(personServiceMock).addPerson(any(Person.class));
 
         assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
         assertThat(response.getContentAsString(), emptyString());
@@ -197,7 +197,7 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
+        given(personServiceMock.getAllPersons()).willReturn(persons).willReturn(persons);
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/add")
@@ -206,8 +206,8 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock, never()).findAll();
-        verify(personDaoMock, never()).save(any(Person.class));
+        verify(personServiceMock, never()).getAllPersons();
+        verify(personServiceMock, never()).addPerson(any(Person.class));
 
         assertThat(response.getStatus(), is(HttpStatus.METHOD_NOT_ALLOWED.value()));
         assertThat(response.getForwardedUrl(), is(nullValue()));
@@ -219,8 +219,8 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findById(TEST_ID)).willReturn(Optional.ofNullable(person));
-        given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
+        given(personServiceMock.findPersonById(TEST_ID)).willReturn(Optional.ofNullable(person));
+        given(personServiceMock.getAllPersons()).willReturn(persons).willReturn(persons);
 
         // when
         MockHttpServletResponse response = mockMvc.perform(delete("/delete/" + TEST_ID)
@@ -228,9 +228,9 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findById(TEST_ID);
-        verify(personDaoMock).deleteById(TEST_ID);
-        verify(personDaoMock, never()).findAll();
+        verify(personServiceMock).findPersonById(TEST_ID);
+        verify(personServiceMock).deletePersonById(TEST_ID);
+        verify(personServiceMock, never()).getAllPersons();
 
         assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
         assertThat(response.getForwardedUrl(), is(nullValue()));
@@ -242,8 +242,8 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findById(TEST_ID)).willReturn(Optional.empty());
-        given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
+        given(personServiceMock.findPersonById(TEST_ID)).willReturn(Optional.empty());
+        given(personServiceMock.getAllPersons()).willReturn(persons).willReturn(persons);
 
         // when
         MockHttpServletResponse response = mockMvc.perform(delete("/delete/" + TEST_ID)
@@ -251,9 +251,9 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findById(TEST_ID);
-        verify(personDaoMock, never()).deleteById(TEST_ID);
-        verify(personDaoMock, never()).findAll();
+        verify(personServiceMock).findPersonById(TEST_ID);
+        verify(personServiceMock, never()).deletePersonById(TEST_ID);
+        verify(personServiceMock, never()).getAllPersons();
 
         assertThat(response.getStatus(), is(HttpStatus.FOUND.value()));
         assertThat(response.getForwardedUrl(), is(nullValue()));
@@ -266,7 +266,7 @@ public class PersonControllerIntegrationTest {
         List<Person> persons = Collections.singletonList(person);
         Page<Person> personsPage = new PageImpl<>(persons);
 
-        given(personDaoMock.findAll(any(Pageable.class))).willReturn(personsPage);
+        given(personServiceMock.getPersonsPage(anyInt(), anyInt())).willReturn(personsPage);
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/")
@@ -274,7 +274,7 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findAll(any(Pageable.class));
+        verify(personServiceMock).getPersonsPage(anyInt(), anyInt());
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
@@ -293,7 +293,7 @@ public class PersonControllerIntegrationTest {
                 .build();
         List<Person> persons = Collections.singletonList(personNoEmployers);
 
-        given(personDaoMock.findAll()).willReturn(persons);
+        given(personServiceMock.getPersonsPage(anyInt(), anyInt())).willReturn(new PageImpl<>(persons));
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/")
@@ -301,7 +301,7 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findAll();
+        verify(personServiceMock).getPersonsPage(anyInt(), anyInt());
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), not(containsString("<th>Job Title</th>")));
