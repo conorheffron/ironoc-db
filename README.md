@@ -120,45 +120,6 @@ src
 
 ## Run
 ### - See `src/main/resources/db/ddl.sql` for sample Schema to get started with ironoc-db instances using MySQL or H2
-```shell
-docker pull mysql:latest
-```
-```shell
-docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -p 3307:3306 mysql
-```
-```shell
-docker logs test-mysql
-```
-```shell
-docker exec -it test-mysql bash
-```
-```shell
-docker ps
-```
-
-![create-db-connection](./screenshots/db-connection.png?raw=true "Create DB Connection")
-![create-test-schema](./screenshots/create-schema.png?raw=true "Create Test Schema")
-![load-db](./screenshots/run-starter-db-script.png?raw=true "Load DB")
-![verify-db](./screenshots/verify-db-load.png?raw=true "Verify DB")
-
-## Create Network
-```shell
-docker network create my-network
-```
-```shell
-docker inspect network my-network 
-```
-
-## Link mysql container to same network for access:
-```
-docker network connect my-network test-mysql
-```
-
-## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
-- Get IPv4Address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
-```shell
-docker inspect network my-network 
-```
 
 ## Build ironoc-db, run unit & integration tests, & generate war file.
 ```shell
@@ -178,7 +139,7 @@ gcloud config list
 ```
 
 ## Run `com.ironoc.db.App.java` directly from IntelliJ (can use localhost for spring.datasource.url) or 
-## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
+## via CLI (build & spin up docker image with MySQL container on the same compose network):
 ```shell
 docker image build -t ironoc-db .
 ```
@@ -210,10 +171,7 @@ docker compose down
 
 ## Tear-down:
 ```shell
-docker stop test-mysql
-```
-```shell
-docker remove test-mysql
+docker compose down
 ```
 
 ## Run ironoc-db on local k8s cluster
