@@ -13,6 +13,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -30,6 +33,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
@@ -172,7 +176,7 @@ public class PersonControllerIntegrationTest {
     @Test
     public void test_addPerson_success() throws Exception {
         // given
-        Iterable<Person> persons = Collections.singletonList(person);
+        List<Person> persons = Collections.singletonList(person);
 
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
@@ -201,7 +205,7 @@ public class PersonControllerIntegrationTest {
     @Test
     public void test_addPerson_fail() throws Exception {
         // given
-        Iterable<Person> persons = Collections.singletonList(person);
+        List<Person> persons = Collections.singletonList(person);
 
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
@@ -270,6 +274,34 @@ public class PersonControllerIntegrationTest {
     public void test_home_success() throws Exception {
         // given
         List<Person> persons = Collections.singletonList(person);
+        Page<Person> personsPage = new PageImpl<>(persons);
+
+        given(personDaoMock.findAll(any(Pageable.class))).willReturn(personsPage);
+
+        // when
+        MockHttpServletResponse response = mockMvc.perform(get("/")
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andReturn().getResponse();
+
+        // then
+        verify(personDaoMock).findAll(any(Pageable.class));
+
+        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
+        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
+    }
+
+    @Test
+    public void test_home_success_no_job_history() throws Exception {
+        // given
+        Person personNoEmployers = Person.builder()
+                .firstName("Conor")
+                .surname(TEST_SURNAME)
+                .age(42)
+                .title("Mr.")
+                .id(TEST_ID)
+                .employers(Collections.emptyList())
+                .build();
+        List<Person> persons = Collections.singletonList(personNoEmployers);
 
         given(personDaoMock.findAll()).willReturn(persons);
 
@@ -282,6 +314,8 @@ public class PersonControllerIntegrationTest {
         verify(personDaoMock).findAll();
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
+        assertThat(response.getContentAsString(), not(containsString("<th>Job Title</th>")));
+        assertThat(response.getContentAsString(), not(containsString("<th>Employer Name</th>")));
+        assertThat(response.getContentAsString(), not(containsString("<th>Start Year</th>")));
     }
 }
