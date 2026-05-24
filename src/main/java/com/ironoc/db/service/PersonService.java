@@ -3,10 +3,13 @@ package com.ironoc.db.service;
 import module java.base;
 
 import com.ironoc.db.model.Person;
+import org.springframework.data.domain.Page;
 
 public interface PersonService {
 
     List<Person> getAllPersons();
+
+    Page<Person> getPersonsPage(int page, int size);
 
 	Boolean addPerson(Person person);
 
