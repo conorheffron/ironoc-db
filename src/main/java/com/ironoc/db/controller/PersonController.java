@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -33,10 +34,18 @@ public class PersonController {
     }
 
     @GetMapping(value = "/")
-    public String home(ModelMap map) {
+    public String home(ModelMap map, @RequestParam(value = "surname", required = false) String surnameFilter) {
         log.info("Entering personController.home: map={}", map);
 
-        List<Person> personslist = personService.getAllPersons();
+        List<Person> personslist;
+        if (surnameFilter != null && !surnameFilter.isBlank()) {
+            String sanitizedSurnameFilter = surnameFilter.trim();
+            personslist = personService.findPersonBySurname(sanitizedSurnameFilter);
+            map.addAttribute("surnameFilter", sanitizedSurnameFilter);
+        } else {
+            personslist = personService.getAllPersons();
+            map.addAttribute("surnameFilter", "");
+        }
         map.addAttribute("personsList", personslist);
         map.addAttribute("person", PersonDto.builder().build());
 

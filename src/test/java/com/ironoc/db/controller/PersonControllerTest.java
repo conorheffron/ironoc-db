@@ -68,9 +68,23 @@ public class PersonControllerTest {
     public void test_Home_success() {
         when(personServiceMock.getAllPersons()).thenReturn(persons);
 
-        String result = personController.home(modelMapMock);
+        String result = personController.home(modelMapMock, null);
 
         verify(personServiceMock).getAllPersons();
+        verify(personServiceMock, never()).findPersonBySurname(ArgumentMatchers.anyString());
+        verify(modelMapMock).addAttribute("surnameFilter", "");
+        assertThat(result, is("index"));
+    }
+
+    @Test
+    public void test_Home_filterBySurname_success() {
+        when(personServiceMock.findPersonBySurname("Heffron")).thenReturn(persons);
+
+        String result = personController.home(modelMapMock, "Heffron");
+
+        verify(personServiceMock).findPersonBySurname("Heffron");
+        verify(personServiceMock, never()).getAllPersons();
+        verify(modelMapMock).addAttribute("surnameFilter", "Heffron");
         assertThat(result, is("index"));
     }
 

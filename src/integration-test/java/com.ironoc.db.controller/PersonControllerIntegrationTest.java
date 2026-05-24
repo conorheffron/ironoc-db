@@ -274,4 +274,25 @@ public class PersonControllerIntegrationTest {
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
     }
+
+    @Test
+    public void test_home_filterBySurname_success() throws Exception {
+        // given
+        List<Person> persons = Collections.singletonList(person);
+
+        given(personDaoMock.findBySurname(TEST_SURNAME)).willReturn(persons);
+
+        // when
+        MockHttpServletResponse response = mockMvc.perform(get("/")
+                        .queryParam("surname", TEST_SURNAME)
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andReturn().getResponse();
+
+        // then
+        verify(personDaoMock).findBySurname(TEST_SURNAME);
+        verify(personDaoMock, never()).findAll();
+
+        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
+        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
+    }
 }

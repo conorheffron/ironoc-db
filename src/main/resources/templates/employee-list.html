@@ -3,6 +3,11 @@
         <h5 class="card-title mb-3">View up to ten items</h5>
         <div th:case="*">
             <h3>Employees</h3>
+            <form th:action="@{/}" method="get" class="form-inline mb-3">
+                <input type="text" name="surname" class="form-control mr-2" placeholder="Filter by surname" th:value="${surnameFilter}">
+                <button type="submit" class="btn btn-outline-primary mr-2">Filter</button>
+                <a th:href="@{/}" class="btn btn-outline-secondary">Clear</a>
+            </form>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered w-100">
                     <thead class="thead-light">
