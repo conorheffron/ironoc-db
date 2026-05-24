@@ -39,7 +39,7 @@
                         </td>
                         <td>
                             <table class="table table-sm mb-0">
-                                <thead>
+                                <thead th:if="${not #lists.isEmpty(person.employers)}">
                                 <tr>
                                     <th>Job Title</th>
                                     <th>Employer Name</th>
