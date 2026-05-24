@@ -2,6 +2,8 @@ package com.ironoc.db.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.config.IronocDbConfig;
+import com.ironoc.db.dao.EmployerDao;
+import com.ironoc.db.dao.PersonDao;
 import com.ironoc.db.dto.PersonDto;
 import com.ironoc.db.model.Employer;
 import com.ironoc.db.model.Person;
@@ -59,6 +61,9 @@ public class PersonControllerIntegrationTest {
     private PersonService personServiceMock;
 
     @MockitoBean
+    private EmployerDao employerDaoMock;
+
+    @MockitoBean
     private VersionController versionControllerMock;
 
     @InjectMocks
@@ -79,6 +84,7 @@ public class PersonControllerIntegrationTest {
                                     <th>Age</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
+                                    <th>Add Job History</th>
                                     <th>Job History</th>
                                 </tr>
                                 </thead>
@@ -101,6 +107,11 @@ public class PersonControllerIntegrationTest {
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
+                                    </td>
+                                    <td>
+                                        <a href="/job-history/7" class="btn btn-success btn-sm rounded-0" title="Manage Job History">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         <table class="table table-sm mb-0">
@@ -128,13 +139,13 @@ public class PersonControllerIntegrationTest {
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                    <td colspan="4">
+                                    <td colspan="5">
                                         <b>42</b> is the Average Employee Age
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="6"></td>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                         <b>42</b> is the Sum of Ages
                                     </td>
                                 </tr>
