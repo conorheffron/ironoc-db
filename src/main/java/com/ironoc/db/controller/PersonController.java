@@ -10,6 +10,7 @@ import com.ironoc.db.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
 public class PersonController {
+
+    private static final int PAGE_SIZE = 5;
 
     private final PersonService personService;
     private final PersonMapper personMapper;
@@ -33,11 +37,13 @@ public class PersonController {
     }
 
     @GetMapping(value = "/")
-    public String home(ModelMap map) {
+    public String home(ModelMap map, @RequestParam(defaultValue = "0") int page) {
         log.info("Entering personController.home: map={}", map);
 
-        List<Person> personslist = personService.getAllPersons();
-        map.addAttribute("personsList", personslist);
+        Page<Person> personsPage = personService.getPersonsPage(page, PAGE_SIZE);
+        map.addAttribute("personsList", personsPage.getContent());
+        map.addAttribute("currentPage", personsPage.getNumber());
+        map.addAttribute("totalPages", personsPage.getTotalPages());
         map.addAttribute("person", PersonDto.builder().build());
 
         return "index";
@@ -50,8 +56,10 @@ public class PersonController {
 
         // validation error handling
         if (result.hasErrors()) {
-            List<Person> personslist = personService.getAllPersons();
-            map.addAttribute("personsList", personslist);
+            Page<Person> personsPage = personService.getPersonsPage(0, PAGE_SIZE);
+            map.addAttribute("personsList", personsPage.getContent());
+            map.addAttribute("currentPage", personsPage.getNumber());
+            map.addAttribute("totalPages", personsPage.getTotalPages());
             map.addAttribute("person", person);
             return "index";
         }

@@ -12,6 +12,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -162,7 +165,7 @@ public class PersonControllerIntegrationTest {
     @Test
     public void test_addPerson_success() throws Exception {
         // given
-        Iterable<Person> persons = Collections.singletonList(person);
+        List<Person> persons = Collections.singletonList(person);
 
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
@@ -191,7 +194,7 @@ public class PersonControllerIntegrationTest {
     @Test
     public void test_addPerson_fail() throws Exception {
         // given
-        Iterable<Person> persons = Collections.singletonList(person);
+        List<Person> persons = Collections.singletonList(person);
 
         given(personDaoMock.findAll()).willReturn(persons).willReturn(persons);
 
@@ -260,8 +263,9 @@ public class PersonControllerIntegrationTest {
     public void test_home_success() throws Exception {
         // given
         List<Person> persons = Collections.singletonList(person);
+        Page<Person> personsPage = new PageImpl<>(persons);
 
-        given(personDaoMock.findAll()).willReturn(persons);
+        given(personDaoMock.findAll(any(Pageable.class))).willReturn(personsPage);
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/")
@@ -269,7 +273,7 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findAll();
+        verify(personDaoMock).findAll(any(Pageable.class));
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
