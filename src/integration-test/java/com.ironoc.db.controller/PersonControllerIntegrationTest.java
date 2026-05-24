@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
@@ -277,5 +278,34 @@ public class PersonControllerIntegrationTest {
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
+    }
+
+    @Test
+    public void test_home_success_no_job_history() throws Exception {
+        // given
+        Person personNoEmployers = Person.builder()
+                .firstName("Conor")
+                .surname(TEST_SURNAME)
+                .age(42)
+                .title("Mr.")
+                .id(TEST_ID)
+                .employers(Collections.emptyList())
+                .build();
+        List<Person> persons = Collections.singletonList(personNoEmployers);
+
+        given(personDaoMock.findAll()).willReturn(persons);
+
+        // when
+        MockHttpServletResponse response = mockMvc.perform(get("/")
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andReturn().getResponse();
+
+        // then
+        verify(personDaoMock).findAll();
+
+        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
+        assertThat(response.getContentAsString(), not(containsString("<th>Job Title</th>")));
+        assertThat(response.getContentAsString(), not(containsString("<th>Employer Name</th>")));
+        assertThat(response.getContentAsString(), not(containsString("<th>Start Year</th>")));
     }
 }
