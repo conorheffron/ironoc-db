@@ -61,8 +61,12 @@ src
 │   │               │   └── VersionController.java
 │   │               ├── dao
 │   │               │   └── PersonDao.java
+│   │               ├── dto
+│   │               │   └── PersonDto.java
 │   │               ├── enums
 │   │               │   └── DataSourceKey.java
+│   │               ├── mapper
+│   │               │   └── PersonMapper.java
 │   │               ├── model
 │   │               │   ├── Employer.java
 │   │               │   └── Person.java
