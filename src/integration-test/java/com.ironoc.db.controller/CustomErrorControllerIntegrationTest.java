@@ -2,6 +2,7 @@ package com.ironoc.db.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.config.IronocDbConfig;
+import com.ironoc.db.dao.EmployerDao;
 import com.ironoc.db.dao.PersonDao;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +46,9 @@ public class CustomErrorControllerIntegrationTest {
 
     @MockitoBean
     private PersonDao personDaoMock;
+
+    @MockitoBean
+    private EmployerDao employerDaoMock;
 
     @MockitoBean
     private VersionController versionControllerMock;

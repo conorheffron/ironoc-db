@@ -13,6 +13,7 @@
                         <th>Age</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>Add Job History</th>
                         <th>Job History</th>
                     </tr>
                     </thead>
@@ -37,6 +38,11 @@
                             </form>
                         </td>
                         <td>
+                            <a th:href="@{/job-history/{personId}(personId=${person.id})}" class="btn btn-success btn-sm rounded-0" title="Manage Job History">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </td>
+                        <td>
                             <table class="table table-sm mb-0">
                                 <thead th:if="${not #lists.isEmpty(person.employers)}">
                                 <tr>
@@ -57,13 +63,13 @@
                     </tr>
                     <tr th:if="${not #lists.isEmpty(personsList)}">
                         <td colspan="4"></td>
-                        <td colspan="4">
+                        <td colspan="5">
                             <b th:text="${#aggregates.avg(personsList.![age])}"></b> is the Average Employee Age
                         </td>
                     </tr>
                     <tr th:if="${not #lists.isEmpty(personsList)}">
                         <td colspan="6"></td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <b th:text="${#aggregates.sum(personsList.![age])}"></b> is the Sum of Ages
                         </td>
                     </tr>
