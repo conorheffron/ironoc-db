@@ -13,6 +13,9 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -56,21 +59,24 @@ public class PersonControllerTest {
     private BindingResult bindingResultMock;
 
     private static final Integer TEST_ID = 7;
+    private static final int PAGE_SIZE = 5;
     private List<Person> persons;
+    private Page<Person> personsPage;
 
     @Before
     public void setUp() {
         persons = new ArrayList<>();
         persons.add(personMock);
+        personsPage = new PageImpl<>(persons, PageRequest.of(0, PAGE_SIZE), persons.size());
     }
 
     @Test
     public void test_Home_success() {
-        when(personServiceMock.getAllPersons()).thenReturn(persons);
+        when(personServiceMock.getPersonsPage(0, PAGE_SIZE)).thenReturn(personsPage);
 
-        String result = personController.home(modelMapMock);
+        String result = personController.home(modelMapMock, 0);
 
-        verify(personServiceMock).getAllPersons();
+        verify(personServiceMock).getPersonsPage(0, PAGE_SIZE);
         assertThat(result, is("index"));
     }
 
@@ -84,7 +90,7 @@ public class PersonControllerTest {
         verify(bindingResultMock).hasErrors();
         verify(personMapperMock).toPerson(personDtoMock);
         verify(personServiceMock).addPerson(personMock);
-        verify(personServiceMock, never()).getAllPersons();
+        verify(personServiceMock, never()).getPersonsPage(0, PAGE_SIZE);
 
         assertThat(result, is("redirect:/"));
     }
@@ -146,12 +152,13 @@ public class PersonControllerTest {
     @Test
     public void test_AddPerson_fail() {
         when(bindingResultMock.hasErrors()).thenReturn(true);
+        when(personServiceMock.getPersonsPage(0, PAGE_SIZE)).thenReturn(personsPage);
 
         String result = personController.addPerson(modelMapMock, personDtoMock, bindingResultMock);
 
         verify(bindingResultMock).hasErrors();
         verify(personServiceMock, never()).addPerson(ArgumentMatchers.any(Person.class));
-        verify(personServiceMock).getAllPersons();
+        verify(personServiceMock).getPersonsPage(0, PAGE_SIZE);
         verify(modelMapMock).addAttribute("person", personDtoMock);
 
         assertThat(result, is("index"));

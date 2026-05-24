@@ -10,6 +10,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
@@ -85,8 +89,8 @@ public class PersonServiceTest {
         // then
         verify(personDaoMock).findAll();
 
-        assertThat(result, is(personsFullRs.stream().limit(10).toList()));
-        assertThat(result.size(), is(10));
+        assertThat(result, is(personsFullRs));
+        assertThat(result.size(), is(personsFullRs.size()));
     }
 
     @Test
@@ -160,5 +164,27 @@ public class PersonServiceTest {
 
         Person result = optionalPerson.orElse(null);
         assertThat(result, is(personMock));
+    }
+
+    @Test
+    public void test_getPersonsPage_success() {
+        // given
+        int page = 0;
+        int size = 5;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Person> personsPage = new PageImpl<>(persons, pageable, persons.size());
+        when(personDaoMock.findAll(pageable)).thenReturn(personsPage);
+
+        // when
+        Page<Person> result = personService.getPersonsPage(page, size);
+
+        // then
+        verify(personDaoMock).findAll(pageable);
+
+        assertThat(result, is(personsPage));
+        assertThat(result.getContent(), is(persons));
+        assertThat(result.getTotalElements(), is((long) persons.size()));
+        assertThat(result.getNumber(), is(page));
+        assertThat(result.getSize(), is(size));
     }
 }
