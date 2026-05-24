@@ -41,81 +41,109 @@ Java 25, Spring Boot 4, Thymeleaf Templates, Hibernate, MySQL or H2 databases su
 
 ## Project Structure
 ```shell
-src
-├── integration-test
-│   └── java
-│       └── com.ironoc.db.controller
-│           ├── CustomErrorControllerIntegrationTest.java
-│           └── PersonControllerIntegrationTest.java
-├── main
-│   ├── java
-│   │   └── com
-│   │       └── ironoc
-│   │           └── db
-│   │               ├── App.java
-│   │               ├── config
-│   │               │   └── IronocDbConfig.java
-│   │               ├── controller
-│   │               │   ├── CustomErrorController.java
-│   │               │   ├── PersonController.java
-│   │               │   └── VersionController.java
-│   │               ├── dao
-│   │               │   └── PersonDao.java
-│   │               ├── dto
-│   │               │   └── PersonDto.java
-│   │               ├── enums
-│   │               │   └── DataSourceKey.java
-│   │               ├── mapper
-│   │               │   └── PersonMapper.java
-│   │               ├── model
-│   │               │   ├── Employer.java
-│   │               │   └── Person.java
-│   │               └── service
-│   │                   ├── GoogleCloudClient.java
-│   │                   ├── GoogleCloudClientImpl.java
-│   │                   ├── PersonService.java
-│   │                   └── PersonServiceImpl.java
-│   ├── META-INF
-│   │   └── MANIFEST.MF
-│   └── resources
-│       ├── application-h2.properties
-│       ├── application.properties
-│       ├── db
-│       │   ├── data-h2.sql
-│       │   ├── data-mysql.sql
-│       │   └── ddl.sql
-│       ├── log4j.xml
-│       ├── static
-│       │   ├── favicon.ico
-│       │   ├── img
-│       │   │   └── robot-logo.png
-│       │   ├── ironoc-db-banner.txt
-│       │   └── style
-│       │       └── main.css
-│       └── templates
-│           ├── add-employee.html
-│           ├── edit-person.html
-│           ├── employee-list.html
-│           ├── error404.html
-│           ├── index.html
-│           └── navbar.html
-└── test
-    ├── java
-    │   └── com
-    │       └── ironoc
-    │           └── db
-    │               ├── AppTest.java
-    │               ├── config
-    │               │   └── IronocDbConfigTest.java
-    │               ├── controller
-    │               │   ├── CustomErrorControllerTest.java
-    │               │   ├── PersonControllerTest.java
-    │               │   └── VersionControllerTest.java
-    │               └── service
-    │                   ├── GoogleCloudClientServiceTest.java
-    │                   └── PersonServiceTest.java
-    └── resources
-        └── application.properties
+ironoc-db/
+├── .github/                                        # GitHub CI/CD configuration
+│   ├── workflows/                                  # GitHub Actions workflows
+│   │   ├── auto-assign.yml                        # Auto-assign issues & PRs
+│   │   ├── codacy.yml                             # Codacy security scan
+│   │   ├── codeql.yml                             # CodeQL analysis
+│   │   ├── docker-image.yml                       # Docker image CI
+│   │   ├── docker-publish.yml                     # Docker publish
+│   │   ├── gradle-publish.yml                     # Gradle package publish
+│   │   ├── gradle.yml                             # Java CI with Gradle
+│   │   ├── proof-html.yml                         # HTML proof check
+│   │   └── sonar.yml                              # SonarQube analysis
+│   ├── dependabot.yml                             # Dependency updates
+│   └── FUNDING.yml                                # GitHub Sponsors
+├── gradle/                                         # Gradle wrapper files
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── kubernetes/                                     # Kubernetes deployment configs
+│   ├── deploy.yml                                 # GKE deployment
+│   └── ironoc-db-local.yml                        # Local minikube deployment
+├── screenshots/                                    # Application screenshots
+├── src/                                            # Application source code
+│   ├── integration-test/                          # Integration tests
+│   │   └── java/
+│   │       └── com.ironoc.db.controller/
+│   │           ├── CustomErrorControllerIntegrationTest.java
+│   │           └── PersonControllerIntegrationTest.java
+│   ├── main/                                      # Main application source
+│   │   ├── java/
+│   │   │   └── com/ironoc/db/
+│   │   │       ├── App.java                      # Application entry point
+│   │   │       ├── config/
+│   │   │       │   └── IronocDbConfig.java
+│   │   │       ├── controller/
+│   │   │       │   ├── CustomErrorController.java
+│   │   │       │   ├── PersonController.java
+│   │   │       │   └── VersionController.java
+│   │   │       ├── dao/
+│   │   │       │   └── PersonDao.java
+│   │   │       ├── dto/
+│   │   │       │   └── PersonDto.java
+│   │   │       ├── enums/
+│   │   │       │   └── DataSourceKey.java
+│   │   │       ├── mapper/
+│   │   │       │   └── PersonMapper.java
+│   │   │       ├── model/
+│   │   │       │   ├── Employer.java
+│   │   │       │   └── Person.java
+│   │   │       └── service/
+│   │   │           ├── GoogleCloudClient.java
+│   │   │           ├── GoogleCloudClientImpl.java
+│   │   │           ├── PersonService.java
+│   │   │           └── PersonServiceImpl.java
+│   │   ├── META-INF/
+│   │   │   └── MANIFEST.MF
+│   │   └── resources/
+│   │       ├── application-h2.properties
+│   │       ├── application.properties
+│   │       ├── db/
+│   │       │   ├── data-h2.sql
+│   │       │   ├── data-mysql.sql
+│   │       │   └── ddl.sql
+│   │       ├── log4j.xml
+│   │       ├── static/
+│   │       │   ├── favicon.ico
+│   │       │   ├── img/
+│   │       │   │   └── robot-logo.png
+│   │       │   ├── ironoc-db-banner.txt
+│   │       │   └── style/
+│   │       │       └── main.css
+│   │       └── templates/
+│   │           ├── add-employee.html
+│   │           ├── edit-person.html
+│   │           ├── employee-list.html
+│   │           ├── error404.html
+│   │           ├── index.html
+│   │           └── navbar.html
+│   └── test/                                      # Unit tests
+│       ├── java/
+│       │   └── com/ironoc/db/
+│       │       ├── AppTest.java
+│       │       ├── config/
+│       │       │   └── IronocDbConfigTest.java
+│       │       ├── controller/
+│       │       │   ├── CustomErrorControllerTest.java
+│       │       │   ├── PersonControllerTest.java
+│       │       │   └── VersionControllerTest.java
+│       │       └── service/
+│       │           ├── GoogleCloudClientServiceTest.java
+│       │           └── PersonServiceTest.java
+│       └── resources/
+│           └── application.properties
+├── build.gradle                                    # Gradle build configuration
+├── docker-compose.yml                              # Docker Compose configuration
+├── Dockerfile                                      # Docker image definition
+├── gradle.properties                               # Gradle properties
+├── gradlew                                         # Gradle wrapper script (Unix)
+├── gradlew.bat                                     # Gradle wrapper script (Windows)
+├── LICENSE                                         # GPL v3 License
+├── README.md                                       # Project documentation
+├── SECURITY.md                                     # Security policy
+└── settings.gradle                                 # Gradle settings
 ```
 
 ## Run
