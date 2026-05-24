@@ -53,8 +53,6 @@ ironoc-db/
 │   │   ├── gradle.yml                             # Java CI with Gradle
 │   │   ├── proof-html.yml                         # HTML proof check
 │   │   └── sonar.yml                              # SonarQube analysis
-│   ├── dependabot.yml                             # Dependency updates
-│   └── FUNDING.yml                                # GitHub Sponsors
 ├── gradle/                                         # Gradle wrapper files
 │   └── wrapper/
 │       ├── gradle-wrapper.jar
@@ -62,7 +60,6 @@ ironoc-db/
 ├── kubernetes/                                     # Kubernetes deployment configs
 │   ├── deploy.yml                                 # GKE deployment
 │   └── ironoc-db-local.yml                        # Local minikube deployment
-├── screenshots/                                    # Application screenshots
 ├── src/                                            # Application source code
 │   ├── integration-test/                          # Integration tests
 │   │   └── java/
@@ -95,8 +92,6 @@ ironoc-db/
 │   │   │           ├── GoogleCloudClientImpl.java
 │   │   │           ├── PersonService.java
 │   │   │           └── PersonServiceImpl.java
-│   │   ├── META-INF/
-│   │   │   └── MANIFEST.MF
 │   │   └── resources/
 │   │       ├── application-h2.properties
 │   │       ├── application.properties
@@ -135,15 +130,6 @@ ironoc-db/
 │       └── resources/
 │           └── application.properties
 ├── build.gradle                                    # Gradle build configuration
-├── docker-compose.yml                              # Docker Compose configuration
-├── Dockerfile                                      # Docker image definition
-├── gradle.properties                               # Gradle properties
-├── gradlew                                         # Gradle wrapper script (Unix)
-├── gradlew.bat                                     # Gradle wrapper script (Windows)
-├── LICENSE                                         # GPL v3 License
-├── README.md                                       # Project documentation
-├── SECURITY.md                                     # Security policy
-└── settings.gradle                                 # Gradle settings
 ```
 
 ## Run
