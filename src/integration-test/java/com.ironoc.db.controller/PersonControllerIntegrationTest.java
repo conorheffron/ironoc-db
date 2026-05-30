@@ -84,7 +84,7 @@ public class PersonControllerIntegrationTest {
                                     <th>Age</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
-                                    <th>Add Job History</th>
+                                    <th>Update Job History</th>
                                     <th>Job History</th>
                                 </tr>
                                 </thead>

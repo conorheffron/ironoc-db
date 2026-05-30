@@ -56,6 +56,6 @@ public class Person {
 	@NotNull(message = "Age is not defined.")
 	private Integer age;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.REMOVE)
 	private List<Employer> employers;
 }
