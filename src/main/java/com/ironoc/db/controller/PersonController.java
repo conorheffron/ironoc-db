@@ -37,29 +37,24 @@ public class PersonController {
     }
 
     @GetMapping(value = "/")
-<<<<<<< HEAD
-    public String home(ModelMap map, @RequestParam(value = "surname", required = false) String surnameFilter) {
+    public String home(ModelMap map, @RequestParam(defaultValue = "0") int page,
+                       @RequestParam(value = "surname", required = false) String surnameFilter) {
         log.info("Entering personController.home: map={}", map);
 
-        List<Person> personslist;
         if (surnameFilter != null && !surnameFilter.isBlank()) {
             String sanitizedSurnameFilter = surnameFilter.trim();
-            personslist = personService.findPersonBySurname(sanitizedSurnameFilter);
+            List<Person> personslist = personService.findPersonBySurname(sanitizedSurnameFilter);
+            map.addAttribute("personsList", personslist);
             map.addAttribute("surnameFilter", sanitizedSurnameFilter);
+            map.addAttribute("currentPage", 0);
+            map.addAttribute("totalPages", 1);
         } else {
-            personslist = personService.getAllPersons();
+            Page<Person> personsPage = personService.getPersonsPage(page, PAGE_SIZE);
+            map.addAttribute("personsList", personsPage.getContent());
+            map.addAttribute("currentPage", personsPage.getNumber());
+            map.addAttribute("totalPages", personsPage.getTotalPages());
             map.addAttribute("surnameFilter", "");
         }
-        map.addAttribute("personsList", personslist);
-=======
-    public String home(ModelMap map, @RequestParam(defaultValue = "0") int page) {
-        log.info("Entering personController.home: map={}", map);
-
-        Page<Person> personsPage = personService.getPersonsPage(page, PAGE_SIZE);
-        map.addAttribute("personsList", personsPage.getContent());
-        map.addAttribute("currentPage", personsPage.getNumber());
-        map.addAttribute("totalPages", personsPage.getTotalPages());
->>>>>>> origin/main
         map.addAttribute("person", PersonDto.builder().build());
 
         return "index";

@@ -74,10 +74,9 @@ public class PersonControllerTest {
     public void test_Home_success() {
         when(personServiceMock.getPersonsPage(0, PAGE_SIZE)).thenReturn(personsPage);
 
-<<<<<<< HEAD
-        String result = personController.home(modelMapMock, null);
+        String result = personController.home(modelMapMock, 0, null);
 
-        verify(personServiceMock).getAllPersons();
+        verify(personServiceMock).getPersonsPage(0, PAGE_SIZE);
         verify(personServiceMock, never()).findPersonBySurname(ArgumentMatchers.anyString());
         verify(modelMapMock).addAttribute("surnameFilter", "");
         assertThat(result, is("index"));
@@ -87,16 +86,11 @@ public class PersonControllerTest {
     public void test_Home_filterBySurname_success() {
         when(personServiceMock.findPersonBySurname("Heffron")).thenReturn(persons);
 
-        String result = personController.home(modelMapMock, "Heffron");
+        String result = personController.home(modelMapMock, 0, "Heffron");
 
         verify(personServiceMock).findPersonBySurname("Heffron");
-        verify(personServiceMock, never()).getAllPersons();
+        verify(personServiceMock, never()).getPersonsPage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt());
         verify(modelMapMock).addAttribute("surnameFilter", "Heffron");
-=======
-        String result = personController.home(modelMapMock, 0);
-
-        verify(personServiceMock).getPersonsPage(0, PAGE_SIZE);
->>>>>>> origin/main
         assertThat(result, is("index"));
     }
 
