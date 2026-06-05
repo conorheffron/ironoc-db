@@ -7,6 +7,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +19,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableCaching
 @ComponentScan(basePackages = { "com.ironoc.db" })
 @Slf4j
 public class IronocDbConfig {
@@ -41,6 +45,11 @@ public class IronocDbConfig {
                 DataSourceKey.GCP_SEC_VER.getKey())));
         dsBuilder.type(HikariDataSource.class);
         return dsBuilder.build();
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager();
     }
 
     @Bean
