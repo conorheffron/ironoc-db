@@ -299,7 +299,7 @@ public class PersonControllerIntegrationTest {
         // given
         List<Person> persons = Collections.singletonList(person);
 
-        given(personDaoMock.findBySurname(TEST_SURNAME)).willReturn(persons);
+        given(personServiceMock.findPersonBySurname(TEST_SURNAME)).willReturn(persons);
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/")
@@ -308,8 +308,8 @@ public class PersonControllerIntegrationTest {
                 .andReturn().getResponse();
 
         // then
-        verify(personDaoMock).findBySurname(TEST_SURNAME);
-        verify(personDaoMock, never()).findAll();
+        verify(personServiceMock).findPersonBySurname(TEST_SURNAME);
+        verify(personServiceMock, never()).getPersonsPage(anyInt(), anyInt());
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
