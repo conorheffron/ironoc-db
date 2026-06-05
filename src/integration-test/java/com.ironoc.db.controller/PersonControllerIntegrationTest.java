@@ -64,6 +64,9 @@ public class PersonControllerIntegrationTest {
     private EmployerDao employerDaoMock;
 
     @MockitoBean
+    private PersonDao personDaoMock;
+
+    @MockitoBean
     private VersionController versionControllerMock;
 
     @InjectMocks
@@ -292,7 +295,6 @@ public class PersonControllerIntegrationTest {
     }
 
     @Test
-<<<<<<< HEAD
     public void test_home_filterBySurname_success() throws Exception {
         // given
         List<Person> persons = Collections.singletonList(person);
@@ -302,7 +304,18 @@ public class PersonControllerIntegrationTest {
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/")
                         .queryParam("surname", TEST_SURNAME)
-=======
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andReturn().getResponse();
+
+        // then
+        verify(personDaoMock).findBySurname(TEST_SURNAME);
+        verify(personDaoMock, never()).findAll();
+
+        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
+        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
+    }
+
+    @Test
     public void test_home_success_no_job_history() throws Exception {
         // given
         Person personNoEmployers = Person.builder()
@@ -319,24 +332,15 @@ public class PersonControllerIntegrationTest {
 
         // when
         MockHttpServletResponse response = mockMvc.perform(get("/")
->>>>>>> origin/main
                         .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andReturn().getResponse();
 
         // then
-<<<<<<< HEAD
-        verify(personDaoMock).findBySurname(TEST_SURNAME);
-        verify(personDaoMock, never()).findAll();
-
-        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
-        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
-=======
         verify(personServiceMock).getPersonsPage(anyInt(), anyInt());
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), not(containsString("<th>Job Title</th>")));
         assertThat(response.getContentAsString(), not(containsString("<th>Employer Name</th>")));
         assertThat(response.getContentAsString(), not(containsString("<th>Start Year</th>")));
->>>>>>> origin/main
     }
 }
