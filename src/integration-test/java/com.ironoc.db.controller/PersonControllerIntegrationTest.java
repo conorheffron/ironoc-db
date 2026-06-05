@@ -64,6 +64,9 @@ public class PersonControllerIntegrationTest {
     private EmployerDao employerDaoMock;
 
     @MockitoBean
+    private PersonDao personDaoMock;
+
+    @MockitoBean
     private VersionController versionControllerMock;
 
     @InjectMocks
@@ -286,6 +289,27 @@ public class PersonControllerIntegrationTest {
 
         // then
         verify(personServiceMock).getPersonsPage(anyInt(), anyInt());
+
+        assertThat(response.getStatus(), is(HttpStatus.OK.value()));
+        assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
+    }
+
+    @Test
+    public void test_home_filterBySurname_success() throws Exception {
+        // given
+        List<Person> persons = Collections.singletonList(person);
+
+        given(personServiceMock.findPersonBySurname(TEST_SURNAME)).willReturn(persons);
+
+        // when
+        MockHttpServletResponse response = mockMvc.perform(get("/")
+                        .queryParam("surname", TEST_SURNAME)
+                        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andReturn().getResponse();
+
+        // then
+        verify(personServiceMock).findPersonBySurname(TEST_SURNAME);
+        verify(personServiceMock, never()).getPersonsPage(anyInt(), anyInt());
 
         assertThat(response.getStatus(), is(HttpStatus.OK.value()));
         assertThat(response.getContentAsString(), containsString(ADD_PERSON_TABLE_HTML));
