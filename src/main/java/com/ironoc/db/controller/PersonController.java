@@ -37,13 +37,24 @@ public class PersonController {
     }
 
     @GetMapping(value = "/")
-    public String home(ModelMap map, @RequestParam(defaultValue = "0") int page) {
+    public String home(ModelMap map, @RequestParam(defaultValue = "0") int page,
+                       @RequestParam(value = "surname", required = false) String surnameFilter) {
         log.info("Entering personController.home: map={}", map);
 
-        Page<Person> personsPage = personService.getPersonsPage(page, PAGE_SIZE);
-        map.addAttribute("personsList", personsPage.getContent());
-        map.addAttribute("currentPage", personsPage.getNumber());
-        map.addAttribute("totalPages", personsPage.getTotalPages());
+        if (surnameFilter != null && !surnameFilter.isBlank()) {
+            String sanitizedSurnameFilter = surnameFilter.trim();
+            List<Person> personslist = personService.findPersonBySurname(sanitizedSurnameFilter);
+            map.addAttribute("personsList", personslist);
+            map.addAttribute("surnameFilter", sanitizedSurnameFilter);
+            map.addAttribute("currentPage", 0);
+            map.addAttribute("totalPages", 1);
+        } else {
+            Page<Person> personsPage = personService.getPersonsPage(page, PAGE_SIZE);
+            map.addAttribute("personsList", personsPage.getContent());
+            map.addAttribute("currentPage", personsPage.getNumber());
+            map.addAttribute("totalPages", personsPage.getTotalPages());
+            map.addAttribute("surnameFilter", "");
+        }
         map.addAttribute("person", PersonDto.builder().build());
 
         return "index";
