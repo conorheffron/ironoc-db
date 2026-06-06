@@ -12,4 +12,4 @@ EXPOSE 8080
 
 ENV SPRING_PROFILES_ACTIVE=h2
 
-ENTRYPOINT [ "sh", "-c", "gradle bootRun --args='--spring.profiles.active=${SPRING_PROFILES_ACTIVE}'" ]
+ENTRYPOINT [ "sh", "-c", "gradle bootRun" ]
