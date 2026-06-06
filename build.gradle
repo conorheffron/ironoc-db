@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.2.8'
+version = '7.2.9'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -76,11 +76,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.46'
 
     // Jackson
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.0'
 
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-cache:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
@@ -109,7 +110,7 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-junit-jupiter:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-inline:5.2.0'
-	testImplementation 'net.bytebuddy:byte-buddy:1.18.8'
+	testImplementation 'net.bytebuddy:byte-buddy:1.18.9'
 }
 
 test {

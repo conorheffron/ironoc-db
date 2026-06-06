@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>iRonoc DB | Edit Job History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/main.css">
+</head>
+<body>
+<header th:replace="~{navbar.html}"></header>
+<main class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="mb-4">Edit Job History</h3>
+            <form action="#" th:action="@{/job-history/update/{id}(id=${employer.employerId})}" th:object="${employer}" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="title">Job Title</label>
+                        <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Enter Job Title...">
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="employerName">Employer Name</label>
+                        <input type="text" th:field="*{employerName}" class="form-control" id="employerName" placeholder="Enter Employer Name...">
+                        <span th:if="${#fields.hasErrors('employerName')}" th:errors="*{employerName}" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="startYear">Start Year</label>
+                        <input type="number" th:field="*{startYear}" class="form-control" id="startYear" placeholder="Enter Start Year...">
+                        <span th:if="${#fields.hasErrors('startYear')}" th:errors="*{startYear}" class="text-danger small"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Job History</button>
+                <a th:href="@{/job-history/{personId}(personId=${employer.personId})}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
