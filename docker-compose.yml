@@ -7,19 +7,21 @@ services:
       - .env
     ports:
       - "8080:8080"
-#    depends_on:
-#      db:
-#        condition: service_healthy
-#  db:
-#    image: mysql:8.3.0
-##    restart: always
-#    environment:
-#      MYSQL_ROOT_PASSWORD: mypassword
-##    volumes:
-##      - ./data/db:/var/lib/mysql
-#    ports:
-#      - "3307:3306"
-#    healthcheck:
-#      test: "cat /var/log/mysql/general-log.log | grep \"ready for connections\""
-#      interval: 1s
-#      retries: 120
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/IRONOC_DB?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+  db:
+    image: mysql:8.3.0
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: IRONOC_DB
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmypassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
