@@ -8,6 +8,7 @@ public enum DataSourceKey {
     DRIVER_CLASS_NAME("spring.datasource.driver-class-name"),
     DS_URL("spring.datasource.url"),
     DS_USERNAME("spring.datasource.username"),
+    DS_PASSWORD("spring.datasource.password"),
     GCP_SEC_VER("google.cloud.db.secret.version");
 
     private final String key;

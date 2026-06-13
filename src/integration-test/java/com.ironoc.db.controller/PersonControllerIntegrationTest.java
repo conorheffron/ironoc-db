@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -47,6 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(controllers = PersonController.class)
 @ContextConfiguration(classes = IronocDbConfig.class)
+@ActiveProfiles("h2")
 public class PersonControllerIntegrationTest {
 
     @Autowired

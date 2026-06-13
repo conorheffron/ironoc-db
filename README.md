@@ -155,10 +155,7 @@ gcloud config list
 ## Run `com.ironoc.db.App.java` directly from IntelliJ (can use localhost for spring.datasource.url) or 
 ## via CLI (build & spin up docker image with MySQL container on the same compose network):
 ```shell
-docker image build -t ironoc-db .
-```
-```shell
-docker compose up -d
+docker compose up --build -d
 ```
 ```shell
 docker ps
@@ -174,11 +171,11 @@ docker logs ironoc-db-web-1 -f
 
 ### Run locally with Gradle & MySQL database (Default run profile)
 ```shell
-./gradlew bootRun --args='--spring.profiles.active=default'
+./gradlew bootRun --args='--spring.profiles.active=mysql'
 ```
 
 ```shell
-docker compose down
+docker compose down -v
 ```
 
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")

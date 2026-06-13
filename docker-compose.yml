@@ -11,7 +11,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_PROFILES_ACTIVE=mysql
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/IRONOC_DB?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
   db:
     image: mysql:8.3.0

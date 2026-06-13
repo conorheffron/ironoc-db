@@ -48,6 +48,18 @@ public class IronocDbConfig {
     }
 
     @Bean
+    @Profile("mysql")
+    public DataSource mySQLDataSource() {
+        DataSourceBuilder<?> dsBuilder = DataSourceBuilder.create();
+        dsBuilder.driverClassName(environment.getRequiredProperty(DataSourceKey.DRIVER_CLASS_NAME.getKey()));
+        dsBuilder.url(environment.getRequiredProperty(DataSourceKey.DS_URL.getKey()));
+        dsBuilder.username(environment.getRequiredProperty(DataSourceKey.DS_USERNAME.getKey()));
+        dsBuilder.password(environment.getRequiredProperty(DataSourceKey.DS_PASSWORD.getKey()));
+        dsBuilder.type(HikariDataSource.class);
+        return dsBuilder.build();
+    }
+
+    @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager();
     }
