@@ -41,124 +41,99 @@ Java 25, Spring Boot 4, Thymeleaf Templates, Hibernate, MySQL or H2 databases su
 
 ## Project Structure
 ```shell
-src
-├── integration-test
-│   └── java
-│       └── com.ironoc.db.controller
-│           ├── CustomErrorControllerIntegrationTest.java
-│           └── PersonControllerIntegrationTest.java
-├── main
-│   ├── java
-│   │   └── com
-│   │       └── ironoc
-│   │           └── db
-│   │               ├── App.java
-│   │               ├── config
-│   │               │   └── IronocDbConfig.java
-│   │               ├── controller
-│   │               │   ├── CustomErrorController.java
-│   │               │   ├── PersonController.java
-│   │               │   └── VersionController.java
-│   │               ├── dao
-│   │               │   └── PersonDao.java
-│   │               ├── dto
-│   │               │   └── PersonDto.java
-│   │               ├── enums
-│   │               │   └── DataSourceKey.java
-│   │               ├── mapper
-│   │               │   └── PersonMapper.java
-│   │               ├── model
-│   │               │   ├── Employer.java
-│   │               │   └── Person.java
-│   │               └── service
-│   │                   ├── GoogleCloudClient.java
-│   │                   ├── GoogleCloudClientImpl.java
-│   │                   ├── PersonService.java
-│   │                   └── PersonServiceImpl.java
-│   ├── META-INF
-│   │   └── MANIFEST.MF
-│   └── resources
-│       ├── application-h2.properties
-│       ├── application.properties
-│       ├── db
-│       │   ├── data-h2.sql
-│       │   ├── data-mysql.sql
-│       │   └── ddl.sql
-│       ├── log4j.xml
-│       ├── static
-│       │   ├── favicon.ico
-│       │   ├── img
-│       │   │   └── robot-logo.png
-│       │   ├── ironoc-db-banner.txt
-│       │   └── style
-│       │       └── main.css
-│       └── templates
-│           ├── add-employee.html
-│           ├── edit-person.html
-│           ├── employee-list.html
-│           ├── error404.html
-│           ├── index.html
-│           └── navbar.html
-└── test
-    ├── java
-    │   └── com
-    │       └── ironoc
-    │           └── db
-    │               ├── AppTest.java
-    │               ├── config
-    │               │   └── IronocDbConfigTest.java
-    │               ├── controller
-    │               │   ├── CustomErrorControllerTest.java
-    │               │   ├── PersonControllerTest.java
-    │               │   └── VersionControllerTest.java
-    │               └── service
-    │                   ├── GoogleCloudClientServiceTest.java
-    │                   └── PersonServiceTest.java
-    └── resources
-        └── application.properties
+ironoc-db/
+├── .github/                                        # GitHub CI/CD configuration
+│   ├── workflows/                                  # GitHub Actions workflows
+│   │   ├── auto-assign.yml                        # Auto-assign issues & PRs
+│   │   ├── codacy.yml                             # Codacy security scan
+│   │   ├── codeql.yml                             # CodeQL analysis
+│   │   ├── docker-image.yml                       # Docker image CI
+│   │   ├── docker-publish.yml                     # Docker publish
+│   │   ├── gradle-publish.yml                     # Gradle package publish
+│   │   ├── gradle.yml                             # Java CI with Gradle
+│   │   ├── proof-html.yml                         # HTML proof check
+│   │   └── sonar.yml                              # SonarQube analysis
+├── gradle/                                         # Gradle wrapper files
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── kubernetes/                                     # Kubernetes deployment configs
+│   ├── deploy.yml                                 # GKE deployment
+│   └── ironoc-db-local.yml                        # Local minikube deployment
+├── src/                                            # Application source code
+│   ├── integration-test/                          # Integration tests
+│   │   └── java/
+│   │       └── com.ironoc.db.controller/
+│   │           ├── CustomErrorControllerIntegrationTest.java
+│   │           └── PersonControllerIntegrationTest.java
+│   ├── main/                                      # Main application source
+│   │   ├── java/
+│   │   │   └── com/ironoc/db/
+│   │   │       ├── App.java                      # Application entry point
+│   │   │       ├── config/
+│   │   │       │   └── IronocDbConfig.java
+│   │   │       ├── controller/
+│   │   │       │   ├── CustomErrorController.java
+│   │   │       │   ├── PersonController.java
+│   │   │       │   └── VersionController.java
+│   │   │       ├── dao/
+│   │   │       │   └── PersonDao.java
+│   │   │       ├── dto/
+│   │   │       │   └── PersonDto.java
+│   │   │       ├── enums/
+│   │   │       │   └── DataSourceKey.java
+│   │   │       ├── mapper/
+│   │   │       │   └── PersonMapper.java
+│   │   │       ├── model/
+│   │   │       │   ├── Employer.java
+│   │   │       │   └── Person.java
+│   │   │       └── service/
+│   │   │           ├── GoogleCloudClient.java
+│   │   │           ├── GoogleCloudClientImpl.java
+│   │   │           ├── PersonService.java
+│   │   │           └── PersonServiceImpl.java
+│   │   └── resources/
+│   │       ├── application-h2.properties
+│   │       ├── application.properties
+│   │       ├── db/
+│   │       │   ├── data-h2.sql
+│   │       │   ├── data-mysql.sql
+│   │       │   └── ddl.sql
+│   │       ├── log4j.xml
+│   │       ├── static/
+│   │       │   ├── favicon.ico
+│   │       │   ├── img/
+│   │       │   │   └── robot-logo.png
+│   │       │   ├── ironoc-db-banner.txt
+│   │       │   └── style/
+│   │       │       └── main.css
+│   │       └── templates/
+│   │           ├── add-employee.html
+│   │           ├── edit-person.html
+│   │           ├── employee-list.html
+│   │           ├── error404.html
+│   │           ├── index.html
+│   │           └── navbar.html
+│   └── test/                                      # Unit tests
+│       ├── java/
+│       │   └── com/ironoc/db/
+│       │       ├── AppTest.java
+│       │       ├── config/
+│       │       │   └── IronocDbConfigTest.java
+│       │       ├── controller/
+│       │       │   ├── CustomErrorControllerTest.java
+│       │       │   ├── PersonControllerTest.java
+│       │       │   └── VersionControllerTest.java
+│       │       └── service/
+│       │           ├── GoogleCloudClientServiceTest.java
+│       │           └── PersonServiceTest.java
+│       └── resources/
+│           └── application.properties
+├── build.gradle                                    # Gradle build configuration
 ```
 
 ## Run
 ### - See `src/main/resources/db/ddl.sql` for sample Schema to get started with ironoc-db instances using MySQL or H2
-```shell
-docker pull mysql:latest
-```
-```shell
-docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=mypassword -p 3307:3306 mysql
-```
-```shell
-docker logs test-mysql
-```
-```shell
-docker exec -it test-mysql bash
-```
-```shell
-docker ps
-```
-
-![create-db-connection](./screenshots/db-connection.png?raw=true "Create DB Connection")
-![create-test-schema](./screenshots/create-schema.png?raw=true "Create Test Schema")
-![load-db](./screenshots/run-starter-db-script.png?raw=true "Load DB")
-![verify-db](./screenshots/verify-db-load.png?raw=true "Verify DB")
-
-## Create Network
-```shell
-docker network create my-network
-```
-```shell
-docker inspect network my-network 
-```
-
-## Link mysql container to same network for access:
-```
-docker network connect my-network test-mysql
-```
-
-## Inspect network configurations & update application properties with IPv4Address instead of localhost if mac user (IPv4Address for my-sql etc.)
-- Get IPv4Address from inspect cmd and test connection from MySql workbench with new host IP. Run StarterDb.sql.
-```shell
-docker inspect network my-network 
-```
 
 ## Build ironoc-db, run unit & integration tests, & generate war file.
 ```shell
@@ -178,12 +153,9 @@ gcloud config list
 ```
 
 ## Run `com.ironoc.db.App.java` directly from IntelliJ (can use localhost for spring.datasource.url) or 
-## via CLI (build & spin up docker image, use docker network IP address for test-mysql process):
+## via CLI (build & spin up docker image with MySQL container on the same compose network):
 ```shell
-docker image build -t ironoc-db .
-```
-```shell
-docker compose up -d
+docker compose up --build -d
 ```
 ```shell
 docker ps
@@ -199,21 +171,18 @@ docker logs ironoc-db-web-1 -f
 
 ### Run locally with Gradle & MySQL database (Default run profile)
 ```shell
-./gradlew bootRun --args='--spring.profiles.active=default'
+./gradlew bootRun --args='--spring.profiles.active=mysql'
 ```
 
 ```shell
-docker compose down
+docker compose down -v
 ```
 
 ![docker-cli](./screenshots/CLI-docker.png?raw=true "CLI Docker")
 
 ## Tear-down:
 ```shell
-docker stop test-mysql
-```
-```shell
-docker remove test-mysql
+docker compose down
 ```
 
 ## Run ironoc-db on local k8s cluster

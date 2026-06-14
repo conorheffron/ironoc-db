@@ -2,6 +2,7 @@ package com.ironoc.db.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironoc.db.config.IronocDbConfig;
+import com.ironoc.db.dao.EmployerDao;
 import com.ironoc.db.dao.PersonDao;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(controllers = PersonController.class)
 @ContextConfiguration(classes = IronocDbConfig.class)
+@ActiveProfiles("h2")
 public class CustomErrorControllerIntegrationTest {
 
     @Autowired
@@ -45,6 +48,9 @@ public class CustomErrorControllerIntegrationTest {
 
     @MockitoBean
     private PersonDao personDaoMock;
+
+    @MockitoBean
+    private EmployerDao employerDaoMock;
 
     @MockitoBean
     private VersionController versionControllerMock;

@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.3.0.8198")
+		classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:7.3.1.8318")
     }
 }
 
@@ -37,7 +37,7 @@ sonar {
 }
 
 group = 'conorheffron'
-version = '7.2.8'
+version = '7.3.0'
 description = "iRonoc-DB Sample Data Manager"
 
 java {
@@ -76,11 +76,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.46'
 
     // Jackson
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.21.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.0'
 
     // Spring
     implementation 'org.springframework.boot:spring-boot-maven-plugin:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-web:' + springBootVersion
+    implementation 'org.springframework.boot:spring-boot-starter-cache:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:' + springBootVersion
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
@@ -88,14 +89,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-h2console:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.92.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.93.0'
 
     // SQL
-//    implementation 'mysql:mysql-connector-java:8.0.33' NOT FOR PRODUCTION
+    runtimeOnly 'mysql:mysql-connector-java:8.0.33' // NOT FOR PRODUCTION
     implementation 'com.h2database:h2:2.4.240'
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
-	implementation 'org.jacoco:jacoco-maven-plugin:0.8.14'
+	implementation 'org.jacoco:jacoco-maven-plugin:0.8.15'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.22'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
@@ -109,7 +110,7 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-junit-jupiter:' + mockitoVersion
 	testImplementation 'org.mockito:mockito-inline:5.2.0'
-	testImplementation 'net.bytebuddy:byte-buddy:1.18.8'
+	testImplementation 'net.bytebuddy:byte-buddy:1.18.10'
 }
 
 test {

@@ -1,8 +1,12 @@
 <div th:switch="${personsList}" class="card shadow-sm mb-4">
     <div class="card-body">
-        <h5 class="card-title mb-3">View up to ten items</h5>
+        <h5 class="card-title mb-3">Employees</h5>
         <div th:case="*">
-            <h3>Employees</h3>
+            <form th:action="@{/}" method="get" class="form-inline mb-3">
+                <input type="text" name="surname" class="form-control mr-2" placeholder="Filter by surname" th:value="${surnameFilter}">
+                <button type="submit" class="btn btn-outline-primary mr-2">Filter</button>
+                <a th:href="@{/}" class="btn btn-outline-secondary">Clear</a>
+            </form>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered w-100">
                     <thead class="thead-light">
@@ -14,6 +18,7 @@
                         <th>Age</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>Update Job History</th>
                         <th>Job History</th>
                     </tr>
                     </thead>
@@ -38,8 +43,13 @@
                             </form>
                         </td>
                         <td>
+                            <a th:href="@{/job-history/{personId}(personId=${person.id})}" class="btn btn-success btn-sm rounded-0" title="Manage Job History">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </td>
+                        <td>
                             <table class="table table-sm mb-0">
-                                <thead>
+                                <thead th:if="${not #lists.isEmpty(person.employers)}">
                                 <tr>
                                     <th>Job Title</th>
                                     <th>Employer Name</th>
@@ -56,21 +66,40 @@
                             </table>
                         </td>
                     </tr>
-                    <tr>
+                    <tr th:if="${not #lists.isEmpty(personsList)}">
                         <td colspan="4"></td>
-                        <td colspan="4">
+                        <td colspan="5">
                             <b th:text="${#aggregates.avg(personsList.![age])}"></b> is the Average Employee Age
                         </td>
                     </tr>
-                    <tr>
+                    <tr th:if="${not #lists.isEmpty(personsList)}">
                         <td colspan="6"></td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <b th:text="${#aggregates.sum(personsList.![age])}"></b> is the Sum of Ages
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <nav th:if="${totalPages != null and totalPages > 1}" aria-label="Employee list pagination" class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{/(page=${currentPage - 1})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active' : ''">
+                        <a class="page-link" th:href="@{/(page=${i})}" th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{/(page=${currentPage + 1})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
