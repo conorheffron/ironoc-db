@@ -89,7 +89,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-h2console:' + springBootVersion
 
     // GC Secret Manager
-    implementation 'com.google.cloud:google-cloud-secretmanager:2.93.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.94.0'
 
     // SQL
     runtimeOnly 'mysql:mysql-connector-java:8.0.33' // NOT FOR PRODUCTION
