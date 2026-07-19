@@ -218,7 +218,7 @@ sequenceDiagram
     participant HTML as Form Template (add-employee.html)
     participant Ctrl as PersonController
     participant Model as Spring MVC ModelMap
-    database Repo as Database / Repository
+    participant Repo as Database / Repository
 
     User->>HTML: Fills Form (e.g., age=150, firstName="Bo")
     User->>HTML: Clicks "Add Employee"
