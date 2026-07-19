@@ -28,7 +28,7 @@
 ================
 
 > [!NOTE]
-> **System Architecture & Design:** For an in-depth architectural breakdown, database environment profiles, layered Java backend, Thymeleaf template structure, and detailed user experience flows (with Mermaid sequence and state diagrams), check out the [iRonoc-DB Architecture & System Design Documentation](architecture.md).
+> **System Architecture & Design:** For an in-depth architectural breakdown, database environment profiles, layered Java backend, Thymeleaf template structure, and detailed user experience flows (with Sequence and State diagrams), check out the [iRonoc-DB Architecture & System Design Documentation](architecture.md).
 
 ## Docker Hub
 [ironoc-db docker hub](https://hub.docker.com/repository/docker/conorheffron/ironoc-db/general)
