@@ -253,7 +253,7 @@ sequenceDiagram
     participant Service as PersonServiceImpl
     participant Dao as PersonDao
     participant Cache as ConcurrentMapCacheManager
-    database DB as Database (H2 / MySQL)
+    participant DB as Database (H2 / MySQL)
     
     User->>Controller: POST /add (Form Fields)
     Note over Controller: Bind & Validate inbound PersonDto using @Valid
@@ -287,7 +287,7 @@ sequenceDiagram
     participant Controller as PersonController
     participant Service as PersonServiceImpl
     participant Dao as PersonDao
-    database DB as Database (H2 / MySQL)
+    participant DB as Database (H2 / MySQL)
     
     User->>Controller: GET /?page=0
     Controller->>Service: getPersonsPage(page=0, size=5)
