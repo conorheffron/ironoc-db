@@ -1,37 +1,55 @@
-# iRonoc-DB Architecture Documentation
+# iRonoc-DB Architecture & System Design Documentation
 
-This document provides a comprehensive overview of the technical architecture of **iRonoc-DB**, a sample data manager application. It covers the system topology, layered Java backend, Thymeleaf-based frontend, database integrations (local and cloud), caching, and request/response data lifecycles.
+This document provides a highly detailed overview of the system design, layered Java backend, Thymeleaf-based frontend, database integrations, and interactive User Experience (UX) flows of **iRonoc-DB**.
 
 ---
 
-## 1. High-Level System Architecture
+## 1. High-Level System Architecture & Deployment Design
 
-iRonoc-DB is built on a containerized, cloud-ready stack using Java 25 and Spring Boot 4. The application is designed to run in multiple environments, ranging from local developer workspaces utilizing Docker Compose or Minikube to production Kubernetes platforms like Google Kubernetes Engine (GKE).
+iRonoc-DB is a containerized, cloud-ready application built on **Java 25** and **Spring Boot 4**. It supports multi-environment run profiles, permitting seamless operations inside local developer environments (via Docker Compose or Minikube) as well as automated production container-orchestrated platforms like Google Kubernetes Engine (GKE).
 
-The system architecture consists of a client browser interacting with a containerized Spring Boot web server. The backend manages relational persistence through localized or remote database environments, integrates with Google Cloud Secret Manager for credentials protection, and maintains high performance via on-heap caching.
+### 1.1 Detailed System Design Topology
 
-### 1.1 System Architecture Diagram
-
-The component diagram below outlines the topology and networking boundaries of the system across standard deployment configurations:
+The following diagram represents the physical, network, and software container topology of the application across both local development environments and cloud-orchestrated clusters:
 
 ```mermaid
 graph TD
-    User([User Browser]) <-->|HTTP / HTTPS| Ingress[Kubernetes Ingress / Docker Port Forward]
-    
-    subgraph ContainerRuntime [Spring Boot Container]
-        Ingress <-->|MVC Requests| Controllers[MVC Controllers Layer]
-        Controllers <-->|DTO Validation & Mapping| Services[Services Layer]
-        
-        subgraph LogicAndCache [Business Logic Component]
-            Services <-->|Cache Check/Evict| CacheManager[ConcurrentMapCacheManager]
-            Services <-->|Fetch Password| GCPSecret[GoogleCloudClient]
-        end
-        
-        Services <-->|JPA Repository Calls| DAOs[Spring Data JPA Repositories]
+    subgraph Client Space [Client Tier]
+        User([User's Browser]) <-->|Local: HTTP 8080<br/>K8s: NodePort/LoadBalancer| NetworkGate[Ingress Network Gateway]
     end
+
+    subgraph ContainerRuntime [Docker Compose Environment / K8s Pod]
+        direction TB
+        subgraph AppContainer [Spring Boot App Container]
+            Tomcat[Embedded Tomcat Web Server] <-->|Incoming Requests| MVC[Spring Boot MVC DispatcherServlet]
+            MVC <-->|Spring Beans Dependency Injection| SpringContext[Spring Application Context]
+            
+            subgraph JVM_Memory [JVM Heap Runtime]
+                SpringContext <-->|On-Heap Caching| Cache[ConcurrentMapCacheManager]
+                SpringContext <-->|Hikari Connection Pool| Hikari[HikariCP DataSource]
+                SpringContext <-->|GCP SDK Service Client| SecretClient[SecretManagerServiceClient]
+            end
+        end
+
+        subgraph DbContainer [Database Environment]
+            MySQL[(MySQL Container<br/>Port 3306 / 3307)]
+            H2[(In-Memory H2 Database<br/>Inside App JVM Heap)]
+        end
+    end
+
+    subgraph GoogleCloud [Google Cloud Platform Services]
+        GCP_SecManager[Google Cloud Secret Manager]
+    end
+
+    %% Client and external routing
+    NetworkGate <-->|Routes to Container Port 8080| Tomcat
     
-    GCPSecret -.->|API Call| SecretManager[Google Cloud Secret Manager]
-    DAOs <-->|JDBC/Hibernate| DB[(Relational Database: MySQL / H2)]
+    %% GCP Integrations
+    SecretClient -.->|API Call via Application Default Credentials| GCP_SecManager
+    
+    %% Database routing depending on Spring Active Profiles
+    Hikari <-->|ActiveProfile: mysql / JDBC| MySQL
+    Hikari <-->|ActiveProfile: h2 / JDBC| H2
 ```
 
 ### 1.2 Deployment & Environment Run Modes
@@ -118,24 +136,12 @@ The application includes on-heap cache management to avoid expensive query execu
 
 ---
 
-## 3. Thymeleaf Frontend Overview
+## 3. Thymeleaf Frontend & UX Overview
 
 iRonoc-DB leverages a dynamic server-side rendering architecture. Web pages are constructed dynamically in memory on the Spring container using the **Thymeleaf Template Engine** before the final HTML is streamed to the user's browser.
 
 ### 3.1 Architecture of Thymeleaf Templates
 The frontend UI is designed with a high level of modularity and layout reuse:
-
-```
-src/main/resources/templates/
-├── index.html                  # Main dashboard layout
-├── navbar.html                 # Common navigation bar component
-├── add-employee.html           # Inline employee creation form
-├── employee-list.html          # Paginated table display of workers & job history
-├── edit-person.html            # Dedicated person modifier view
-├── job-history.html            # Individual job experience list & creation view
-├── edit-job-history.html       # Job experience record modification form
-└── error404.html               # Custom graceful error page
-```
 
 - **Layout Composition:** Templates are dynamically composed using Thymeleaf's fragment expression syntax (`th:replace`). `index.html` serves as a master container, injecting the reusable header navbar, the add form panel, and the list component.
 - **Interactive Forms:** Forms utilize Spring-Thymeleaf binding features like `th:object` (mapping a DTO model) and `th:field` (automatically binding form controls to model fields).
@@ -149,11 +155,95 @@ src/main/resources/templates/
 
 ---
 
-## 4. Data Flows & Lifecycle Sequences
+## 4. User Experience (UX) Flow & State Transitions
 
-### 4.1 Create Record Flow (Adding an Employee)
+The frontend user experience consists of navigating through employee lists, modifying worker profiles, managing granular job history records, and receiving immediate feedback when input parameters are invalid.
 
-The sequence diagram below displays the lifecycle of an inbound POST request designed to create a new `Person` record, highlighting form validation, entity mapping, and cache flushing:
+### 4.1 Navigation & State Machine Diagram
+
+The diagram below tracks the states a user transitions through while working with the application, highlighting URLs, methods, and triggers:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Dashboard : Access URL http://localhost:8080/ (GET)
+    
+    state Dashboard {
+        [*] --> ViewEmployees
+        ViewEmployees --> FilterEmployees : Input Surname & Click "Filter"
+        FilterEmployees --> ViewEmployees : Click "Clear" Filter
+        ViewEmployees --> Paginate : Click Page 1, 2, ...
+    }
+    
+    Dashboard --> EditPersonView : Click "Edit" Button on Employee Row (GET /edit/{id})
+    state EditPersonView {
+        [*] --> EditPersonForm
+        EditPersonForm --> Dashboard : Cancel / Click Navbar brand
+        EditPersonForm --> Dashboard : Submit Valid Changes (POST /update/{id})
+        EditPersonForm --> EditPersonForm : Submit Invalid (Renders Inline Errors)
+    }
+
+    Dashboard --> DeleteConfirmation : Click "Trash" Icon (DELETE /delete/{id})
+    DeleteConfirmation --> Dashboard : Successful Delete & Redirect "/"
+
+    Dashboard --> JobHistoryView : Click "Manage Job History" (GET /job-history/{personId})
+    state JobHistoryView {
+        [*] --> ViewJobHistoryList
+        ViewJobHistoryList --> AddJobHistoryForm : Fill Title, Employer, Year & Submit
+        AddJobHistoryForm --> ViewJobHistoryList : Valid Submission (Refresh GET)
+        AddJobHistoryForm --> ViewJobHistoryList : Invalid Submission (Render Validation Errors)
+        ViewJobHistoryList --> DeleteJobRecord : Click "Trash" Icon (DELETE /job-history/delete/{id})
+        DeleteJobRecord --> ViewJobHistoryList : Successful Delete & Redirect
+    }
+
+    JobHistoryView --> EditJobHistoryView : Click "Edit" Button on Job row (GET /job-history/edit/{id})
+    state EditJobHistoryView {
+        [*] --> EditJobForm
+        EditJobForm --> JobHistoryView : Submit Valid Changes (POST /job-history/update/{id})
+        EditJobForm --> EditJobForm : Submit Invalid (Renders Inline Errors)
+    }
+
+    Dashboard --> ErrorPage : Enter Invalid URL or Route Error
+    JobHistoryView --> ErrorPage : Enter Invalid Person ID
+    ErrorPage --> Dashboard : Click Navbar Logo / Redirect
+```
+
+### 4.2 Dynamic Form Validation and Error Feedback Loop
+
+To guarantee validation accuracy without interrupting the user's flow, iRonoc-DB implements a feedback mechanism where state-violating submissions are captured, parsed, and rendered inline without persisting raw data in the database:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as User Browser
+    participant HTML as Form Template (add-employee.html)
+    participant Ctrl as PersonController
+    participant Model as Spring MVC ModelMap
+    database Repo as Database / Repository
+
+    User->>HTML: Fills Form (e.g., age=150, firstName="Bo")
+    User->>HTML: Clicks "Add Employee"
+    HTML->>Ctrl: POST /add with Form Data (PersonDto)
+    Note over Ctrl: Spring validation kicks in<br/>Interprets @Min(1), @Max(90) on Age<br/>Interprets @Size(min=3) on First Name
+    
+    rect rgb(255, 230, 230)
+        Note over Ctrl: Validation Fails!<br/>BindingResult.hasErrors() is TRUE
+        Ctrl->>Ctrl: Retrieve standard pagination content
+        Ctrl->>Model: Put invalid PersonDto back in Model as "person"
+        Ctrl->>Model: Put field error context in Model
+        Ctrl-->>HTML: Resolve view "index.html" (No database insert!)
+    end
+    
+    Note over HTML: Thymeleaf engine processes errors:<br/>th:field="*{firstName}" retains entered "Bo"<br/>th:errors="*{firstName}" inserts error label
+    HTML-->>User: Renders red error message:<br/>"First Name should be between 3-30 characters."
+```
+
+---
+
+## 5. Data Flows & Lifecycle Sequences
+
+### 5.1 Create Record Flow (Adding an Employee)
+
+The sequence diagram below displays the lifecycle of an inbound POST request designed to create a new `Person` record when validation successfully passes:
 
 ```mermaid
 sequenceDiagram
@@ -163,7 +253,7 @@ sequenceDiagram
     participant Service as PersonServiceImpl
     participant Dao as PersonDao
     participant Cache as ConcurrentMapCacheManager
-    participant DB as Database (H2 / MySQL)
+    database DB as Database (H2 / MySQL)
     
     User->>Controller: POST /add (Form Fields)
     Note over Controller: Bind & Validate inbound PersonDto using @Valid
@@ -186,9 +276,9 @@ sequenceDiagram
     end
 ```
 
-### 4.2 Read Record Flow (Paginated List Retrieval)
+### 5.2 Read Record Flow (Paginated List Retrieval)
 
-The sequence diagram below shows how the default paginated view is served to the client:
+The sequence diagram below shows how the default paginated view is served to the client, illustrating the bypass of cache limits for list layouts:
 
 ```mermaid
 sequenceDiagram
@@ -197,7 +287,7 @@ sequenceDiagram
     participant Controller as PersonController
     participant Service as PersonServiceImpl
     participant Dao as PersonDao
-    participant DB as Database (H2 / MySQL)
+    database DB as Database (H2 / MySQL)
     
     User->>Controller: GET /?page=0
     Controller->>Service: getPersonsPage(page=0, size=5)
@@ -213,11 +303,11 @@ sequenceDiagram
 
 ---
 
-## 5. Detailed Relational Schema & Entity Relationships
+## 6. Detailed Relational Schema & Entity Relationships
 
 The core database schema manages two tables: `person` and `employer`. These represent a strict **One-to-Many Relationship** where an employee can have multiple historical job experience entries in the database.
 
-### 5.1 Entity Relationship Diagram
+### 6.1 Entity Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -240,6 +330,6 @@ erDiagram
     PERSON ||--o{ EMPLOYER : "has history (1 to many)"
 ```
 
-### 5.2 Relationship Lifecycle Controls
+### 6.2 Relationship Lifecycle Controls
 - **Eager Fetching:** The `@OneToMany` relationship on the `Person` entity utilizes `FetchType.EAGER` fetching. This ensures that when a person is loaded from the database, their associated list of employers is retrieved in a single unified operation, streamlining the nested table layout within the HTML UI.
 - **Cascade Deletion:** The relationship is configured with `CascadeType.REMOVE` (also represented as `ON DELETE CASCADE` in the schema). When a `Person` entity is deleted, Hibernate automatically propagates the deletion to remove all associated `Employer` history records, preventing relational orphaned entries and enforcing strict database integrity.
