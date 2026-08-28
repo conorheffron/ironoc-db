@@ -94,7 +94,7 @@ metadata:
   name: ironoc-db-app-deployment
   namespace: ironoc-db-ns
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: ironoc-db-app-deployment
@@ -113,6 +113,8 @@ spec:
           imagePullPolicy: IfNotPresent
           name: ironoc-db-app-sha256-1
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "default"
             - name: PROJECT_ID
               value: "ironoc-db"
             - name: SECRET_ID
@@ -202,7 +204,7 @@ metadata:
   name: ironoc-db-app-deployment-hpa-kbij
   namespace: ironoc-db-ns
 spec:
-  maxReplicas: 1
+  maxReplicas: 4
   metrics:
     - resource:
         name: cpu
@@ -210,7 +212,7 @@ spec:
           averageUtilization: 80
           type: Utilization
       type: Resource
-  minReplicas: 1
+  minReplicas: 2
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
