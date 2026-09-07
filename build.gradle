@@ -72,8 +72,8 @@ configurations {
 
 dependencies {
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.46'
-    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+    compileOnly 'org.projectlombok:lombok:1.18.48'
+    annotationProcessor 'org.projectlombok:lombok:1.18.48'
 
     // Jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.22.2'
