@@ -93,7 +93,7 @@ dependencies {
 
     // SQL
     runtimeOnly 'mysql:mysql-connector-java:8.0.33' // NOT FOR PRODUCTION
-    implementation 'com.h2database:h2:2.4.240'
+    implementation 'com.h2database:h2:2.5.250'
 
     implementation 'org.apache.maven.reporting:maven-reporting-api:4.0.0'
 	implementation 'org.jacoco:jacoco-maven-plugin:0.8.15'
